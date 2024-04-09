@@ -1,5 +1,33 @@
 ## Front-End Bible:
 
+
+* ## April 9, 2024
+  ### JS:
+    * You can include multiple variables, multiple loop conditions, and even multiple increment/decrement operators inside of a `for` loop
+      ```javascript
+      functional = () => {
+        for (let i =1, x = 7; i < 100 && (i % x !== 0); i++, j--) {
+            console.log(i)
+        }
+      }
+      ```
+    * Here, we can declare two variables and set two conditions for the loop to run, we could also include multiple 
+  ### HTML:
+    * The `<nav>` element is used to define a set of navigation links
+    * Common examples of navigation sections are menus, tables of contents, and indexes
+    * The `<nav>` element is intended only for major block of navigation links
+    * Links do not need to be present exclusively inside of a `<nav>` element
+    * A footer may contains links outside of a nav element
+    * A nav could be used for providing a navbar, or a table of contents within the body of a document
+  ### CSS:
+    * The `align-content` property sets the distribution of space between and around content items along a flexbox's cross axis, or a grid or block-level element's block axis
+      * `start`, `end`, `center`
+      * `space-between`, `space-around`, `space-evenly`, `stretch`
+      * `safe`, `unsafe` - safety resets alignment to the `start` value to prevent data loss in the case of overflow, but `unsafe` honors the alignment value
+    * The `align-items` property sets the `align-self` for all direct children as a group
+    * The `align-self` property sets the alignment of an item within its containing flexbox or grid
+      * `auto`, `stretch`, `center`, `start`, `end`, `flex-start`, `flex-end`, `baseline`, `safe`, `unsafe`
+    * SO Link to more specifically describe how these properties work together: https://stackoverflow.com/questions/31250174/css-flexbox-difference-between-align-items-and-align-content
 * ## April 8, 2024
   ### JS:
     * Converting Objects to primitive values in JS is very complicated and dependent on the source object
