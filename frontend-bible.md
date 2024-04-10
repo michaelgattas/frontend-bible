@@ -1,5 +1,53 @@
 ## Front-End Bible:
 
+* ## April 10, 2024
+  ### JS: 
+  * Object/Array Destructuring
+    * Destructuring is a great way to streamline variable assignment off of one source object or array
+      * Array Destructuring
+        ```javascript
+        // very easy if you want to assign variables with the same names as their indices
+        const arr = [1, 2, 3]
+        const [a, b, c] = arr
+        console.log(a, b, c) // 1, 2, 3
+        
+        let [x,y] = [1]; // x == 1; y == undefined [x,y] = [1,2,3]; // x == 1; y == 2
+        [,x,,y] = [1,2,3,4]; // x == 2; y == 4
+        let [x, ...y] = [1,2,3,4]; // y == [2,3,4]
+        ```
+      * Object Destructuring
+        ```javascript
+        // very easy if you want to assign variables with the same names as their properties
+        const obj = {a: 1, b: 2, c: 3}
+        const {a, b, c} = obj
+        console.log(a, b, c) // 1, 2, 3
+      
+        // you can also assign variables with different names than their properties
+        const obj2 = {d: 4, e: 5, f: 6}
+        const {d: x, e: y, f: z} = obj2
+        console.log(x, y, z) // 4, 5, 6
+        
+        // or destructure functions off of objects for tighter code
+        const {sin, cos, tan} = Math
+        const {floor, ceil, round} = Math
+        
+        // you can even destructure any iterable object, including strings!
+        let [first, ...rest] = "Hello"; // first == "H"; rest == ["e","l","l","o"]
+        ```
+  ### HTML:
+  * Audio Elements `<audio>`
+    * The `<audio>` element has no intrinsic visual output of its own unless the controls attribute is specified, in which case the browser's default controls are shown
+    * If you attribute multiple `<source>` elements to an `<audio>` element, the browser will choose the first one it can play
+    * Audio elements do not inherently support subtitles or captions (WebVTT)
+      * You either need to use a `<video>` element or a JavaScript library to add subtitles
+    * There are a number of events emitted by the `<audio>` element, including:
+      * `onplay`, `onpause`, `onvolumechange`, `onseeking`, `onseeked`, `onended`, `oncanplay`, `oncanplaythrough`, `onloadedmetadata`, `onloadeddata`, `onwaiting`, `onplaying`, `onstalled`, `onsuspend`, `onabort`, `onerror`
+  ### CSS:
+  * The `css justify-content` property defines how the browsers sets the spaces between and around content items along the main (x) axis of a flex container
+    * `start', `end`, `center`, `space-between`, `space-around`, `space-evenly`, `stretch`, `safe`, `unsafe`
+  * The `justify-items` property sets the default alignment for items inside a grid container along the inline (x) axis
+  * The `justify-self` property sets the alignment of an item within its containing grid or flexbox, overriding the `justify-items` property if it's present
+    * `auto`, `stretch`, `center`, `start`, `end`, `flex-start`, `flex-end`, `baseline`, `safe`, `unsafe`
 
 * ## April 9, 2024
   ### JS:
@@ -28,6 +76,7 @@
     * The `align-self` property sets the alignment of an item within its containing flexbox or grid
       * `auto`, `stretch`, `center`, `start`, `end`, `flex-start`, `flex-end`, `baseline`, `safe`, `unsafe`
     * SO Link to more specifically describe how these properties work together: https://stackoverflow.com/questions/31250174/css-flexbox-difference-between-align-items-and-align-content
+
 * ## April 8, 2024
   ### JS:
     * Converting Objects to primitive values in JS is very complicated and dependent on the source object
@@ -78,7 +127,6 @@
     ```css
     outline: 5px solid red;
     ```
-
 
 * ## April 5, 2024
   * ### JS:
