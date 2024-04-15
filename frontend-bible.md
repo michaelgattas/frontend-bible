@@ -1,5 +1,59 @@
 ## Front-End Bible:
 
+## April 15, 2024
+  ### JS:
+  * In a regular _Property Access Expression_ (like `expression.property` or `expression[expression]`):
+  * We either use a _dot_ followed by a valid identifier (cannot be a number, reserved keyword, or start with a number or special character)
+  * Or we use an expression to access a property, which is evaluated to a string literal or symbol
+  * In either case, accessing a property that doesn't exist will return `undefined`
+  * Optional Chaining allows the ability to access deeply nested properties without throwing an error if a property doesn't exist
+    * It's denoted by a `?.` after the object or array, and will return `undefined` if the property doesn't exist
+    * It's especially useful when working with APIs, where the data structure may not be consistent
+    * It's also useful when working with user input, where the data may not be complete
+  ### HTML:
+  * The `<a>` or "anchor" tag is used to create hyperlinks to other web pages, files, locations within the same page, email addresses, or any other URL\
+  * The `href` indicates the destination of the link
+    * Acceptable alternative link formats include: 
+      * Telephone numbers with `tel:` URLs 
+      * Email addresses with `mailto:` URLs 
+      * SMS text messages with `sms:` URLs
+  * `hreflang` specifies the language of the linked resource - allowed values are the same as the global `lang` attribute
+  * `ping` is a space-separated list of URLs to which, when the link is followed, post requests with the body `ping` will be sent
+    * These are typically used for trackers, analytics, and other monitoring purposes
+  * `referrerpolicy` specifies how much of the referrer information should be sent when following the link
+    * `no-referrer` : The `Referer` header will not be sent
+    * `no-referrer-when-downgrade` : The `Referer` header will not be sent to a less secure destination
+    * `origin` : Only the origin of the document will be sent (its scheme/protocol, host and port)
+    * `origin-when-cross-origin` : The full URL will be sent if the destination is the same origin, otherwise only the origin will be sent
+    * `same-origin` : The full URL will be sent if the destination is the same origin, otherwise no `Referer` header will be sent
+    * `strict-origin` : The full URL will be sent if the destination is the same origin, otherwise only the origin will be sent
+    * `strict-origin-when-cross-origin` : The full URL will be sent if the destination is the same origin, otherwise only the origin will be sent
+    * `unsafe-url` : The full URL will be sent, regardless of the destination
+  * `rel` specifies the relationship between the current document and the linked document
+  * `target` specifies where to open the linked document
+    * `_blank` : Opens the linked document in a new window or tab
+    * `_self` : Opens the linked document in the same frame as it was clicked
+    * `_parent` : Opens the linked document in the parent frame
+    * `_top` : Opens the linked document in the full body of the window
+    * `framename` : Opens the linked document in a named frame
+  * You can also link to sections below with an `href` of `#section-name`, where the id is set to another section
+  * Using an `<a>` tag with a `target="_blank"` attribute will open the link in a new tab, with some security considerations
+    * The new tab or window will often have access to the original page, through the `window.opener` property
+    * In a "Tabnabbing" attack, the new tab will change its location to a phishing site, while the original page is still open
+    * In a "Reverse Tabnabbing" attack, the original (legitimate) page have its location changed to a phishing site, as the new tab accesses the `window.opener` property
+    * Many browsers have implemented security measures to prevent these attacks, but it's still a good idea to be aware of the risks, and use `noopener` and `noreferrer` attributes to prevent these attacks
+  ### CSS:
+  * If you had a flex container and wanted to ensure that overflowing elements in your flex direction will wrap onto a following row/column, you can set `flex-wrap: wrap`
+  * So, if you wanted to distribute child div's along a row with following rows for any extra children, you could write:
+    ```CSS
+    flex-direction: row;
+    flex-wrap: wrap;
+    ```
+  * Conversely, you can also simply set:
+    ```CSS
+    flex-flow: row wrap;
+    ```
+
 ## April 11, 2024
   ### JS:
   * While `null` is a reserved keyword representing the null value, 
