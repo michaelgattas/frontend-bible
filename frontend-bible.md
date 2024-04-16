@@ -1,5 +1,42 @@
 ## Front-End Bible:
 
+## April 16, 2024
+  ### JS:
+  * Operators in JS do have an order of operation (like PEMDAS)
+    * We call this **operator precedence**
+    * Generally, access operators and invocation operators take top precedence
+    * Mult/Division operators take precedence over Add/Subtract operators
+    * Use parentheses to ensure the order of operations you want
+  * The `??`, or **Nullish Coalescing Operator** in JS returns its right-hand side operand when its left-hand side operand is null or undefined
+    * Unlike the `||` operator, the `??` operator doesn't coerce its left-hand side operand to a boolean
+    * Therefore: 
+    ```javascript
+    let x = null 
+    let y = x ?? 'default' // y == 'default'
+    x = 0
+    y = x ?? 'default' // y == 0, since 0 is not null or undefined
+    x = false
+    y = x ?? 'default' // y == false, since false is not null or undefined
+    ```
+  ### HTML:
+  * The `<abbr>` or abbreviation element is used to mark up an abbreviation or acronym
+    * The `title` attribute is used to provide the full expansion of the abbreviation
+    * The `title` attribute is also used to provide a tooltip when the user hovers over the abbreviation
+    * The first time using an abbreviation on a page, it's a good idea to use the `<abbr>` element to fully expand it
+    * Only extends the global attributes, and has no specific attributes of its own
+    * The `<abbr>` element is a semantic element, and should be used to provide meaning to the content
+    * Supported by all major browsers
+  ### CSS:
+  * Within a flex container, you can assign flex values to each flex-item
+    * ```CSS
+      article {
+          flex: 1;
+      }
+      article:nth-of-type(3) {
+          flex: 2;
+      }
+      ```
+    * This will give the third article twice the space of the other articles
 ## April 15, 2024
   ### JS:
   * In a regular _Property Access Expression_ (like `expression.property` or `expression[expression]`):
