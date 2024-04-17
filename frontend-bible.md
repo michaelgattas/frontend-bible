@@ -1,9 +1,33 @@
 ## Front-End Bible:
 
+## April 17, 2024
+  ### JS:
+  * In JS, an `lval` is a value that can legally be on the left-side of an assignment expression
+    * This includes variables, properties of objects, and elements of arrays
+  ### HTML:
+  * The `<address>` HTML element indicates that the enclosed HTML provides contact information for a person or people, or for an organization
+    * The `address` element is a block-level element, and will typically be displayed in an italic font
+    * The `address` element is a semantic element, and should be used to provide meaning to the content
+    * The `address` element is supported by all major browsers
+  * Although it formats equivalently as using an `<i>` or `<em>` tag, the `<address>` tag is more semantically correct
+  * No attributes for this elements beyond the global attributes
+  ### CSS:
+  * By default, all flex-items have a `order` property of 0
+  * Increased order property means an item comes later in the order of items
+    * ```CSS
+      article {
+          order: 1;
+      }
+      article:nth-of-type(3) {
+          order: 2;
+      }
+      ```
+    * This will give the third article a later order than the other articles
+
 ## April 16, 2024
   ### JS:
   * Operators in JS do have an order of operation (like PEMDAS)
-    * We call this **operator precedence**
+    * We call this **operator precedence** (which operator is evaluated first) and **operator associativity** (which operator is evaluated first in the case of operators with the same precedence)
     * Generally, access operators and invocation operators take top precedence
     * Mult/Division operators take precedence over Add/Subtract operators
     * Use parentheses to ensure the order of operations you want
