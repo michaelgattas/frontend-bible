@@ -1,5 +1,96 @@
 ## Front-End Bible:
 
+## April 22, 2024
+  ### JS: 
+  * The incremenet and decrement operators have a pre- and post- versions, which return the value before or after increment/decrement
+  * For example: 
+    ```javascript
+    let x = 5 
+    let y = x++ // y == 5, x == 6
+    let z = ++x // z == 7, x == 7
+    ```
+  * Basically the pre- or post- defines if the change to the original will happen pre- or post- the assignment to the `lval` in question
+  * Remember, all increment/decrement operators must use `lval`, so must be a 
+    * Variable
+    * Array item
+    * Object property
+  ### HTML:
+  * The `<area>` element is only used within an image map (`<map>`) element in order to allow for clickable areas
+  * It will normally use a `shape` and `coords` attribute to define the clickable area
+  * Here's an example from the docs site: 
+    ```html
+    <map name="infographic">
+        <area
+            shape="poly"
+            coords="129,0,260,95,129,138"
+            href="https://developer.mozilla.org/docs/Web/HTTP"
+            target="_blank"
+            alt="HTTP" 
+        />
+        <area
+            shape="poly"
+            coords="260,96,209,249,130,138"
+            href="https://developer.mozilla.org/docs/Web/HTML"
+            target="_blank"
+            alt="HTML" 
+        />
+        <area
+            shape="poly"
+            coords="209,249,49,249,130,139"
+            href="https://developer.mozilla.org/docs/Web/JavaScript"
+            target="_blank"
+            alt="JavaScript" 
+        />
+        <area
+            shape="poly"
+            coords="48,249,0,96,129,138"
+            href="https://developer.mozilla.org/docs/Web/API"
+            target="_blank"
+            alt="Web APIs" 
+        />
+        <area
+            shape="poly"
+            coords="0,95,128,0,128,137"
+            href="https://developer.mozilla.org/docs/Web/CSS"
+            target="_blank"
+            alt="CSS" 
+        />
+    </map>
+    <img usemap="#infographic" src="/media/examples/mdn-info.png" alt="MDN infographic" />
+    ```
+  ### CSS: 
+  * A block-level element always starts on a new line, taking up the entire space availab to it along the main-axis (x-axis for English text)
+  * An inline-level element only takes up as much space as it needs, and does not start on a new line. A span is an exampel of an inline element.
+  * Here is code from the CSS Docs demonstrating the differences
+  * ```html
+    <h1>Basic document flow</h1>
+
+    <p>
+      I am a basic block level element. My adjacent block level elements sit on new
+      lines below me.
+    </p>
+    
+    <p>
+      By default we span 100% of the width of our parent element, and we are as tall
+      as our child content. Our total width and height is our content + padding +
+      border width/height.
+    </p>
+    
+    <p>
+      We are separated by our margins. Because of margin collapsing, we are
+      separated by the width of one of our margins, not both.
+    </p>
+    
+    <p>
+      Inline elements <span>like this one</span> and <span>this one</span> sit on
+      the same line along with adjacent text nodes, if there is space on the same
+      line. Overflowing inline elements will
+      <span>wrap onto a new line if possible (like this one containing text)</span>,
+      or just go on to a new line if not, much like this image will do:
+      <img src="long.jpg" alt="snippet of cloth" />
+    </p>
+    ```
+
 ## April 17, 2024
   ### JS:
   * In JS, an `lval` is a value that can legally be on the left-side of an assignment expression
