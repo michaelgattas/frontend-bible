@@ -1,5 +1,31 @@
 ## Front-End Bible:
 
+## April 23, 2024
+  ## JS:
+  * The shift left operator `<<` shift the bits of a number to the left, filling empty bits with 0's
+    * This is effectively the same as multiplying by 2
+  * The shift right operator `>>` shifts the bits of a number to the right, filling the empty bits with the sign bit (0 for positive numbers, 1 for negative numbers)
+    * This is effectively the same as dividing by 2, but always rounding down
+  * In a strict equality check, `NaN` is no equal to itself. 
+    * A good shorthand way is to use the global `isNaN()` function or to check is `x !== x`
+  * Also, in a strict equality check, `0` is equal to `-0`
+  ## HTML:
+  * The `<article>` element is a semantic element that defines a self-contained piece of content that could be distributed and reused independently
+    * It could be a blog post, a forum post, a news article, or a comment
+    * The `<article>` element is a block-level element, and will typically be displayed in a normal font
+    * The `<article>` element is a semantic element, and should be used to provide meaning to the content
+    * The `<article>` element is supported by all major browsers
+  * The `<aside>` element is a semantic element that defines content that is tangentially related to the content around it
+    * It could be a sidebar, a pull quote, a glossary, or a related article
+    * The `<aside>` element is a block-level element, and will typically be displayed in a normal font
+    * The `<aside>` element is a semantic element, and should be used to provide meaning to the content
+    * The `<aside>` element is supported by all major browsers
+  ## CSS:
+  * The `justify-items` property is ignored in a flex container, as it only applies to grid containers
+  * Instead, justifying items in a flex container is done with the `justify-content` property
+    * `start`, `end`, `center`, `space-between`, `space-around`, `space-evenly`, `stretch`, `safe`, `unsafe`
+  
+
 ## April 22, 2024
   ### JS: 
   * The incremenet and decrement operators have a pre- and post- versions, which return the value before or after increment/decrement
