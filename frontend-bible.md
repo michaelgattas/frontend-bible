@@ -1,5 +1,42 @@
 ## Front-End Bible:
 
+## April 24, 2024
+  ## JS:
+  * The `in` operator expects a lefthand argument that is a string, symbol, or can evaluate to a string, and a righthand side argument that is an Object
+  * The `in` operator will return `true` if the lefthand argument is a property of the righthand object, and `false` otherwise
+  * For objects, this is rather intuitive:
+    ```javascript
+    let obj = {a: 1, b: 2, c: 3}
+    console.log('a' in obj) // true
+    console.log('d' in obj) // false
+    ```
+  * For arrays, the `in` will return true if the passed in string/symbol is a valid index of the array.
+    * So the "index" is treated like a property in this case
+    * It does not evaluate array values
+    ```javascript
+    let arr = [1, 2, 3]
+    console.log('0' in arr) // true
+    console.log('1' in arr) // true
+    console.log(`3` in arr) // false, because the array only has indices 0, 1, and 2
+    ```
+  ## HTML: 
+  * The `<b>` element is a stylistic element that provides bold formatting to text
+    * It is no longer recommended, with either `<strong>` or `<span>` with CSS `font-weight` styling being preferred
+    * Here's where the docs get nitpicky:
+      * The `<strong>` element indicates text of certain **importance**
+      * The `<em>` element indicates text of certain _emphasis_
+      * The `<mark>` element indicates text with certain relevance (highlighting)
+    * If there is no semantic importance, emphasis, or relevance, then the `<span>` element with CSS styling is recommended
+  ## CSS:
+  * **Font stacks** enable you to create fall-backs if a web-font fails to load
+  * The `font-family` property can take a comma-separated list of font names, with the browser trying each font in order
+  ```CSS
+    p {
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+    }
+  ```
+  * In this case, the browser will first try to load "Trebuchet MS", then "Verdana", and finally any sans-serif font
+
 ## April 23, 2024
   ## JS:
   * The shift left operator `<<` shift the bits of a number to the left, filling empty bits with 0's
@@ -28,7 +65,7 @@
 
 ## April 22, 2024
   ### JS: 
-  * The incremenet and decrement operators have a pre- and post- versions, which return the value before or after increment/decrement
+  * The increment and decrement operators have a pre- and post- versions, which return the value before or after increment/decrement
   * For example: 
     ```javascript
     let x = 5 
