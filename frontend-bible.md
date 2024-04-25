@@ -1,4 +1,39 @@
 ## Front-End Bible:
+  ## JS:
+  * The `instanceof` operator checks if an object is an instance of a class
+    * It returns `true` if the object is an instance of the class, and `false` otherwise
+    * It can also be used to check if an object is an instance of a subclass
+    * It can also be used to check if an object is an instance of an interface
+    * Interesting, it's not quite the same thing as `typeof`, which checks the type of a variable
+  * For example, if you were to declare `x = 2` and `y = new Number(2)`, then `x instanceof Number` would return `false`, while `y instanceof Number` would return `true`
+  * This is because `x` is a primitive number, while `y` is an instance of the `Number` class
+  * The difference between a primitive number and an instance of the `Number` class is that the `Number` class has methods and properties that can be accessed
+  * Here's a code block from JS The Definitive Guide (p. 173) to further explain how the `instanceof` operator works:
+  ```javascript
+    let d = new Date(); // Create a new object with the Date() constructor
+    d instanceof Date // => true: d was created with Date()
+    d instanceof Object // => true: all objects are instances of Object
+    d instanceof Number // => false: d is not a Number object 
+    let a = [1, 2, 3]; // Create an array with array literal syntax
+    a instanceof Array // => true: a is an array
+    a instanceof Object // => true: all arrays are objects
+    a instanceof RegExp // => false: arrays are not regular expressions
+  ```
+  ## HTML:
+  * The `<base>` element specifies the base URL to use for all relative URLs in a document
+    * The `<base>` element must have an `href` attribute, which specifies the base URL, or a `target` attribute, which specifies the default target for all hyperlinks and forms in the document
+    * The `<base>` element must be placed inside the `<head>` element
+    * The `<base>` element is supported by all major browsers
+    * A document's used base URL can be accessed by scripts with `Node.baseURI`. If the document has no <base> elements, then baseURI defaults to `location.href`
+  ## CSS:
+  * In a `display: grid` context, you can use `fr`, or fractional units to take up a given proportion of the available space
+  * For example:
+    ```CSS
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+    }
+    ```
 
 ## April 24, 2024
   ## JS:
