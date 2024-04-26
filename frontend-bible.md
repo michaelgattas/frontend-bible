@@ -1,4 +1,35 @@
 ## Front-End Bible:
+## April 26, 2024
+  ## JS:
+  * The assignment operator `=` has right-to-left associativity which means that the rightmost expression is evaluated first
+    * This is why you can chain assignments like `let a = b = c = 5`
+    * The rightmost expression is evaluated first, and then assigned to the next variable to the left
+    * This is also why you can chain assignments with different types of variables
+    * For example, `let a = b = 'hello'` will assign the string `'hello'` to `b`, and then assign `b` to `a`
+  * Also, the assignment operator might be nested inside more complex logic, like `(a = b) === 0`
+    * In this case, the assignment operator is evaluated first, and then the comparison operator is evaluated
+  ## HTML:
+  * The `<bdi>` element is used to tell a browser about bi-directional text
+    * This is useful when you have text in multiple languages, or text that is mixed with numbers
+    * The `<bdi>` element isolates the text from its surrounding text, so that the browser can display it correctly
+    * For example: 
+    * ```html
+      <p>Here is some text in English: <bdi>שלום</bdi></p>
+      ```
+  ## CSS:
+  * The `display` property in CSS is used to determine how an element is displayed
+    * The `display` property is used to determine the layout of an element, and how it interacts with other elements on the page
+    * The `display` property is one of the most important properties in CSS, and is used to control the layout of a web page
+      * The `block` value makes an element a block-level element, which means it will take up the full width of its container, and will start on a new line
+      * The `inline` value makes an element an inline-level element, which means it will only take up as much width as it needs, and will not start on a new line
+      * The `inline-block` value makes an element an inline-block element, which means it will take up as much width as it needs, but will start on a new line
+      * The `flex` value makes an element a flex container, which means it will lay out its children in a flex layout
+      * The `grid` value makes an element a grid container, which means it will lay out its children in a grid layout
+      * The `none` value makes an element invisible, and it will not take up any space on the page
+      * The `table` value makes an element a table element, which means it will lay out its children in a table layout
+      * The `flow-root` value makes an element a block-level element, and establishes a new block formatting context
+
+## April 25, 2024
   ## JS:
   * The `instanceof` operator checks if an object is an instance of a class
     * It returns `true` if the object is an instance of the class, and `false` otherwise
