@@ -1,4 +1,81 @@
 ## Front-End Bible:
+## April 29, 2024
+  ## JS:
+  * The `eval` function is used to evaluate a string as JavaScript
+    * Generally, the `eval` function will use the variable environment of the code that calls it
+    * This means that the `eval` function can access variables in the calling code, reassign them, etc.
+    * It can also create new variables in that scope using the `var` variable declaration keyword
+    * `let` and `const` variables are block-scoped, so they will not be accessible outside the `eval` function
+    * If the `eval` is aliased and called by any other name, its scope will be treated as global scope, and any local variables or functions from the calling scope will not be accessible within the `eval` code
+    ```javascript 
+    const geval = eval
+    let x = "global", y = "global"
+    function f() {
+        let x = "local"
+        eval("x += 'changed';")
+        return x;
+    }
+    function g() {
+        let y = "local"
+        geval("y += 'changed';")
+        return y;
+    }
+    
+    console.log(f(), x); // Local variable changed: prints "localchanged global"
+    console.log(g(), y); // Global variable changed: prints "local globalchanged"
+    ```
+    * The notable difference is the context in which the eval function is called, and the scope in which it is executed in each case
+  * The `delete` operator is used to remove a property from an index or object
+    * The `delete` operator returns `true` if the property is successfully deleted, and `false` otherwise
+    * If the property is non-existent, `delete` will return `true`
+    * If the property is non-configurable, `delete` will return `false`
+    ```javascript 
+     let obj = {a: 1, b: 2, c: 3}
+     delete obj.a // true
+     delete obj.d // true
+     delete obj // false
+     
+     let arr = [1, 2, 3]
+     delete arr[0] // true
+     delete arr[3] // true
+     delete arr // false
+     console.log(arr) // [empty, 2, 3]
+     console.log(arr.length) // 3, because the array still has 3 elements, this is called a "sparse array"
+    ```
+  ## HTML:
+  * The `<bdo>` or Bi-directional Text Override element is used to override the Unicode bidirectional algorithm
+    * This is useful when you want to display text in a different direction than the surrounding text
+    * The `dir` attribute is used to specify the direction of the text
+    * The `dir` attribute can have one of three values: `ltr`, `rtl`, or `auto`
+    * The `ltr` value specifies that the text should be displayed from left to right
+    * The `rtl` value specifies that the text should be displayed from right to left
+    * The `auto` value specifies that the text should be displayed in the direction of the surrounding text
+    * The main difference between the `bdi` and `bdo` elements is that the `bdi` element isolates the text from its surrounding text, while the `bdo` element overrides the Unicode bidirectional algorithm
+    ```html 
+    <h1>Famous seaside songs</h1>
+    <p>The English song "Oh I do like to be beside the seaside"</p>
+    <p>Looks like this in Hebrew: <span dir="rtl">אה, אני אוהב להיות ליד חוף הים</span></p>
+    <p>In the computer's memory, this is stored as <bdo dir="ltr">אה, אני אוהב להיות ליד חוף הים</bdo></p>
+    ```
+  * The `<blockquote>` element is used to define a block of text that is quoted from another source
+    * You can use the `cite` attribute to specify the source of the quotation
+    * You can also use a `<cite>` element to specify the title of the source
+    * See the `index.html` file to see how you can use a footer to cite the source of the quote
+    * Also keep in mind that you can use a `<q>` element to define a short inline quotation
+  ## CSS:
+  * Grids, grids, grids
+    * The `grid-template-columns` property is used to define the number and size of columns in a grid container
+    * Here, you can define the size of each column using a length, a percentage, or a fraction of the available space
+    * To add space across both access of the grid, you can specify the gap property:
+    ```CSS
+    .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 25px;
+    }
+    ```
+    * Alternatively, `column-gap` and `row-gap` properties also specify gap space
+
 ## April 26, 2024
   ## JS:
   * The assignment operator `=` has right-to-left associativity which means that the rightmost expression is evaluated first
