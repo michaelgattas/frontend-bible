@@ -1,4 +1,65 @@
 ## Front-End Bible:
+
+## April 30, 2024
+  ## JS:
+  * The comma operator (`,`) is used to evaluate any left-hand operands, then return the value of the right-hand-most operand
+  * An example would be 
+  ```javascript 
+  i = 0, j = 0, k = 2;
+  // you could also write something like 
+  i = 0, j = 0, k = someVal === 2 // in this case, the comma operator discards the left operand values and returns 'someVal' assigned to k for comparison to the number 2
+  ```
+  * The most common example of the comma operator is in a `for` loop, where multiple variables are used, and operands with side effects exist on both sides of the comma
+  ```javascript
+  for (let i = 0, j = 1; i < 10, j < 5; i++, j++) {
+    console.log(i, j)
+  }
+  ```
+  * **Expressions** are evaluated to produce a value, but **Statements** are executed to make something happen
+  ## HTML:
+  * The `<body>` element represents the content of an HTML document.
+    * There can only be one body element
+    * In addition to the global attributes, the body element has the following:
+      * `onafterprint`: function to call after the user has printed the doc
+      * `onbeforeprint`: function to call before the user prints the doc
+      * `onbeforeunload`: function to call before the doc is unloaded
+      * `onblur`: function to call when the element loses focus
+      * `onerror`: function to call when an error occurs
+      * `onfocus`: function to call when the element gets focus
+      * `onhashchange`: function to call when there has been a change in the anchor part of the URL
+      * `onlanguagechange`: function to call when the user changes the language of the page
+      * `onload`: function to call when the element is finished loading
+      * `onmessage`: function to call when the element receives a message
+      * `onoffline`: function to call when the browser starts to work offline
+      * `ononline`: function to call when the browser starts to work online
+      * `onpopstate`: function to call when the window's history changes
+      * `onredo`: function to call when the document performs a redo
+      * `onresize`: function to call when the document view is resized
+      * `onstorage`: function to call when the storage area has changed
+      * `onundo`: function to call when the document performs an undo
+      * `onunload`: function to call when the document is being unloaded
+  * The `<br>` element is used to insert a line break in text
+    * The `<br>` element is an empty element, which means it does not have a closing tag
+    * This element is meant to break up a paragraph, like a poem or a speech, where specific line breaks are necessary
+    * Never adjust the margins on a `<br>` element, and instead adjust the `line-height` property of the parent element
+    * There are accessibility concerns associated with the `<br>` element, as it can be misused to create a new paragraph, when a `<p>` element should be used instead
+    * For the purpose of screen readers and accessibility, it is recommended not to use a `<br>` element to create a new paragraph
+  ## CSS:
+  * You can repeat all or part of a track listing using the CSS `repeat()` function
+  * E.g.
+  ```CSS
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 20px;
+  }
+  ```
+  * Explicit grids are created using `grid-template-columns` and `grid-template-rows
+  * Implicit grids extends the defined explicit grid when content is placed outside of that grid, such as into the rows by drawing additional grid lines
+  * By default, tracks created in the grid are auto-sized, which means they're large enough to contain their content
+  * You can also give them a size using `grid-auto-rows` and `grid-auto-columns`
+  * Using `grid-auto-columns` with `grid-template-columns` will not overwrite the explicit grid
+
 ## April 29, 2024
   ## JS:
   * The `eval` function is used to evaluate a string as JavaScript
