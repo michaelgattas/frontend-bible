@@ -1,5 +1,70 @@
 ## Front-End Bible:
 
+## May 2, 2024
+  ## JS:
+  * `else if` is not actually a statement in proper JS, and is instead an idiom used by programmers to make these nested conditionals more legible
+  * A `switch` statement in JS looks like this:
+  ```javascript
+    switch (expression) {
+        case value1: // starting point 1
+        // code block
+        break;
+        case value2: // starting point 2
+        // code block
+        break;
+        default: // final starting point
+        // code block
+    }
+  ```
+  * It's also worth noting that the `===` operator is used to check equality in this context
+  The purpose of these `case` statements is to provide a starting point for the code block to execute, and the `break` statement is used to exit the `switch` statement
+  ## HTML: 
+  * The `<button>` attribute is used to define a button 
+    * It inherits the global attributes
+    * Notable attributes include `autofocus`, `disabled`, and `type`
+    * When the button is part of a form, the `type` attribute can be `submit`, `reset`, or `button`
+      * The `submit` type will submit the form data to the server, and is the default type if the `type` attribute is not specified
+      * If your buttons are not for submitting form data to a server, be sure to set their `type` attribute to `button`
+        * Otherwise, the default behavior of the button will be to submit the form data to the server, possibly destroying the current state of teh document
+    * If a button is attached to a form, the following attributes help direct this call:
+      * `formaction` : The URL that processes the form data when the form is submitted
+      * `formenctype` : The encoding type for the form data
+      * `formmethod` : The HTTP method used to submit the form data
+      * `formnovalidate` : A Boolean attribute that specifies that the form data should not be validated when submitted
+      * `formtarget` : The target window or frame where the form data is submitted
+      * `name` : The name of the button, which is submitted with the form data
+      * `value` : The value of the button, which is submitted with the form data
+      * `form` : The form element id that the button is associated with
+    * For accessibility, it's best practice to include text along with any icon within a button, to ensure cultural or technological gaps in understanding can be overcome by the user
+  * Firefox will add a small dotted border around a button when it is focused, but this can be removed with the following CSS:
+    ```CSS
+    button::-moz-focus-inner {
+      outline: none;
+    }
+    ```
+  ## CSS:
+  * If you set a `grid-auto-rows` value to `100px' but want to make sure than any overflown text in a row would still display
+  * In this case, simply use the `minmax()` function to set a minimum and maximum height for the row
+  * For example:
+  ```CSS
+    .container {
+        display: grid;
+        grid-template-columns: 100px 100px 100px;
+        grid-auto-rows: minmax(100px, auto);
+    }
+  ```
+  * In this case, the row will be at least 100px tall, but will expand to fit the content if it is larger than 100px
+  * You can also configure a value that allows as many columns as will fit, using a combination of `auto-fit` and `minmax()`
+  * For example:
+  ```CSS
+    .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-auto-rows: minmax(100px, auto);
+        gap: 20px;
+    }
+  ```
+
 ## April 30, 2024
   ## JS:
   * The comma operator (`,`) is used to evaluate any left-hand operands, then return the value of the right-hand-most operand
