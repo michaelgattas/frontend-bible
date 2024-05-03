@@ -1,5 +1,50 @@
 ## Front-End Bible:
 
+## May 3, 2024
+  ## JS:
+  * Explicitly, the `for` loop syntax is 
+  ```javascript 
+    for (initialize; test; increment) { 
+        statement 
+    }
+  ```
+  * An interesting way to compare it to a `while` loop:
+  ```javascript
+    initialize;
+    while (test) {
+        statement;
+        increment;
+    }
+  ```
+  * Most `for` loops are numeric, but they can be used to iterate over many different types of data structures:
+  ```javascript
+  function tail(o) {
+    for (; o.next; o = o.next) /* empty */ ;
+    return o;
+  }
+  ```
+  ## HTML: 
+  *  The `<canvas>` element uses either the canvas scripting API or the WebGL API to draw graphics and animations
+  * It uses the global attributes, and some noticeable ones are:
+    * `height` : The height of the canvas
+    * `width` : The width of the canvas
+  * Unlike the `<img>` element, the `<canvas>` element requires the closing tag
+  * iOS devices notably limit maximum canvas size to 4,096 x 4,096 pixels, whereas most other browsers allow 10,000 x 10,000 pixels
+  * Using the `OffscreenCanvas` API, you can create a canvas that is not visible in the DOM, but can be used to render images offscreen
+  * It is good practice to include alternative text within the canvas to describe what is happening on the canvas
+  * For more detailed description of using the `Offscreen Canvas` API and the `Canvas` API
+  ## CSS: 
+  *  You can specify an item's placement within the grid using the `grid-column-start`, `grid-column-end`, `grid-row-start`, and `grid-row-end` properties
+  * These are often shortened to `grid-column` and `grid-row` properties
+  * For example: 
+  * ```CSS
+    .item {
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+    }
+    ```
+    * This will place the item in the first column, spanning two columns, ending after the 3rd, and in the first row, spanning two rows, ending after the 3rd
+
 ## May 2, 2024
   ## JS:
   * `else if` is not actually a statement in proper JS, and is instead an idiom used by programmers to make these nested conditionals more legible
