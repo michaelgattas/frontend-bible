@@ -1,5 +1,60 @@
 ## Front-End Bible:
 
+## May 6, 2024
+  ## JS:
+  * A `for/of` loop works on any iterable object in JS
+    * This includes Arrays, Strings, Sets, and Maps
+  * In order to iterate over an object, you must use
+    * A `for/in` loop
+    * The `Object.keys()`, `Object.values()`, or `Object.entries()` methods
+  * You can destructure an object in a `for/of` loop like so
+    ```javascript
+    const obj = {a: 1, b: 2, c: 3}
+    for (const [key, value] of Object.entries(obj)) {
+        console.log(key, value)
+    }
+    ```
+  ## HTML:
+  * The `<caption>` element is used to define a table caption
+    * This provides an accessible description. 
+    * It should be the first child of a `<table>` element
+  * The `<cite>` element is used to define the title of a work
+    * This is typically used for a book, movie, song, or other creative work
+    * It should be used to provide a citation to the work
+    * This is normally used inside of a `<blockquote>` or `<q>` element
+    * Most browsers will style the `<cite>` element with italics, but you can override this with CSS
+  * The `<code>` element is used to define a piece of computer code
+    * This is normally formatted using the user agent's monospace font
+  ## CSS:
+  * In addition to setting the `grid-column` and `grid-row` properties, you can also use `grid-template-areas` to define the layout of different sections
+  * Check the `index.html`/`styles.scss` files for a full example, but here's an example:
+  ```CSS 
+    .container {
+      display: grid;
+      grid-template-areas:
+        "header header"
+        "sidebar content"
+        "footer footer";
+      grid-template-columns: 1fr 3fr;
+      gap: 20px;
+    }
+    
+    header {
+      grid-area: header;
+    }
+    
+    article {
+      grid-area: content;
+    }
+    
+    aside {
+      grid-area: sidebar;
+    }
+    
+    footer {
+      grid-area: footer;
+    }
+  ```
 ## May 3, 2024
   ## JS:
   * Explicitly, the `for` loop syntax is 

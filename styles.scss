@@ -43,6 +43,10 @@ body {
   margin-top: 10px;
   margin-bottom: 20px;
   display: grid;
+  grid-template-areas:
+    "header header"
+    "aside article"
+    "footer footer";
   grid-template-columns: 1fr 3fr;
   gap: 20px;
 }
@@ -57,21 +61,17 @@ footer {
 
 aside {
   border-right: 1px solid #999;
-  grid-column: 1;
-  grid-row: 2;
+  grid-area: aside;
 }
 
 header {
-  grid-column: 1 / 3;
-  grid-row: 1;
+  grid-area: header;
 }
 
 footer {
-  grid-column: 1 / 3;
-  grid-row: 3;
+  grid-area: footer;
 }
 
 article {
-  grid-column: 2;
-  grid-row: 2;
+  grid-area: article;
 }
