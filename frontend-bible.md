@@ -1,5 +1,66 @@
 ## Front-End Bible:
 
+## May 7, 2024
+  # JS:
+  * Because strings are iterated by Unicode codepoint, not by UTF-16 character, 
+  * The string "I❤JS" has a length of 5, but would be iterated as 4 characters
+  * Sets are also iterable in a very predictable, simple way
+  * Maps are slightly different because they are iterated not by key or value, but by key/value pairs
+    * Here's an example of Map iteration:
+    ```javascript 
+      let m = new Map([[1, "one"]]); 
+      for(let [key, value] of m) {
+          key // => 1
+          value // => "one" 
+      }
+    ```
+  * The `for/await` loop was introduced in ES2018 and will be covered later, but here's an example
+    ```javascript
+    async function printStream(stream) {
+        for await (let chunk of stream) { 
+            console.log(chunk);
+        }
+    }
+    ```
+  # HTML:
+  * The `<col>` element defines one or more columns in a column group represented by its parent `<colgroup>` element
+    * It's only valid as a child of a `<colgroup>` element that has no span attribute defined
+    * An example: 
+    ```HTML
+    <table>
+        <caption>
+          Superheros and sidekicks
+        </caption>
+        <colgroup>
+          <col />
+          <col span="2" class="batman" />
+          <col span="2" class="flash" />
+        </colgroup>
+        <tr>
+          <td></td>
+          <th scope="col">Batman</th>
+          <th scope="col">Robin</th>
+          <th scope="col">The Flash</th>
+          <th scope="col">Kid Flash</th>
+        </tr>
+        <tr>
+          <th scope="row">Skill</th>
+          <td>Smarts, strong</td>
+          <td>Dex, acrobat</td>
+          <td>Super speed</td>
+          <td>Super speed</td>
+        </tr>
+    </table>
+    ```
+    * Here, a `<col>` element is used to group them and assign custom classes, for styling
+  * The `<colgroup>` element is used to define a group of columns within a table
+    * The `span` attribute specifies the number of columns the `<colgroup>` element should span. 
+    * It defaults to 1 and must not be present if there are any `<col>` elements as children
+    * The `<colgroup>` element should always appear within a table, after any `<caption>` elements but before any `<thead>`, `<tbody>`, `<tfoot>`, or `<tr>` elements
+  ## CSS:
+  * The ability to add subgrids enables even more flexibility within this layout model
+  * Check the accompanying `index.html` and `styles.scss` files for a full example
+
 ## May 6, 2024
   ## JS:
   * A `for/of` loop works on any iterable object in JS
