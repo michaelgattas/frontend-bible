@@ -1,7 +1,34 @@
 ## Front-End Bible:
 
+## May 8, 2024
+  ## JS:
+  * The `for/in` loop iterates over the properties of an object
+    * It will iterate over all enumerable properties of an object, including inherited properties
+    * The `for/in` loop is not recommended for use with arrays, as it will iterate over the indices of the array, as well as any other enumerable properties
+    * The `for/of` loop is recommended for use with arrays, as it will only iterate over the values of the array
+    * In addition to built-in methods, many of the built-in properties of objects are non-enumerable
+    * All properties and methods defined by your code are enumerable by default
+    * The `for/in` loop will iterate over all enumerable string-named properties, whether they are inherited up the prototype chain or not
+  * You will learn more about enumerable properties later
+  ## HTML:
+  * The `<data>` element is used to provide a machine-readable version of the content within it
+  ```HTML
+    <p>New Products:</p>
+    <ul>
+      <li><data value="398">Mini Ketchup</data></li>
+      <li><data value="399">Jumbo Ketchup</data></li>
+      <li><data value="400">Mega Jumbo Ketchup</data></li>
+    </ul>
+  ```
+  * The `<datalist>` element is used to provide a list of predefined `<option>` elements within another control
+    * The `<datalist>` element is used in conjunction with the `<input>` element to provide a list of predefined options for the user to choose from
+    * The `<datalist>` is given a unique id, which is then referenced by the `list` attribute of the `<input>` element
+    * This can be used for autocomplete functionality, or to provide a list of options for the user to choose from
+  ## CSS:
+  * Today, I start the CSS grids assessment. See `index.html` and `styles.scss` for details
+
 ## May 7, 2024
-  # JS:
+  ## JS:
   * Because strings are iterated by Unicode codepoint, not by UTF-16 character, 
   * The string "I❤JS" has a length of 5, but would be iterated as 4 characters
   * Sets are also iterable in a very predictable, simple way
@@ -22,7 +49,7 @@
         }
     }
     ```
-  # HTML:
+  ## HTML:
   * The `<col>` element defines one or more columns in a column group represented by its parent `<colgroup>` element
     * It's only valid as a child of a `<colgroup>` element that has no span attribute defined
     * An example: 
