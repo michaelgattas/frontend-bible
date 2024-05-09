@@ -1,5 +1,41 @@
 ## Front-End Bible:
 
+## May 9, 2024
+  ## JS:
+  * Another form of statement in JS is a `jump` statement
+    * The `break` statement makes the interpreter jump to the end of a loop or other statement
+    * The `continue` statement makes the interpreter skip the rest of the body of a loop and jump back to the top of a loop to begin a new iteration
+    * The `return` statement makes the interpreter jump from a function invocation back to the code that invoked it and also supplies the value for the invocation
+    * The `throw` statement is a kind of interim return from a generator function
+      * It is designed to work with `try/catch/finally` statements
+  * Furthermore, any statement may be labeled by preceiding it with an identifier and a colon:
+    ```javascript
+    identifier: statement
+    ```
+    * This is useful for nested loops, where you can break out of the inner loop by referencing the outer loop
+  ## HTML: 
+  * The `<dd>` element provides the description, definition, or value for the preceding term `<dt>` in a description list `<dl>`
+    * This is called the description details element
+  * The `<del>` element is used to indicate that text has been deleted from a document
+    * This is typically displayed with a strikethrough
+    * The `cite` attribute can be used to provide a URL to the source of the deletion
+    * The `datetime` attribute can be used to provide a machine-readable date and time for the deletion
+    * This could be used to show changes, similar to the `<ins>` element
+  ## CSS:
+  * In terms of font-size, a `<p>` tag will be set with a default value of `16px` by default
+  * Using `em` can be tricky when you're setting the font-size of a parent element, as it will be relative to the parent element
+  * Using `rem` is a better choice, as it will be relative to the root element, which is the `<html>` element
+  * `font-style` is the property used to turn italic text on or off
+  * `font-weight` is the property used to set the weight of the font
+  * `text-transform` allows you to set your font to be transformed
+    * `none`: prevents any transformation
+    * `lowercase`, `uppercase`, `capitalize`
+    * `full-width`: converts the text to full-width characters that are written inside a fixed width square
+  * `text-decoration` is the property used to set the decoration of the text
+    * `none`, `underline`, `overline`, `line-through`, `blink`
+  * `text-shadow` allows you to apply drop shadows to your text, setting the horizontal and vertical offsets, blur radius, and color
+    
+
 ## May 8, 2024
   ## JS:
   * The `for/in` loop iterates over the properties of an object
