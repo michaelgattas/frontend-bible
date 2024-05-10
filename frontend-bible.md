@@ -1,5 +1,62 @@
 ## Front-End Bible:
 
+## May 10, 2024
+  ## JS:
+  * Labeled break statements can allow you to break out of a deeply nested loop. Here's an example
+  ```javascript
+  let matrix = getData(); // get a 2D array of data from somewhere
+  // Now sum all the numbers in the matrix
+  let sum = 0, success = false;
+  // Start with a labeled statement that we can break out of if errors occur
+  computeSum: if (matrix) {
+      for (let x = 0; x < matrix.length; x++) {
+          let row = matrix[x];
+          if (!row) break computeSum;
+          for (let y = 0; y < row.length; y++) {
+              let cell = row[y];
+              if (isNaN(cell)) break computeSum;
+              sum += cell;
+          }
+      }
+      success = true;
+  }
+  // The break statements jump here. If we arrive here with success == false then there was somthing wrong with the matrix we were given.
+  // Otherwise, sum contains the sum of all cells of the matrix
+  ```
+  * The `continue` statement is used to skip the rest of the body of a loop and jump back to the top of the loop to begin a new iteration
+    * In the case of a `for` loop, the increment expression is evaluated before the loop condition is tested
+    * In the case of a `while` loop, the loop condition is tested before the loop body is executed
+    * Here's an example:
+    ```javascript
+    for (let i = 0; i < data.length; i++) {
+        if (!data[i]) continue; // Skip null and undefined values
+        total += data[i];
+    }
+    ```
+  * The `return` statement is used to make the interpreter jump from a function invocation back to the code that invoked it
+  * The `yield` statement is much like the return statement but is used only in ES6 generator functions to produce the next value in the generated sequence of values without actually returning.
+    * In order to understand the `yield`, you must understand iterators and generators
+  * The `throw` statement is used to throw an exception, which is a signal that an error or other unusual condition has occurred
+    * The `throw` statement requires a single argument, which is the value of the exception that is thrown
+    * The `throw` statement is typically used in conjunction with the `try/catch/finally` statement
+  * The `finally` statement is used to specify a block of code that will be executed after a `try` or `catch` block, regardless of whether an exception is thrown
+    * If any part of the `try` block is executed, the `finally` block will also be executed
+    * This statement is often used to clean up resources, such as closing files or network connections
+  ## HTML:
+  * The `<dfn>` element is used to indicate a term being defined. 
+    * It should be used to indicate the term being defined, not the definition itself
+    * The ancestor of the `<dfn>` element should be a `<p>`, `<section>`, `<article>`, or `<aside>` element that contains the full definition of the elemtn
+    * Or it can be used with `<dd>/<dt>` elements in a `<dl>` element
+  * The `<dialog>`
+  ## CSS:
+  * The `text-align` property is used to position horizontal alignment of text within its parent container
+    * The `text-align` property can have one of the following values: `left`, `right`, `center`, `justify`, `start`, `end`, `match-parent`, `initial`, `inherit`
+    * The `text-align` property is inherited by child elements
+    * The `text-align` property only affects inline-level and inline-block elements
+    * The `text-align` property does not affect block-level elements
+    * The `text-align` property does not affect table elements
+    * The `text-align` property does not affect flex items
+
 ## May 9, 2024
   ## JS:
   * Another form of statement in JS is a `jump` statement
