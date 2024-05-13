@@ -1,5 +1,55 @@
 ## Front-End Bible:
 
+## May 13, 2024
+  ## JS:
+  * The `debugger` directive is used to tell the interpreter to pause execution and enter the debugger
+    * This is useful for debugging code, as it allows you to inspect the state of the program at that point
+    * This acts very similarly to a `breakpoint` set with your developer tools
+    * It is only available when the developer tools are open
+    * Often used in conjunction with breakpoints, which are set in the developer tools
+    * Not a statement in the strict sense, but rather a directive to the interpreter
+    * Not supported in all browsers, and should not be used in production code
+  * The `use strict` directive is used to enable strict mode in JavaScript
+    * Strict mode is a way to opt in to a restricted variant of JavaScript
+    * It catches common coding errors and makes it easier to write "secure" JavaScript
+    * It is a string literal, and must be the first statement in a script or function
+    * It is not a statement, but a directive to the interpreter
+    * It is supported in all modern browsers
+  * `strict mode` has the following key differences with `non-strict mode`:
+    * The `with` statement is not allowed
+    * All variables must be declared before they are used
+    * All functions invoked as functions (rather than as methods) have a `this` value of `undefined`
+      * In non-strict mode, the `this` value would be the global object
+    * Assignments to non-writable properties and attempts to create new properties on non-extensible objects throw a `TypeError`
+      * In non-strict mode, these assignments fail silently
+    * Code passed into `eval` is executed in its own scope, rather than the caller's scope
+    * The Arguments object in a function holds a static copy of the values of the arguments passed to the function
+      * In non-strict mode, the Arguments object has a magical behavior in which elements of the array and named function parameters both refer to the same value
+    * The `delete` operator throws a `SyntaxError` when used on a non-configurable property
+      * In non-strict mode, the `delete` operator returns `false` when used on a non-configurable property
+    * It is a Syntax Error for an object literal to define two properties of the same name 
+    * Octal Integers (beginning with a 0 and not followed by an x) are not allowed
+    * Identifiers `eval` and `arguments` are treated as reserved words, and you cannot change their value
+      * You cannot assign a value to their identifiers, declare them as variables, use them as function names, use them as function parameter names, or use them as the identifier of a `catch` block
+    * The ability to examine the call stack is restricted
+      * `arguments.caller` and `arguments.callee` are not allowed, and both throw a `TypeError` within a strict mode function
+  ## HTML: 
+  * The `<dialog>` represents a modal or non-modal dialog box or other interactive component, such as a dismissible alert, inspector, or subwindow
+    * Modal dialog boxes interrupt interaction with the rest of the page, while non-modal dialog boxes allow interaction with the rest of the page
+    * Javascript should be used to display the `<dialog>` element
+      * Use the `.showModal()` method to display a modal dialog box
+      * Use the `.show()` method to display a non-modal dialog box
+      * A dialog box can be closed using the `.close()` method
+      * Modal dialogs can also be closed by pressing the `esc` key
+    * The `tabindex` attribute must not be used on the `<dialog>` element
+    * The `open` attribute is a boolean attribute that controls whether the dialog box is displayed
+      * It's recommended to use the `.show()` or `.showModal()` methods to display the dialog box
+      * If a dialog is opened using the `open` attribute, it will be displayed as a non-modal dialog box
+    * HTML `<form>` elements can be used to close a dialog if they have the `method="dialog"` attribute set, or if the button used to submit the form has the `formmethod="dialog"` attribute set
+  ## CSS:
+  * The `line-height` property sets the height of each line of text
+  * Similarly, you can set the `letter-spacing` and `word-spacing` properties to adjust the space between characters and words, respectively
+
 ## May 10, 2024
   ## JS:
   * Labeled break statements can allow you to break out of a deeply nested loop. Here's an example
@@ -47,7 +97,6 @@
     * It should be used to indicate the term being defined, not the definition itself
     * The ancestor of the `<dfn>` element should be a `<p>`, `<section>`, `<article>`, or `<aside>` element that contains the full definition of the elemtn
     * Or it can be used with `<dd>/<dt>` elements in a `<dl>` element
-  * The `<dialog>`
   ## CSS:
   * The `text-align` property is used to position horizontal alignment of text within its parent container
     * The `text-align` property can have one of the following values: `left`, `right`, `center`, `justify`, `start`, `end`, `match-parent`, `initial`, `inherit`
