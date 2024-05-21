@@ -1,5 +1,42 @@
 ## Front-End Bible:
 
+## May 15, 2024
+  ## JS:
+  * Any value in Javascript that is not a string, a number, a Symbol, or `true`, `false`, `null`, or `undefined` is an object
+  * A property name on an Object can be any string, including the empty string (or any Symbol)
+  * The value may be any Javascript value, or it may be a getter or setter function (or both)
+  * An `own property` refers to a non-inherited property
+  * In addition to its name and value, each property has three property attributes:
+    * The _writable_ attribute specifies whether the value of the property can be set
+    * The _enumerable_ attribute specifies whether the property name is returned by a `for/in` loop
+    * The _configurable_ attribute specifies whether the property can be deleted and whether its attributes can be altered
+  * Many of JS's built-in objects have properties that are read-only, non-enumerable, or non-configurable
+  * By default, however, all properties of the objects you create are writable, enumerable, and configurable
+  ## HTML:
+  * Today, I am practicing the usage of dialogs in the `index.html` file attached
+  ## CSS:
+  * The `outline` and `border` properties in CSS have different properties
+    * The border is added to the inside of the element, while outline is added to the outside of the element
+  * The CSS selector `x + y` will select the first instance of a `y` following an `x` element. 
+    * This is the adjacent sibling selector
+
+## May 14, 2024
+  ## JS:
+  * Unlike statements, **declarations** in JS code don't necessarily "make things happen"
+  * Rather, they provide structure for the code and are run before code is actually executed
+  * These declarations include `let`, `var`, `const`, `class`, `function`, `import`, and `export`
+  * You've already learned much about the `let`, `var`, `const`, and `function` declarations
+  * `class` is on the way
+  * `import` and `export` are both used to link to **modules** in JS
+    * A _module_ is a file of Javascript code with its own global namespace, completely independent of all other modules 
+    * Values within modules are private and cannot be accessed by external modules unless they've been explicitly exported
+    * The export keyword is sometimes used in addition to other declarations
+    * When a module exports only a single value, this is typically done with the special form `export default`
+    ```javascript
+    export const TAU = 2 * Math.PI;
+    export function magnitude(x,y) { return Math.sqrt(x*x + y*y); }
+    export default class Circle { /* class definition omitted here */ }
+    ```
 ## May 13, 2024
   ## JS:
   * The `debugger` directive is used to tell the interpreter to pause execution and enter the debugger

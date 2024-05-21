@@ -8,8 +8,38 @@
 </head>
 <body>
 
-<h1 class="text-playaround">This text is to see what happens</h1>
+<!--<dialog open>-->
+<!--    <p> Greetings, one and all</p>-->
+<!--    <form method="dialog">-->
+<!--        <p>This example demonstrates the non-modal dialog by using only HTML. Because of the boolean <code>open</code>-->
+<!--        attribute in the element, the dialog appears open when the page loads.-->
+<!--        </p>-->
+<!--        <button>OK</button>-->
+<!--        <p> dialogs opened because of the <code>open</code> attribute are non-modal. No method is provided to re-open it. Because of this the <code>HTMLDialogElement.show()</code> method is recommended to show the element</p>-->
+<!--    </form>-->
+<!--</dialog>-->
 
+<dialog>
+    <button autofocus>Close</button>
+    <p>This modal dialog has a groovy backdrop</p>
+</dialog>
+<button>Show dialog #1</button>
+
+<script>
+    const dialog = document.querySelector("dialog");
+    const showButton = document.querySelector("dialog + button");
+    const closeButton = document.querySelector("dialog button");
+
+    // "Show the dialog" button opens the dialog modally
+    showButton.addEventListener("click", () => {
+        dialog.showModal()
+    })
+
+    // Close Button closes the dialog
+    closeButton.addEventListener("click", () => {
+        dialog.close()
+    })
+</script>
 </body>
 
 </html>
