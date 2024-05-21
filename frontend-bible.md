@@ -1,6 +1,6 @@
 ## Front-End Bible:
 
-## May 15, 2024
+## May 21, 2024
   ## JS:
   * Any value in Javascript that is not a string, a number, a Symbol, or `true`, `false`, `null`, or `undefined` is an object
   * A property name on an Object can be any string, including the empty string (or any Symbol)
