@@ -1,5 +1,34 @@
 ## Front-End Bible:
 
+## May 22, 2024
+  ## JS:
+  * All objects in JS have a second object (called a prototype) tied to them
+  * Any object created with the `new` keyword inherits the prototype of the constructor function
+    * e.g. `let o = new Object();` will inherit the prototype of the `Object` constructor, or `Object.prototype`
+  * All objects created from Object literals will inherit `Object.prototype`
+  * Almost all objects have a prototype, but only a relatively small number of objects have a prototype property
+    * It is these objects with prototype properties that define the prototypes for all other objects
+  * `Object.prototype` is one of the rare objects in JS that has no prototype
+    * Other prototype objects are normal objects that do have a prototype
+    * Most built-in constructors (and most user-defined constructors) have a prototype that inherits from `Object.prototype`
+      * e.g., `Date.prototype` inherits from `Object.prototype`
+        * So, an object created by `new Date()` will inherit from `Date.prototype` and `Object.prototype`
+        * This linked series of prototype objects is called a **_Prototype Chain_**
+  * Chapter 9 will describe how to set Class constructors up to assign object prototypes for instances created by the constructor
+  ## HTML: 
+  * Wrap-up of the HTML dialog element today
+  ## CSS:
+  * Styling lists in CSS is much like styling any other text, with some unique properties
+  * The three types of lists in CSS are:
+    * Unordered lists (`<ul>`)
+    * Ordered lists (`<ol>`)
+    * Definition lists (`<dl>`)
+  * List-Specific Styles
+    * These properties can be set on `<ul>` and `<ol>` elements
+      * `list-style-type` : The type of bullet or numbering used
+      * `list-style-position` : The position of the bullet or numbering, whether inside or outside the list item
+      * `list-style-image` : An image to use as the bullet or numbering
+
 ## May 21, 2024
   ## JS:
   * Any value in Javascript that is not a string, a number, a Symbol, or `true`, `false`, `null`, or `undefined` is an object

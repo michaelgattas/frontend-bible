@@ -19,25 +19,137 @@
 <!--    </form>-->
 <!--</dialog>-->
 
-<dialog>
-    <button autofocus>Close</button>
-    <p>This modal dialog has a groovy backdrop</p>
+<!--<dialog>-->
+<!--    <button autofocus>Close</button>-->
+<!--    <p>This modal dialog has a groovy backdrop</p>-->
+<!--</dialog>-->
+
+<dialog id="favDialog">
+    <form>
+        <p>
+            <label>
+                Favorite animal:
+                <select>
+                    <option value="default">Choose...</option>
+                    <option>Brine Shrimp</option>
+                    <option>Red Panda</option>
+                    <option>Spider monkey</option>
+                </select>
+            </label>
+        </p>
+        <div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+        </div>
+    </form>
 </dialog>
-<button>Show dialog #1</button>
+
+<p>
+    <button id="showDialog">Show the dialog</button>
+</p>
+<output></output>
+
+<!--<button>Show dialog #1</button>-->
+
+<section id="css-practice">
+    <h2>Shopping (unordered) list</h2>
+
+    <p>
+        Paragraph for reference, paragraph for reference, paragraph for reference,
+        paragraph for reference, paragraph for reference, paragraph for reference.
+    </p>
+
+    <ul>
+        <li>Hummus</li>
+        <li>Pita</li>
+        <li>Green salad</li>
+        <li>Halloumi</li>
+    </ul>
+
+    <h2>Recipe (ordered) list</h2>
+
+    <p>
+        Paragraph for reference, paragraph for reference, paragraph for reference,
+        paragraph for reference, paragraph for reference, paragraph for reference.
+    </p>
+
+    <ol>
+        <li>Toast pita, leave to cool, then slice down the edge.</li>
+        <li>
+            Fry the halloumi in a shallow, non-stick pan, until browned on both sides.
+        </li>
+        <li>Wash and chop the salad.</li>
+        <li>Fill pita with salad, hummus, and fried halloumi.</li>
+    </ol>
+
+    <h2>Ingredient description list</h2>
+
+    <p>
+        Paragraph for reference, paragraph for reference, paragraph for reference,
+        paragraph for reference, paragraph for reference, paragraph for reference.
+    </p>
+
+    <dl>
+        <dt>Hummus</dt>
+        <dd>
+            A thick dip/sauce generally made from chick peas blended with tahini, lemon
+            juice, salt, garlic, and other ingredients.
+        </dd>
+        <dt>Pita</dt>
+        <dd>A soft, slightly leavened flatbread.</dd>
+        <dt>Halloumi</dt>
+        <dd>
+            A semi-hard, unripened, brined cheese with a higher-than-usual melting
+            point, usually made from goat/sheep milk.
+        </dd>
+        <dt>Green salad</dt>
+        <dd>That green healthy stuff that many of us just use to garnish kebabs.</dd>
+    </dl>
+
+</section>
 
 <script>
-    const dialog = document.querySelector("dialog");
-    const showButton = document.querySelector("dialog + button");
-    const closeButton = document.querySelector("dialog button");
+    // const dialog = document.querySelector("dialog");
+    // const showButton = document.querySelector("dialog + button");
+    // const closeButton = document.querySelector("dialog button");
+    //
+    // // "Show the dialog" button opens the dialog modally
+    // showButton.addEventListener("click", () => {
+    //     dialog.showModal()
+    // })
+    //
+    // // Close Button closes the dialog
+    // closeButton.addEventListener("click", () => {
+    //     dialog.close()
+    // })
 
-    // "Show the dialog" button opens the dialog modally
-    showButton.addEventListener("click", () => {
-        dialog.showModal()
+    const showButton2 = document.getElementById("showDialog");
+    const favDialog = document.getElementById("favDialog");
+    const outputBox = document.querySelector("output");
+    const selectEl = favDialog.querySelector("select");
+    const confirmBtn = favDialog.querySelector("#confirmBtn");
+
+    // "Show the dialog" button opens the <dialog> modally
+    showButton2.addEventListener("click", () => {
+        favDialog.showModal();
     })
 
-    // Close Button closes the dialog
-    closeButton.addEventListener("click", () => {
-        dialog.close()
+    // "Favorite animal" input sets the value of the submit button
+    selectEl.addEventListener("change", (event) => {
+        confirmBtn.value = selectEl.value;
+    })
+
+    // "Cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event
+    favDialog.addEventListener("close", (e) => {
+        outputBox.value = favDialog.returnValue === "default"
+            ? "No return value"
+            : `Return value ${favDialog.returnValue}.`
+        // have to check for "default rather than the empty string
+
+    confirmBtn.addEventListener("click", (event) => {
+        event.preventDefault(); // we don't want to submit this fake form
+        favDialog.close(selectEl.value); // Have to send the select box value here
+    })
     })
 </script>
 </body>
