@@ -1,5 +1,62 @@
 ## Front-End Bible:
 
+## May 23, 2024
+  ## JS:
+  *  `Object.create()` creates a new object, using the first argument as the prototype of that object:
+  ```javascript
+        let o1 = Object.create({x: 1, y: 2}); // o1 inherits properties x and y
+        o1.x + o1.y // => 3
+  ```
+  * You can pass `null` to create a new object that does not have a prototype, but if you do this, the newly created object will not inherit anything, not even basic methods like `toString()` (which means it won't work with the + operator either)
+  ```javascript 
+  let o2 = Object.create(null); // o2 inherits no props or methods.
+  ```  
+  * If you want to create an ordinary empty object (like the object returned by `{}` or `new Object()`), pass `Object.prototype` to `Object.create()`
+  ```javascript
+  let o3 = Object.create(Object.prototype); // o3 is like {} or new Object().
+  ````
+  * One use case for creating a prototype chain is that a library method might unintentionally augment the values in the original object. Instead, you can pass in your object as a prototype of the new object, which will guard against accidental modifications
+  ```javascript
+  let x = { x: "don't change this value"};
+  library.function(Object.create(o));
+  ```
+  * Javascript objects are associative arrays (like a hash map or dictionary)
+    * In C, C++, Java, and similarly strongly type languages, an object can only have a fixed number of properties, and the names of these properties must be defined in advance
+    * Since JS is a loosely typed language, this rule does not apply
+    * When you use the `.` operator to access a property of an object, the name of the property is expressed as an identifier
+      * Identifiers must be typed literally into your JavaScript program; they are not a datatype, so they cannot be manipulated by the program
+    * On the other hand, when you access a property of an object with teh `[]` array notation, the name of the property is expressed as a string
+      * Strings are JS datatypes, so they can be manipulated by the program
+      * Basically, these values can be handled at runtime, while the dot operator is more strict and requires identifiers, not strings
+## HTML: 
+  * The `<div>` element is the generic container for flow content
+    * The `<div>` should only be used when no other semantic elements (like `<article>` or `<nav>` are appropriate)
+  * The `<dl>` or **Description List** element encloses a list of groups of terms
+    * The `<dt>` or description term element is used to define the term being defined
+    * The `<dd>` or description details element is used to define the description, definition, or value for the preceding term
+    * Tip: 
+      * It can be handy to define a key-value separator in the CSS, such as:
+      ```CSS
+      dt::after {
+        content: ": ";
+      }
+      ```
+  * The `<dt>` or **Description Term** element specifies a term in a description or definition list
+    * Must be used inside of a `<dl>` element
+  * The `<em>` or **Emphasis** element marks text that has stress emphasis
+    * This is semantically different from the `<i>` or `<cite>` elements, which are used for other types of emphasis
+  ## CSS:
+  * Controlling List Counting
+    * Sometimes you might want to:
+      * Start from a number other than 1
+      * Count Backwards
+      * Count in steps of more than 1
+    * HTML and CSS have some tools to help
+      * Check `index.html` for example
+      * Add `start` attribute to the list element to start from a number besides 1
+      * Add `reversed` attribute to the list element to start from the final number and count backwards
+      * Add `value` attributes with different numbers to list item elements in order to count in steps of more than 1
+
 ## May 22, 2024
   ## JS:
   * All objects in JS have a second object (called a prototype) tied to them

@@ -8,49 +8,6 @@
 </head>
 <body>
 
-<!--<dialog open>-->
-<!--    <p> Greetings, one and all</p>-->
-<!--    <form method="dialog">-->
-<!--        <p>This example demonstrates the non-modal dialog by using only HTML. Because of the boolean <code>open</code>-->
-<!--        attribute in the element, the dialog appears open when the page loads.-->
-<!--        </p>-->
-<!--        <button>OK</button>-->
-<!--        <p> dialogs opened because of the <code>open</code> attribute are non-modal. No method is provided to re-open it. Because of this the <code>HTMLDialogElement.show()</code> method is recommended to show the element</p>-->
-<!--    </form>-->
-<!--</dialog>-->
-
-<!--<dialog>-->
-<!--    <button autofocus>Close</button>-->
-<!--    <p>This modal dialog has a groovy backdrop</p>-->
-<!--</dialog>-->
-
-<dialog id="favDialog">
-    <form>
-        <p>
-            <label>
-                Favorite animal:
-                <select>
-                    <option value="default">Choose...</option>
-                    <option>Brine Shrimp</option>
-                    <option>Red Panda</option>
-                    <option>Spider monkey</option>
-                </select>
-            </label>
-        </p>
-        <div>
-            <button value="cancel" formmethod="dialog">Cancel</button>
-            <button id="confirmBtn" value="default">Confirm</button>
-        </div>
-    </form>
-</dialog>
-
-<p>
-    <button id="showDialog">Show the dialog</button>
-</p>
-<output></output>
-
-<!--<button>Show dialog #1</button>-->
-
 <section id="css-practice">
     <h2>Shopping (unordered) list</h2>
 
@@ -108,49 +65,51 @@
 
 </section>
 
+<section id="list-styling-2">
+    <h1>Augmented Start</h1>
+    <ol start="4">
+        <li>Toast pita, leave to cool, then slice down the edge</li>
+        <li>
+            Fry the halloumi in a shallow, non-stick pan, until browned on both sides.
+        </li>
+        <li>Wash and chop the salad</li>
+        <li>Fill pita with salad, hummus, and fried halloumi</li>
+    </ol>
+    <h1>Reversed List</h1>
+    <ol start="4" reversed>
+        <li>Toast pita, leave to cool, then slice down the edge</li>
+        <li>
+            Fry the halloumi in a shallow, non-stick pan, until browned on both sides.
+        </li>
+        <li>Wash and chop the salad</li>
+        <li>Fill pita with salad, hummus, and fried halloumi</li>
+    </ol>
+    <h1>Changed Values</h1>
+    <ol>
+        <li value="2">Toast pita, leave to cool, then slice down the edge</li>
+        <li value="4">
+            Fry the halloumi in a shallow, non-stick pan, until browned on both sides.
+        </li>
+        <li value="6">Wash and chop the salad</li>
+        <li value="8">Fill pita with salad, hummus, and fried halloumi</li>
+    </ol>
+</section>
+
+<section id="first-list-styling-assessment">
+    <ul>
+        <li>First, light the candle.</li>
+        <li>Next, open the box.</li>
+        <li>Finally, place the three magic items in the box, in this exact order, to complete the spell:
+            <ol>
+                <li>The book of spells</li>
+                <li>The shiny rod</li>
+                <li>The goblin statue</li>
+            </ol>
+        </li>
+    </ul>
+</section>
+
 <script>
-    // const dialog = document.querySelector("dialog");
-    // const showButton = document.querySelector("dialog + button");
-    // const closeButton = document.querySelector("dialog button");
-    //
-    // // "Show the dialog" button opens the dialog modally
-    // showButton.addEventListener("click", () => {
-    //     dialog.showModal()
-    // })
-    //
-    // // Close Button closes the dialog
-    // closeButton.addEventListener("click", () => {
-    //     dialog.close()
-    // })
-
-    const showButton2 = document.getElementById("showDialog");
-    const favDialog = document.getElementById("favDialog");
-    const outputBox = document.querySelector("output");
-    const selectEl = favDialog.querySelector("select");
-    const confirmBtn = favDialog.querySelector("#confirmBtn");
-
-    // "Show the dialog" button opens the <dialog> modally
-    showButton2.addEventListener("click", () => {
-        favDialog.showModal();
-    })
-
-    // "Favorite animal" input sets the value of the submit button
-    selectEl.addEventListener("change", (event) => {
-        confirmBtn.value = selectEl.value;
-    })
-
-    // "Cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event
-    favDialog.addEventListener("close", (e) => {
-        outputBox.value = favDialog.returnValue === "default"
-            ? "No return value"
-            : `Return value ${favDialog.returnValue}.`
-        // have to check for "default rather than the empty string
-
-    confirmBtn.addEventListener("click", (event) => {
-        event.preventDefault(); // we don't want to submit this fake form
-        favDialog.close(selectEl.value); // Have to send the select box value here
-    })
-    })
 </script>
 </body>
 
