@@ -1,5 +1,67 @@
 ## Front-End Bible:
 
+## May 24, 2024
+  # JS: 
+  * If you are to assign property `x` to the object `o`, and `o` already has a property `x`, the property will be overwritten
+    * If `o` inherits a property `x` from its prototype chain, that inherited property is now hidden by the newly created own property with the same name
+  * Property assignment examines the prototype chain only to determine whether the assignment is allowed
+    * If `o` inherits a read-only property named `x` for example, the assignment is not allowed
+  * The fact that inheritance occurs when querying properties but not when setting them is a key feature of JavaScript because it allows us to selectively override inherited properties
+  * There is one exception to the rule that a property assignment either fails or creates or sets a property in the original object
+    * If o inherits the property x, and that property is an accessor property with a setter method, then that setter method is called rather than creating a new property x in o
+    * Note, however, that the setter method is called on the object o, not on the prototype object that defines the property, so if the setter method defines any properties, it will do so on o, and it will again leave the prototype chain unmodified
+    * 
+  # HTML: 
+  * The `<embed>` element is used to embed external content at the specific point in the document. 
+    * This content is provided by an external application or other source of interactive content such as a browser plug-in
+    * Most modern browsers have deprecated and removed support for browser plug-ins, so relying upon `<embed>` is not wise for the average user's browser
+    * It has the following notable attributes:
+      * `height`: the displayed height of the resource, in CSS pixels
+      * `width`: the displayed width of the resource, in CSS pixels
+      * `src`: the URL of the resource being embedded
+      * `type`: the MIME type of the resource
+    * A MIME type is a two-part identifier for file formats and format contents transmitted on the Internet
+      * Stands for **Multipurpose Internal Mail Extensions**
+      * The first part is the type, and the second part is the subtype
+      * For example, the MIME type for HTML is `text/html`
+      * The MIME type for a JPEG image is `image/jpeg`
+      * The MIME type for a PDF document is `application/pdf`
+  * The `<fencedframe>` element represents a nested browsing context, embedding another HTML page into the current one 
+    * They are very similar to `<iframes>`, except that:
+      * Communication between frame content and embedded site is restricted
+      * It can access cross-site data, but only in a very specific set of controlled circumstances that preserve user privacy
+      * It can't be manipulated or have its data accessed via regular scripting (e.g. reading or setting the source URL)
+      * It content can only be embedded via specific APIs
+      * The frame can't access the embedding context's DOM, not can the embedding context access the frame's DOM
+    * Notable attributes include:
+      * `allow`: specifies a Permissions Policy for the `<fencedframe>
+      * `width`, `height`
+    * The only features that can be enabled by a policy inside fenced frames are the specific features designed to be used inside fenced frames:
+      * Protected Audience API
+        * attribution-reporting
+        * private-aggregation
+        * shared-storage
+        * shared-storage-select-url
+      * Shared Storage API
+        * attribution-reporting
+        * private-aggregation
+        * shared-storage
+        * shared-storage-select-url
+    * Focusing across frame boundaries is limited. User initiated actions such as a click or a tab can do so, as there is no fingerprinting risk there
+      * `HTMLElement.focus()` is prohibited, however, because a malicious script could use a series of such calls to leak inferred information across the boundary
+  # CSS:
+  * Styling Links: 
+    * Link States: by taking advantage of the different states that links can be in, you can style them effectively 
+      * `:link` pseudo class will select any link that has a destination (not just a named anchor)
+      * `:visited` pseudo class will select any link that has been visited
+      * `:hover` pseudo class will select any link that is being hovered over
+      * `:active` pseudo class will select any link that is being activated
+      * `:focus` pseudo class will select any link that is currently focused
+    * The default link styles can be turned off/changed using the following CSS properties:
+      * `color`
+      * `cursor`
+      * `outline`
+
 ## May 23, 2024
   ## JS:
   *  `Object.create()` creates a new object, using the first argument as the prototype of that object:
