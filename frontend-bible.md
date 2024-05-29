@@ -1,7 +1,71 @@
 ## Front-End Bible:
 
-## May 24, 2024
-  # JS: 
+## May 29, 2024
+  ## JS:
+  * Property Access expressions do not throw an error if a property does not exist
+  * It does throw an error, however, ifyou try to access a project of an object that does not exist
+  ```javascript
+    let o = {x: 1};
+    o.y // => undefined
+    o.y.length // => TypeError: Cannot read property 'length' of undefined
+  ```
+  * Fortunately, conditional property access (options chaining) can be used to avoid this error
+  ```javascript
+    let len = o.y?.length; // len is undefined if o.y does not exist
+  ```
+  * An attempt to set a property on `null` or `undefined` will cause a TypeError
+  * Attempts to set properties on other values do not always success either
+    * Some properties are read-only and cannot be set
+    * Some objects do not allow the addition of new properties
+  * In strict mode, a TypeError is thrown whenever an attempt to set a property fails
+    * Outside of strict mode, these failures are usually silent
+  * Concisely describing when property assignment will fail is difficult, but intuitive
+  * An attempt to set a property `p` of an object `o` fails in these circumstances:
+    * `o` has own property `p` that is read-only
+    * `o` has inherited property `p` that is read-only: it is not possible to hide an inherited read-only property with an own property of the same name
+    * `o` does not have an own property p; `o` does not inherit a property `p` with a setter method and `o`'s `extensible` attribute is `false`
+  ## HTML:
+  * The `<fieldset>` element is used to group several controls as well as labels `<label>` within a web form
+  ```HTML
+<form>
+    <fieldset>
+        <legend>Choose your favorite monster</legend>
+
+        <input type="radio" id="kraken" name="monster" value="K"/>
+        <label for="kraken">Kraken</label><br/>
+
+        <input type="radio" id="sasquatch" name="monster" value="S"/>
+        <label for="sasquatch">Sasquatch</label><br/>
+
+        <input type="radio" id="mothman" name="monster" value="M"/>
+        <label for="mothman">Mothman</label>
+    </fieldset>
+</form>
+```
+  * You can use a `<legend>` element to provide a caption for the `<fieldset>` element
+  * You can also provide a `disabled` attribute to the `<fieldset>` element to disable all of the controls within it
+  ## CSS:
+  * Web Fonts
+    * As discussed previously, you can describe a font family in CSS using the `font-family` property
+    ```CSS
+    p { 
+        font-family: "Times New Roman", Times, serif;
+    }
+    ```
+    * In addition to this method, you can also load fonts from the web using the `@font-face` rule
+    ```CSS
+    @font-face {
+        font-family: "MyWebFont";
+        src: url("myfont.woff2");
+    }
+    ```
+    * All major browsers support `WOFF/WOFF2` (Web Open Font Format versions 1 and 2)
+    * The order of files provided will affect what gets loaded first
+    * So if you provide multiple files to be loaded to populate a web font, use `WOFF2`, then `WOFF` as a fallback
+    * If you have to support older browsers, you should provide `EOT` (Embedded Open Type), `TTF` (TrueType Font), and SVG web fonts for download
+
+## May 28, 2024
+  ## JS: 
   * If you are to assign property `x` to the object `o`, and `o` already has a property `x`, the property will be overwritten
     * If `o` inherits a property `x` from its prototype chain, that inherited property is now hidden by the newly created own property with the same name
   * Property assignment examines the prototype chain only to determine whether the assignment is allowed
@@ -11,7 +75,7 @@
     * If o inherits the property x, and that property is an accessor property with a setter method, then that setter method is called rather than creating a new property x in o
     * Note, however, that the setter method is called on the object o, not on the prototype object that defines the property, so if the setter method defines any properties, it will do so on o, and it will again leave the prototype chain unmodified
     * 
-  # HTML: 
+  ## HTML: 
   * The `<embed>` element is used to embed external content at the specific point in the document. 
     * This content is provided by an external application or other source of interactive content such as a browser plug-in
     * Most modern browsers have deprecated and removed support for browser plug-ins, so relying upon `<embed>` is not wise for the average user's browser
@@ -49,7 +113,7 @@
         * shared-storage-select-url
     * Focusing across frame boundaries is limited. User initiated actions such as a click or a tab can do so, as there is no fingerprinting risk there
       * `HTMLElement.focus()` is prohibited, however, because a malicious script could use a series of such calls to leak inferred information across the boundary
-  # CSS:
+  ## CSS:
   * Styling Links: 
     * Link States: by taking advantage of the different states that links can be in, you can style them effectively 
       * `:link` pseudo class will select any link that has a destination (not just a named anchor)
