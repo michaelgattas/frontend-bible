@@ -1,5 +1,35 @@
 ## Front-End Bible:
 
+## May 30, 2024
+  ## JS:
+  * The `delete` operator only deletes own properties, not inherited ones
+  * To delete an inherited property, you must delete it from the prototype object in which it is defined. Doing this affects every object that inherits the property
+  * The delete expression evaluates to `true` if the delete succeeded or if the delete had no effect (such as deleting a nonexistent property)
+  * `delete` also evaluates to `true` when used with an expression that is not a property access expression
+  * `delete` does not remove properties that have a configurable attribute of `false`
+  * In strict mode, attempting to delete a non-configurable property causes a `TypeError`
+  * In non-strict mode, `delete` simply returns `false` when used on a non-configurable property
+  ## HTML: 
+  * `<figcaption>` represents a caption or legend describing the rest of the contents of its parent `<figure>` element, providing the element an accessible description
+  * The `<figure>` HTML element represents self-contained content, potentially with an optional caption, which is specified using the `<figcaption>` element 
+    * Usually a `<figure>` is an image, illustration, diagram, code snippet, etc. that is referenced in the main flow, but that can be moved to another part of the document or to an appendix without affeecting the main flow
+  ## CSS: 
+  * With CSS selectors, you have type, class, and ID selectors
+  * You also have attribute selectors
+    * These give you different ways to select elements based on the presence of a certain attribute on an element
+    ```CSS
+    a[title] {
+        font-size: 15px;
+    }
+    ```
+    * This would equate to selecting all elements with a title
+    * You can also make selections using selectors for every element with a specific attribute value:
+    ```CSS
+    a[href="https://www.example.com"] {
+        color: red;
+    }
+    ```
+
 ## May 29, 2024
   ## JS:
   * Property Access expressions do not throw an error if a property does not exist
