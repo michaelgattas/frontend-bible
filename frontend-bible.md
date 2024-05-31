@@ -1,5 +1,38 @@
 ## Front-End Bible:
 
+## May 31, 2024
+  ## JS:
+  * You can check whether an object has a property with a given name using
+    * `in` operator - returns true if it has an own or inherited property with that name
+    * `hasOwnProperty()` method - returns true if an object has an own property with that name
+    * `propertyIsEnumerable()` method - returns true if a property is an own property and is enumerable
+    ```javascript
+    let o = { x: 1 };
+    o.propertyIsEnumerable("x") // => true: o has an own enumerable property x
+    o.propertyIsEnumerable("toString") // => false: toString is an inherited method
+    Object.prototype.propertyIsEnumerable("toString") // => false: property is not enumerable
+    ```
+    * or simply by querying the property
+    * The `for/in` loop iterates over all enumerable (either own or inherited) properties of a specified object
+    * An alternative to using the `for/in` loop is getting an array of property names and then looping over them with a `for/of` loop
+    * The four functions you can use to get an array of property names are:
+      * `Object.keys()` - returns an array of the names of the enumerable own properties of an object
+        * Does not include non-enumerable properties, inherited properties, or properties whose name is a Symbol
+      * `Object.getOwnPropertyNames()` works like `Object.keys()` but returns an array of the names of non-enumerable own properties as well, as long as their names are strings
+      * `Object.getOwnPropertySymbols()` returns an array of the names of the own properties of an object whose names are Symbols, whether or not they are enumerable
+      * `Reflect.ownKeys()` returns all own property names, both enumerable and non-enumerable, both string and Symbol
+  ## HTML: 
+  * The `footer` element represents a footer for its nearest ancestor sectioning content or sectioning root element
+  * It typically contains information about the author of the section, copyright data, or links to related documents
+  ## CSS: 
+  * A `pseudo-class` selects an element which is in a specific state
+    * For example, a `:hover` pseudo-class selects an element when the user hovers over it
+  * A `pseudo-element` selects a certain part of an element rather than the entire element
+    * For example, a `p::first-line` pseudo-element selects the first line of a paragraph element
+  * Combinators: 
+    * You can combine selectors in order to target elements that have a specific relationship to other elements
+    * E.g. `article > p { }` would select all `<p>` elements that are direct children of an `<article>` element
+
 ## May 30, 2024
   ## JS:
   * The `delete` operator only deletes own properties, not inherited ones
