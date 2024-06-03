@@ -1,5 +1,93 @@
 ## Front-End Bible:
 
+## June 3, 2024
+  ## JS: 
+  * A common operation in JS is to copy properties of one object to another object
+    * It is easy to do that with code like this
+    ```javascript
+    let target = {x: 1}, source = {y: 2, z: 3};
+    for (let key of Object.keys(source)) {
+        target[key] = source[key];
+    }
+    target // => {x: 1, y: 2, z: 3}
+    ```
+  * Because this is a common operation, various JS frameworks have defined utility functions, often named `extend()` to perform this copying operation
+  * In ES6, this ability comes as `Object.assign()`
+    * For each source object, it copies enumerable own properties of that object (including Symbol-named ones) and assigns them to the target object
+    * It also copies properties with ordinary property get and set operations, so if a source has a getter or a target has a setter, they will be invoked during the copy, but will not be copied themselves
+    * If you wanted to copy default properties to an object only if the target did not have that existing property, you would NOT want to do this
+    ```javascript
+    Object.assign(o, defaults); // overwrites everything in o with defaults
+    ```
+    * Instead, you would want to do this
+    ```javascript
+    o = Object.assign({}, defaults, o); // applies defaults to an empty object, then assigns existing properties from o last, overriding defaults
+    ```
+    * You can also express this object-copy-and-override operation using spread operators
+    ```javascript
+    o = {...defaults, ...o}; // same as above
+    ```
+  * Object serialization is the process of converting an object's state to a string from which is can later be restored
+  * The functions `JSON.stringify()` and `JSON.parse()` serialize and restore JavaScript objects
+  ## HTML:
+  * The `<form>` element is used to submit information to some aspect of an application (normally a remote server)
+    * Pertinent attributes:
+      * `accept-charset`: specifies the character encodings that are to be used for the form submission
+      * `autocapitalize`: specifies whether the form should have autocapitalization
+      * `autocomplete`: specifies whether the form should have autocomplete
+      * `name`: the name of the form, must not be an empty string, and must be unique among all `<form>` elements
+      * `rel`: controls the annotations and what kind of links the form creates
+        * Annotations include `external`, `nofollow`, `opener`, `noopener`, and `noreferrer`
+        * Link types include `help`, `prev`, `next`, `search`, and `license`
+    * Attributes for form submission:
+      * `action`: the URL that processes the form submission. This can be overriden by a `formaction` attribute on a `button`, `<input type="submit"` or `<input type="image">` element. This attribute is ignored when `method="dialog` is set
+      * `enctype`: the encoding type that the form should use when submitting data. This can be overriden by a `formenctype` attribute on a `button`, `<input type="submit"` or `<input type="image">` element. This attribute is ignored when `method="dialog` is set
+        * If the value of the `method` is `post`, the `enctype` attribute is the MIME type of the form submission. Possible values:
+          * `application/x-www-form-urlencoded`: the default value if the attribute is not specified
+          * `multipart/form-data`: the value used for an `<input type="file">` element
+          * `text/plain`: a single line of text
+      * `method`: the HTTP method to submit the form with
+        * `post`: form data is sent as the request body
+        * `get`: form data is appended to the `action` URL with a `?` separator. Use this method when the form has no side effects
+        * `dialog`: when the form is inside a `<dialog>`, closes the dialog and causes a submit event to be fired on submission, without submitting data or clearing the form
+      * `novalidate`: Boolean attribute that indicates that the form should not be validated when submitted
+        * It can be overriden by a `formnovalidate` attribute on a `button`, `<input type="submit"` or `<input type="image">` element
+      * `target`: indicates where to display the response after submitting the form. It is a name keyword for a browsing context (e.g., tab, window, or iframe)
+        * `_self`: the response will be displayed in the same frame
+        * `_blank`: the response will be displayed in a new window or tab
+        * `_parent`: the response will be displayed in the parent frame
+        * `_top`: the response will be displayed in the full body of the window
+        * `_unfencedTop`: load the form response inside an embedded fenced frame into the top-level frame
+  * The `<h1>`-`<h6>` elements represent six levels of section headings
+    * `<h1>` is the highest section level and `<h6>` is the lowest
+      * Each are block-level elements, starting on a new line and taking up the full width available in their containing block
+      * Heading information can be used by user agents to construct a table of contents for a document automatically
+      * Do not use heading elements to resize test. That's what CSS font-size is for
+      * Do not skip heading levels
+      * Avoid using multiple `<h1>` elements on a single page
+    * A common technique for users of screen reading software is to generate a list of sectioning content and use it to determine the page's layout
+    * Sectioning content can be labeled using a combination of the `aria-labelledby` and `id` attributes, with a label concisely describing the purpose of the section. This is userful if there is more than one sectioning element on the same page
+  ## CSS:
+  * A `Type Selector` (aka `Tag Name` or `Element` selector selects a given element type
+    * For example, `p` selects all `<p>` elements
+  * The `Universal Selector` selects everything in your document, or in a parent element if it is being chained , using as asterisk
+    * You can use the universal selector to make your CSS easier to read. For example
+    ```CSS 
+    article :first-child {
+        margin-top: 0;
+    }
+    ```
+    * This could be confused with `article:first-child`, so it could also be written as:
+    ```CSS
+    article *:first-child {
+        margin-top: 0;
+    }
+    ```
+  * The `Class Selector` selects elements with a specific class attribute
+    * For example, `.example` selects all elements with `class="example"
+  * The `ID Selector` selects elements with an id, denoted by `#`
+    * For example, `#example` selects the element with `id="example"`
+ 
 ## May 31, 2024
   ## JS:
   * You can check whether an object has a property with a given name using
