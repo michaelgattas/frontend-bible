@@ -1,4 +1,35 @@
-## Front-End Bible:
+# Front-End Bible:
+
+## June 4, 2024
+  ## JS:
+  * _Object serialization_ is the process of converting an object's state to a string from which it can later be restored
+    * `JSON.stringify()` and `JSON.parse()` serialize and restore JavaScript objects
+  * JSON is a subset of JS syntax, and it can't represent all JS values
+    * Objects, arrays, strings, finite numbers, `true`, `false`, and null are supported and can be serialized and restored
+    * `NaN`, `Infinity`, `-Infinity` are not supported and will be serialized to `null`
+    * Date objects are serialized to ISO-formatted date strings (see the `Date.toJSON()` function), but `JSON.parse()` leaves these in string form and does not restore the original Date object
+    * Function, RegExp, and Error objects and the `undefined` value cannot be serialized or restored
+    * `JSON.stringify()` serializes only the enumerable own properties of an object
+  * All JS objects (except those explicitly created without a prototype) inherit properties from Object.prototype
+    * These inherited properties are primarily methods, and because they are universally available they are of particular interest to JS programmers
+  * The `toString()` method takes no arguments; it returns a string that represents the value of the object on which it is invoked
+    * JS invokes this method of an object whenever it needs to convert the object to a string
+    * This occurs, for example, when you use the + operator to concatenate a string with an object or when you pass an object to a method that expects a string
+  ## HTML: 
+  * The `<head>` element contains machine-readable information (metadata) about the document, like its title, scripts, and style sheets
+  * The `<header>` element represents introductory content, typically a group of introductory or navigational aids
+    * It may also have a logo, a search form, an author name, and other elements
+    * The header has identical meaning to the site-wide banner, unless nested within sectioning content
+    * In this case the `<header>` element is not a landmark
+    * The `banner` ARIA role is intended to be used in the context of a site-wide header, such as a masthead
+      * Unless a `<header>` is a descendant of an `<aside>`, `<footer>`, `<article>`, or `<nav>`, it is considered a site-wide header
+  ## CSS:
+  * Attribute Selectors
+    * These selectors enable the selection of an element based on the presence of an attribute alone, or on various matches against the value of the attribute
+      * `[attr]`, example `a[title]` matches elements with an `attr` attribute
+      * `[attr=value]`, example `a[href="https://www.example.com"]` matches elements with an `attr` that is exactly `value`
+      * `[attr~=value]`, example `a[rel~="external"]` matches elements with exactly the `attr`, or contains the attribute in its space separated list of values
+      * `[attr|=value]`, example `a[lang|="en"]` matches elements with exactly the `attr`, or with the attribute followed by a hyphen and more characters
 
 ## June 3, 2024
   ## JS: 
