@@ -1,7 +1,59 @@
 # Front-End Bible:
 
+## June 5, 2024
+  ### JS: 
+  * In addition to the basic `toString()` method, objects all have a `toLocaleString()`
+    * The default `toLocaleString()` method defined by Object doesn't do any localization itself
+    * It simply calls `toString()` and returns that value
+    * The Date and Number classes define customized versions of `toLocaleString()` that attempts to format numbers, dates, and times according to local conventions
+  * The `valueOf()` method is much like the `toString() method, but it is called when JS needs to convert an object to some primitive type other than a string (typically, a number)
+    * You can define your own `valueOf()` method for your own classes, like defining a custom `valueOf()` method below
+    ```javascript
+    let point = {
+        x: 1,
+        y: 1,
+        valueOf: function() { return Math.hypot(this.x, this.y); }
+    };
+    ```
+    * Date class does something similar, where it converts all times into their millisecond distance from Jan 1 1970 for direct date comparison using the `<` or `>` operators
+  * The `toJSON()` method:
+    * `Object.prototype` does not actually define a `toJSON()` method, but `JSON.stringify()` looks for a `toJSON()` method on any object it is asked to serialize
+    * If the method exists, it is invoked, and the return value is serialized, instead of the original object
+  ### HTML: 
+  * The `<hgroup>` HTML element represents a heading and related content. 
+    * It groups a single `<h1>-<h6>` element with one of more `<p>` elements
+    * The `<hgroup>` presently has no strong accessibility semantics
+    * The content of the element (a heading and optional paragraphs) is what is exposed by browser accessibility APIs)
+  * The `<hr>` element is the Thematic Break (Horizontal Rule) element
+    * It represents a thematic break between paragraph-level elements
+    * For example, a change of scene in a story, or a shift of topic within a section
+    * Historically, this has been presented as a horizontal rule or line
+    * While it may still be displayed as a horizontal rule in visual browsers, this element is now defined in semantic terms, rather than presentation terms
+    * If you solely wish to draw a horizontal line, you should do so using appropriate CSS
+  * The `<html>` or HTML Document/Root element represents the top-level element in an HTML document. 
+    * While HTML does not require authors to specify `<html>` element start and ending tags, doing so allows you to specify the `lang` attribute for the webpage
+  * The `<i>` element (or Idiomatic Text Element) represents a range of text that is set off from the normal text for some reason
+    * Examples are idiomatic text, technical terms, taxonomical designations, among others
+    * In earlier versions of the HTML specification, the `<i>` element was merely a presentation element used to display text in italics, much like the `<b>` element was used for bold letters
+    * These tags now define semantics rather than appearance. 
+    * A gentle reminder for the appropriate markup for alternative text:
+      * Use `<em>` to indicate stress emphasis. 
+      * Use `<strong>` to indicate importance, seriousness, or urgency. 
+      * Use `<mark>` to indicate relevance. 
+      * Use `<cite>` to mark up the name of a work, such as a book, play, or song. 
+      * Use `<dfn>` to mark up the defining instance of a term.
+  ### CSS:
+  * Substring Match Selectors:
+    * For more advanced matching of attribute values, you can use these substring match selectors
+      * `[attr^=value]` - Selects elements that have the `attr` attribute with a value that begins exactly with `value`
+      * `[attr$=value]` - Selects elements that have the `attr` attribute with a value that ends exactly with `value`
+      * `[attr*=value]` - Selects elements that have the `attr` attribute with a value containing the substring `value`
+    * It may help to note that `^` and `$` are the symbols for the beginning and end of a string, in RegExp respectively
+    * If you want to match attribute values case-insensitively you can use the value `i` before the closing bracket
+      * For example, `[attr^="value" i]` would match `value`, `Value`, `VALUE`, etc.
+
 ## June 4, 2024
-  ## JS:
+  ### JS:
   * _Object serialization_ is the process of converting an object's state to a string from which it can later be restored
     * `JSON.stringify()` and `JSON.parse()` serialize and restore JavaScript objects
   * JSON is a subset of JS syntax, and it can't represent all JS values
@@ -15,7 +67,7 @@
   * The `toString()` method takes no arguments; it returns a string that represents the value of the object on which it is invoked
     * JS invokes this method of an object whenever it needs to convert the object to a string
     * This occurs, for example, when you use the + operator to concatenate a string with an object or when you pass an object to a method that expects a string
-  ## HTML: 
+  ### HTML: 
   * The `<head>` element contains machine-readable information (metadata) about the document, like its title, scripts, and style sheets
   * The `<header>` element represents introductory content, typically a group of introductory or navigational aids
     * It may also have a logo, a search form, an author name, and other elements
@@ -23,7 +75,7 @@
     * In this case the `<header>` element is not a landmark
     * The `banner` ARIA role is intended to be used in the context of a site-wide header, such as a masthead
       * Unless a `<header>` is a descendant of an `<aside>`, `<footer>`, `<article>`, or `<nav>`, it is considered a site-wide header
-  ## CSS:
+  ### CSS:
   * Attribute Selectors
     * These selectors enable the selection of an element based on the presence of an attribute alone, or on various matches against the value of the attribute
       * `[attr]`, example `a[title]` matches elements with an `attr` attribute
@@ -32,7 +84,7 @@
       * `[attr|=value]`, example `a[lang|="en"]` matches elements with exactly the `attr`, or with the attribute followed by a hyphen and more characters
 
 ## June 3, 2024
-  ## JS: 
+  ### JS: 
   * A common operation in JS is to copy properties of one object to another object
     * It is easy to do that with code like this
     ```javascript
@@ -60,7 +112,7 @@
     ```
   * Object serialization is the process of converting an object's state to a string from which is can later be restored
   * The functions `JSON.stringify()` and `JSON.parse()` serialize and restore JavaScript objects
-  ## HTML:
+  ### HTML:
   * The `<form>` element is used to submit information to some aspect of an application (normally a remote server)
     * Pertinent attributes:
       * `accept-charset`: specifies the character encodings that are to be used for the form submission
@@ -98,7 +150,7 @@
       * Avoid using multiple `<h1>` elements on a single page
     * A common technique for users of screen reading software is to generate a list of sectioning content and use it to determine the page's layout
     * Sectioning content can be labeled using a combination of the `aria-labelledby` and `id` attributes, with a label concisely describing the purpose of the section. This is userful if there is more than one sectioning element on the same page
-  ## CSS:
+  ### CSS:
   * A `Type Selector` (aka `Tag Name` or `Element` selector selects a given element type
     * For example, `p` selects all `<p>` elements
   * The `Universal Selector` selects everything in your document, or in a parent element if it is being chained , using as asterisk
@@ -120,7 +172,7 @@
     * For example, `#example` selects the element with `id="example"`
  
 ## May 31, 2024
-  ## JS:
+  ### JS:
   * You can check whether an object has a property with a given name using
     * `in` operator - returns true if it has an own or inherited property with that name
     * `hasOwnProperty()` method - returns true if an object has an own property with that name
@@ -140,10 +192,10 @@
       * `Object.getOwnPropertyNames()` works like `Object.keys()` but returns an array of the names of non-enumerable own properties as well, as long as their names are strings
       * `Object.getOwnPropertySymbols()` returns an array of the names of the own properties of an object whose names are Symbols, whether or not they are enumerable
       * `Reflect.ownKeys()` returns all own property names, both enumerable and non-enumerable, both string and Symbol
-  ## HTML: 
+  ### HTML: 
   * The `footer` element represents a footer for its nearest ancestor sectioning content or sectioning root element
   * It typically contains information about the author of the section, copyright data, or links to related documents
-  ## CSS: 
+  ### CSS: 
   * A `pseudo-class` selects an element which is in a specific state
     * For example, a `:hover` pseudo-class selects an element when the user hovers over it
   * A `pseudo-element` selects a certain part of an element rather than the entire element
@@ -153,7 +205,7 @@
     * E.g. `article > p { }` would select all `<p>` elements that are direct children of an `<article>` element
 
 ## May 30, 2024
-  ## JS:
+  ### JS:
   * The `delete` operator only deletes own properties, not inherited ones
   * To delete an inherited property, you must delete it from the prototype object in which it is defined. Doing this affects every object that inherits the property
   * The delete expression evaluates to `true` if the delete succeeded or if the delete had no effect (such as deleting a nonexistent property)
@@ -161,11 +213,11 @@
   * `delete` does not remove properties that have a configurable attribute of `false`
   * In strict mode, attempting to delete a non-configurable property causes a `TypeError`
   * In non-strict mode, `delete` simply returns `false` when used on a non-configurable property
-  ## HTML: 
+  ### HTML: 
   * `<figcaption>` represents a caption or legend describing the rest of the contents of its parent `<figure>` element, providing the element an accessible description
   * The `<figure>` HTML element represents self-contained content, potentially with an optional caption, which is specified using the `<figcaption>` element 
     * Usually a `<figure>` is an image, illustration, diagram, code snippet, etc. that is referenced in the main flow, but that can be moved to another part of the document or to an appendix without affeecting the main flow
-  ## CSS: 
+  ### CSS: 
   * With CSS selectors, you have type, class, and ID selectors
   * You also have attribute selectors
     * These give you different ways to select elements based on the presence of a certain attribute on an element
@@ -183,7 +235,7 @@
     ```
 
 ## May 29, 2024
-  ## JS:
+  ### JS:
   * Property Access expressions do not throw an error if a property does not exist
   * It does throw an error, however, ifyou try to access a project of an object that does not exist
   ```javascript
@@ -206,7 +258,7 @@
     * `o` has own property `p` that is read-only
     * `o` has inherited property `p` that is read-only: it is not possible to hide an inherited read-only property with an own property of the same name
     * `o` does not have an own property p; `o` does not inherit a property `p` with a setter method and `o`'s `extensible` attribute is `false`
-  ## HTML:
+  ### HTML:
   * The `<fieldset>` element is used to group several controls as well as labels `<label>` within a web form
   ```HTML
 <form>
@@ -226,7 +278,7 @@
 ```
   * You can use a `<legend>` element to provide a caption for the `<fieldset>` element
   * You can also provide a `disabled` attribute to the `<fieldset>` element to disable all of the controls within it
-  ## CSS:
+  ### CSS:
   * Web Fonts
     * As discussed previously, you can describe a font family in CSS using the `font-family` property
     ```CSS
@@ -247,7 +299,7 @@
     * If you have to support older browsers, you should provide `EOT` (Embedded Open Type), `TTF` (TrueType Font), and SVG web fonts for download
 
 ## May 28, 2024
-  ## JS: 
+  ### JS: 
   * If you are to assign property `x` to the object `o`, and `o` already has a property `x`, the property will be overwritten
     * If `o` inherits a property `x` from its prototype chain, that inherited property is now hidden by the newly created own property with the same name
   * Property assignment examines the prototype chain only to determine whether the assignment is allowed
@@ -257,7 +309,7 @@
     * If o inherits the property x, and that property is an accessor property with a setter method, then that setter method is called rather than creating a new property x in o
     * Note, however, that the setter method is called on the object o, not on the prototype object that defines the property, so if the setter method defines any properties, it will do so on o, and it will again leave the prototype chain unmodified
     * 
-  ## HTML: 
+  ### HTML: 
   * The `<embed>` element is used to embed external content at the specific point in the document. 
     * This content is provided by an external application or other source of interactive content such as a browser plug-in
     * Most modern browsers have deprecated and removed support for browser plug-ins, so relying upon `<embed>` is not wise for the average user's browser
@@ -295,7 +347,7 @@
         * shared-storage-select-url
     * Focusing across frame boundaries is limited. User initiated actions such as a click or a tab can do so, as there is no fingerprinting risk there
       * `HTMLElement.focus()` is prohibited, however, because a malicious script could use a series of such calls to leak inferred information across the boundary
-  ## CSS:
+  ### CSS:
   * Styling Links: 
     * Link States: by taking advantage of the different states that links can be in, you can style them effectively 
       * `:link` pseudo class will select any link that has a destination (not just a named anchor)
@@ -309,7 +361,7 @@
       * `outline`
 
 ## May 23, 2024
-  ## JS:
+  ### JS:
   *  `Object.create()` creates a new object, using the first argument as the prototype of that object:
   ```javascript
         let o1 = Object.create({x: 1, y: 2}); // o1 inherits properties x and y
@@ -336,7 +388,7 @@
     * On the other hand, when you access a property of an object with teh `[]` array notation, the name of the property is expressed as a string
       * Strings are JS datatypes, so they can be manipulated by the program
       * Basically, these values can be handled at runtime, while the dot operator is more strict and requires identifiers, not strings
-## HTML: 
+### HTML: 
   * The `<div>` element is the generic container for flow content
     * The `<div>` should only be used when no other semantic elements (like `<article>` or `<nav>` are appropriate)
   * The `<dl>` or **Description List** element encloses a list of groups of terms
@@ -353,7 +405,7 @@
     * Must be used inside of a `<dl>` element
   * The `<em>` or **Emphasis** element marks text that has stress emphasis
     * This is semantically different from the `<i>` or `<cite>` elements, which are used for other types of emphasis
-  ## CSS:
+  ### CSS:
   * Controlling List Counting
     * Sometimes you might want to:
       * Start from a number other than 1
@@ -366,7 +418,7 @@
       * Add `value` attributes with different numbers to list item elements in order to count in steps of more than 1
 
 ## May 22, 2024
-  ## JS:
+  ### JS:
   * All objects in JS have a second object (called a prototype) tied to them
   * Any object created with the `new` keyword inherits the prototype of the constructor function
     * e.g. `let o = new Object();` will inherit the prototype of the `Object` constructor, or `Object.prototype`
@@ -380,9 +432,9 @@
         * So, an object created by `new Date()` will inherit from `Date.prototype` and `Object.prototype`
         * This linked series of prototype objects is called a **_Prototype Chain_**
   * Chapter 9 will describe how to set Class constructors up to assign object prototypes for instances created by the constructor
-  ## HTML: 
+  ### HTML: 
   * Wrap-up of the HTML dialog element today
-  ## CSS:
+  ### CSS:
   * Styling lists in CSS is much like styling any other text, with some unique properties
   * The three types of lists in CSS are:
     * Unordered lists (`<ul>`)
@@ -395,7 +447,7 @@
       * `list-style-image` : An image to use as the bullet or numbering
 
 ## May 21, 2024
-  ## JS:
+  ### JS:
   * Any value in Javascript that is not a string, a number, a Symbol, or `true`, `false`, `null`, or `undefined` is an object
   * A property name on an Object can be any string, including the empty string (or any Symbol)
   * The value may be any Javascript value, or it may be a getter or setter function (or both)
@@ -406,16 +458,16 @@
     * The _configurable_ attribute specifies whether the property can be deleted and whether its attributes can be altered
   * Many of JS's built-in objects have properties that are read-only, non-enumerable, or non-configurable
   * By default, however, all properties of the objects you create are writable, enumerable, and configurable
-  ## HTML:
+  ### HTML:
   * Today, I am practicing the usage of dialogs in the `index.html` file attached
-  ## CSS:
+  ### CSS:
   * The `outline` and `border` properties in CSS have different properties
     * The border is added to the inside of the element, while outline is added to the outside of the element
   * The CSS selector `x + y` will select the first instance of a `y` following an `x` element. 
     * This is the adjacent sibling selector
 
 ## May 14, 2024
-  ## JS:
+  ### JS:
   * Unlike statements, **declarations** in JS code don't necessarily "make things happen"
   * Rather, they provide structure for the code and are run before code is actually executed
   * These declarations include `let`, `var`, `const`, `class`, `function`, `import`, and `export`
@@ -432,7 +484,7 @@
     export default class Circle { /* class definition omitted here */ }
     ```
 ## May 13, 2024
-  ## JS:
+  ### JS:
   * The `debugger` directive is used to tell the interpreter to pause execution and enter the debugger
     * This is useful for debugging code, as it allows you to inspect the state of the program at that point
     * This acts very similarly to a `breakpoint` set with your developer tools
@@ -464,7 +516,7 @@
       * You cannot assign a value to their identifiers, declare them as variables, use them as function names, use them as function parameter names, or use them as the identifier of a `catch` block
     * The ability to examine the call stack is restricted
       * `arguments.caller` and `arguments.callee` are not allowed, and both throw a `TypeError` within a strict mode function
-  ## HTML: 
+  ### HTML: 
   * The `<dialog>` represents a modal or non-modal dialog box or other interactive component, such as a dismissible alert, inspector, or subwindow
     * Modal dialog boxes interrupt interaction with the rest of the page, while non-modal dialog boxes allow interaction with the rest of the page
     * Javascript should be used to display the `<dialog>` element
@@ -477,12 +529,12 @@
       * It's recommended to use the `.show()` or `.showModal()` methods to display the dialog box
       * If a dialog is opened using the `open` attribute, it will be displayed as a non-modal dialog box
     * HTML `<form>` elements can be used to close a dialog if they have the `method="dialog"` attribute set, or if the button used to submit the form has the `formmethod="dialog"` attribute set
-  ## CSS:
+  ### CSS:
   * The `line-height` property sets the height of each line of text
   * Similarly, you can set the `letter-spacing` and `word-spacing` properties to adjust the space between characters and words, respectively
 
 ## May 10, 2024
-  ## JS:
+  ### JS:
   * Labeled break statements can allow you to break out of a deeply nested loop. Here's an example
   ```javascript
   let matrix = getData(); // get a 2D array of data from somewhere
@@ -523,12 +575,12 @@
   * The `finally` statement is used to specify a block of code that will be executed after a `try` or `catch` block, regardless of whether an exception is thrown
     * If any part of the `try` block is executed, the `finally` block will also be executed
     * This statement is often used to clean up resources, such as closing files or network connections
-  ## HTML:
+  ### HTML:
   * The `<dfn>` element is used to indicate a term being defined. 
     * It should be used to indicate the term being defined, not the definition itself
     * The ancestor of the `<dfn>` element should be a `<p>`, `<section>`, `<article>`, or `<aside>` element that contains the full definition of the elemtn
     * Or it can be used with `<dd>/<dt>` elements in a `<dl>` element
-  ## CSS:
+  ### CSS:
   * The `text-align` property is used to position horizontal alignment of text within its parent container
     * The `text-align` property can have one of the following values: `left`, `right`, `center`, `justify`, `start`, `end`, `match-parent`, `initial`, `inherit`
     * The `text-align` property is inherited by child elements
@@ -538,7 +590,7 @@
     * The `text-align` property does not affect flex items
 
 ## May 9, 2024
-  ## JS:
+  ### JS:
   * Another form of statement in JS is a `jump` statement
     * The `break` statement makes the interpreter jump to the end of a loop or other statement
     * The `continue` statement makes the interpreter skip the rest of the body of a loop and jump back to the top of a loop to begin a new iteration
@@ -550,7 +602,7 @@
     identifier: statement
     ```
     * This is useful for nested loops, where you can break out of the inner loop by referencing the outer loop
-  ## HTML: 
+  ### HTML: 
   * The `<dd>` element provides the description, definition, or value for the preceding term `<dt>` in a description list `<dl>`
     * This is called the description details element
   * The `<del>` element is used to indicate that text has been deleted from a document
@@ -558,7 +610,7 @@
     * The `cite` attribute can be used to provide a URL to the source of the deletion
     * The `datetime` attribute can be used to provide a machine-readable date and time for the deletion
     * This could be used to show changes, similar to the `<ins>` element
-  ## CSS:
+  ### CSS:
   * In terms of font-size, a `<p>` tag will be set with a default value of `16px` by default
   * Using `em` can be tricky when you're setting the font-size of a parent element, as it will be relative to the parent element
   * Using `rem` is a better choice, as it will be relative to the root element, which is the `<html>` element
@@ -574,7 +626,7 @@
     
 
 ## May 8, 2024
-  ## JS:
+  ### JS:
   * The `for/in` loop iterates over the properties of an object
     * It will iterate over all enumerable properties of an object, including inherited properties
     * The `for/in` loop is not recommended for use with arrays, as it will iterate over the indices of the array, as well as any other enumerable properties
@@ -583,7 +635,7 @@
     * All properties and methods defined by your code are enumerable by default
     * The `for/in` loop will iterate over all enumerable string-named properties, whether they are inherited up the prototype chain or not
   * You will learn more about enumerable properties later
-  ## HTML:
+  ### HTML:
   * The `<data>` element is used to provide a machine-readable version of the content within it
   ```HTML
     <p>New Products:</p>
@@ -597,11 +649,11 @@
     * The `<datalist>` element is used in conjunction with the `<input>` element to provide a list of predefined options for the user to choose from
     * The `<datalist>` is given a unique id, which is then referenced by the `list` attribute of the `<input>` element
     * This can be used for autocomplete functionality, or to provide a list of options for the user to choose from
-  ## CSS:
+  ### CSS:
   * Today, I start the CSS grids assessment. See `index.html` and `styles.scss` for details
 
 ## May 7, 2024
-  ## JS:
+  ### JS:
   * Because strings are iterated by Unicode codepoint, not by UTF-16 character, 
   * The string "I❤JS" has a length of 5, but would be iterated as 4 characters
   * Sets are also iterable in a very predictable, simple way
@@ -622,7 +674,7 @@
         }
     }
     ```
-  ## HTML:
+  ### HTML:
   * The `<col>` element defines one or more columns in a column group represented by its parent `<colgroup>` element
     * It's only valid as a child of a `<colgroup>` element that has no span attribute defined
     * An example: 
@@ -657,12 +709,12 @@
     * The `span` attribute specifies the number of columns the `<colgroup>` element should span. 
     * It defaults to 1 and must not be present if there are any `<col>` elements as children
     * The `<colgroup>` element should always appear within a table, after any `<caption>` elements but before any `<thead>`, `<tbody>`, `<tfoot>`, or `<tr>` elements
-  ## CSS:
+  ### CSS:
   * The ability to add subgrids enables even more flexibility within this layout model
   * Check the accompanying `index.html` and `styles.scss` files for a full example
 
 ## May 6, 2024
-  ## JS:
+  ### JS:
   * A `for/of` loop works on any iterable object in JS
     * This includes Arrays, Strings, Sets, and Maps
   * In order to iterate over an object, you must use
@@ -675,7 +727,7 @@
         console.log(key, value)
     }
     ```
-  ## HTML:
+  ### HTML:
   * The `<caption>` element is used to define a table caption
     * This provides an accessible description. 
     * It should be the first child of a `<table>` element
@@ -686,7 +738,7 @@
     * Most browsers will style the `<cite>` element with italics, but you can override this with CSS
   * The `<code>` element is used to define a piece of computer code
     * This is normally formatted using the user agent's monospace font
-  ## CSS:
+  ### CSS:
   * In addition to setting the `grid-column` and `grid-row` properties, you can also use `grid-template-areas` to define the layout of different sections
   * Check the `index.html`/`styles.scss` files for a full example, but here's an example:
   ```CSS 
@@ -717,7 +769,7 @@
     }
   ```
 ## May 3, 2024
-  ## JS:
+  ### JS:
   * Explicitly, the `for` loop syntax is 
   ```javascript 
     for (initialize; test; increment) { 
@@ -739,7 +791,7 @@
     return o;
   }
   ```
-  ## HTML: 
+  ### HTML: 
   *  The `<canvas>` element uses either the canvas scripting API or the WebGL API to draw graphics and animations
   * It uses the global attributes, and some noticeable ones are:
     * `height` : The height of the canvas
@@ -749,7 +801,7 @@
   * Using the `OffscreenCanvas` API, you can create a canvas that is not visible in the DOM, but can be used to render images offscreen
   * It is good practice to include alternative text within the canvas to describe what is happening on the canvas
   * For more detailed description of using the `Offscreen Canvas` API and the `Canvas` API
-  ## CSS: 
+  ### CSS: 
   *  You can specify an item's placement within the grid using the `grid-column-start`, `grid-column-end`, `grid-row-start`, and `grid-row-end` properties
   * These are often shortened to `grid-column` and `grid-row` properties
   * For example: 
@@ -762,7 +814,7 @@
     * This will place the item in the first column, spanning two columns, ending after the 3rd, and in the first row, spanning two rows, ending after the 3rd
 
 ## May 2, 2024
-  ## JS:
+  ### JS:
   * `else if` is not actually a statement in proper JS, and is instead an idiom used by programmers to make these nested conditionals more legible
   * A `switch` statement in JS looks like this:
   ```javascript
@@ -779,7 +831,7 @@
   ```
   * It's also worth noting that the `===` operator is used to check equality in this context
   The purpose of these `case` statements is to provide a starting point for the code block to execute, and the `break` statement is used to exit the `switch` statement
-  ## HTML: 
+  ### HTML: 
   * The `<button>` attribute is used to define a button 
     * It inherits the global attributes
     * Notable attributes include `autofocus`, `disabled`, and `type`
@@ -803,7 +855,7 @@
       outline: none;
     }
     ```
-  ## CSS:
+  ### CSS:
   * If you set a `grid-auto-rows` value to `100px' but want to make sure than any overflown text in a row would still display
   * In this case, simply use the `minmax()` function to set a minimum and maximum height for the row
   * For example:
@@ -827,7 +879,7 @@
   ```
 
 ## April 30, 2024
-  ## JS:
+  ### JS:
   * The comma operator (`,`) is used to evaluate any left-hand operands, then return the value of the right-hand-most operand
   * An example would be 
   ```javascript 
@@ -842,7 +894,7 @@
   }
   ```
   * **Expressions** are evaluated to produce a value, but **Statements** are executed to make something happen
-  ## HTML:
+  ### HTML:
   * The `<body>` element represents the content of an HTML document.
     * There can only be one body element
     * In addition to the global attributes, the body element has the following:
@@ -870,7 +922,7 @@
     * Never adjust the margins on a `<br>` element, and instead adjust the `line-height` property of the parent element
     * There are accessibility concerns associated with the `<br>` element, as it can be misused to create a new paragraph, when a `<p>` element should be used instead
     * For the purpose of screen readers and accessibility, it is recommended not to use a `<br>` element to create a new paragraph
-  ## CSS:
+  ### CSS:
   * You can repeat all or part of a track listing using the CSS `repeat()` function
   * E.g.
   ```CSS
@@ -887,7 +939,7 @@
   * Using `grid-auto-columns` with `grid-template-columns` will not overwrite the explicit grid
 
 ## April 29, 2024
-  ## JS:
+  ### JS:
   * The `eval` function is used to evaluate a string as JavaScript
     * Generally, the `eval` function will use the variable environment of the code that calls it
     * This means that the `eval` function can access variables in the calling code, reassign them, etc.
@@ -929,7 +981,7 @@
      console.log(arr) // [empty, 2, 3]
      console.log(arr.length) // 3, because the array still has 3 elements, this is called a "sparse array"
     ```
-  ## HTML:
+  ### HTML:
   * The `<bdo>` or Bi-directional Text Override element is used to override the Unicode bidirectional algorithm
     * This is useful when you want to display text in a different direction than the surrounding text
     * The `dir` attribute is used to specify the direction of the text
@@ -949,7 +1001,7 @@
     * You can also use a `<cite>` element to specify the title of the source
     * See the `index.html` file to see how you can use a footer to cite the source of the quote
     * Also keep in mind that you can use a `<q>` element to define a short inline quotation
-  ## CSS:
+  ### CSS:
   * Grids, grids, grids
     * The `grid-template-columns` property is used to define the number and size of columns in a grid container
     * Here, you can define the size of each column using a length, a percentage, or a fraction of the available space
@@ -964,7 +1016,7 @@
     * Alternatively, `column-gap` and `row-gap` properties also specify gap space
 
 ## April 26, 2024
-  ## JS:
+  ### JS:
   * The assignment operator `=` has right-to-left associativity which means that the rightmost expression is evaluated first
     * This is why you can chain assignments like `let a = b = c = 5`
     * The rightmost expression is evaluated first, and then assigned to the next variable to the left
@@ -972,7 +1024,7 @@
     * For example, `let a = b = 'hello'` will assign the string `'hello'` to `b`, and then assign `b` to `a`
   * Also, the assignment operator might be nested inside more complex logic, like `(a = b) === 0`
     * In this case, the assignment operator is evaluated first, and then the comparison operator is evaluated
-  ## HTML:
+  ### HTML:
   * The `<bdi>` element is used to tell a browser about bi-directional text
     * This is useful when you have text in multiple languages, or text that is mixed with numbers
     * The `<bdi>` element isolates the text from its surrounding text, so that the browser can display it correctly
@@ -980,7 +1032,7 @@
     * ```html
       <p>Here is some text in English: <bdi>שלום</bdi></p>
       ```
-  ## CSS:
+  ### CSS:
   * The `display` property in CSS is used to determine how an element is displayed
     * The `display` property is used to determine the layout of an element, and how it interacts with other elements on the page
     * The `display` property is one of the most important properties in CSS, and is used to control the layout of a web page
@@ -994,7 +1046,7 @@
       * The `flow-root` value makes an element a block-level element, and establishes a new block formatting context
 
 ## April 25, 2024
-  ## JS:
+  ### JS:
   * The `instanceof` operator checks if an object is an instance of a class
     * It returns `true` if the object is an instance of the class, and `false` otherwise
     * It can also be used to check if an object is an instance of a subclass
@@ -1014,13 +1066,13 @@
     a instanceof Object // => true: all arrays are objects
     a instanceof RegExp // => false: arrays are not regular expressions
   ```
-  ## HTML:
+  ### HTML:
   * The `<base>` element specifies the base URL to use for all relative URLs in a document
     * The `<base>` element must have an `href` attribute, which specifies the base URL, or a `target` attribute, which specifies the default target for all hyperlinks and forms in the document
     * The `<base>` element must be placed inside the `<head>` element
     * The `<base>` element is supported by all major browsers
     * A document's used base URL can be accessed by scripts with `Node.baseURI`. If the document has no <base> elements, then baseURI defaults to `location.href`
-  ## CSS:
+  ### CSS:
   * In a `display: grid` context, you can use `fr`, or fractional units to take up a given proportion of the available space
   * For example:
     ```CSS
@@ -1031,7 +1083,7 @@
     ```
 
 ## April 24, 2024
-  ## JS:
+  ### JS:
   * The `in` operator expects a lefthand argument that is a string, symbol, or can evaluate to a string, and a righthand side argument that is an Object
   * The `in` operator will return `true` if the lefthand argument is a property of the righthand object, and `false` otherwise
   * For objects, this is rather intuitive:
@@ -1049,7 +1101,7 @@
     console.log('1' in arr) // true
     console.log(`3` in arr) // false, because the array only has indices 0, 1, and 2
     ```
-  ## HTML: 
+  ### HTML: 
   * The `<b>` element is a stylistic element that provides bold formatting to text
     * It is no longer recommended, with either `<strong>` or `<span>` with CSS `font-weight` styling being preferred
     * Here's where the docs get nitpicky:
@@ -1057,7 +1109,7 @@
       * The `<em>` element indicates text of certain _emphasis_
       * The `<mark>` element indicates text with certain relevance (highlighting)
     * If there is no semantic importance, emphasis, or relevance, then the `<span>` element with CSS styling is recommended
-  ## CSS:
+  ### CSS:
   * **Font stacks** enable you to create fall-backs if a web-font fails to load
   * The `font-family` property can take a comma-separated list of font names, with the browser trying each font in order
   ```CSS
@@ -1068,7 +1120,7 @@
   * In this case, the browser will first try to load "Trebuchet MS", then "Verdana", and finally any sans-serif font
 
 ## April 23, 2024
-  ## JS:
+  ### JS:
   * The shift left operator `<<` shift the bits of a number to the left, filling empty bits with 0's
     * This is effectively the same as multiplying by 2
   * The shift right operator `>>` shifts the bits of a number to the right, filling the empty bits with the sign bit (0 for positive numbers, 1 for negative numbers)
@@ -1076,7 +1128,7 @@
   * In a strict equality check, `NaN` is no equal to itself. 
     * A good shorthand way is to use the global `isNaN()` function or to check is `x !== x`
   * Also, in a strict equality check, `0` is equal to `-0`
-  ## HTML:
+  ### HTML:
   * The `<article>` element is a semantic element that defines a self-contained piece of content that could be distributed and reused independently
     * It could be a blog post, a forum post, a news article, or a comment
     * The `<article>` element is a block-level element, and will typically be displayed in a normal font
@@ -1087,7 +1139,7 @@
     * The `<aside>` element is a block-level element, and will typically be displayed in a normal font
     * The `<aside>` element is a semantic element, and should be used to provide meaning to the content
     * The `<aside>` element is supported by all major browsers
-  ## CSS:
+  ### CSS:
   * The `justify-items` property is ignored in a flex container, as it only applies to grid containers
   * Instead, justifying items in a flex container is done with the `justify-content` property
     * `start`, `end`, `center`, `space-between`, `space-around`, `space-evenly`, `stretch`, `safe`, `unsafe`
