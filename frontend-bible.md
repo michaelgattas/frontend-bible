@@ -1,5 +1,80 @@
 # Front-End Bible:
 
+## June 6, 2024
+### JS:
+#### Shorthand Properties
+* In JS, you can assign variable properties to an object the following way:
+```javascript
+let x = 1, y = 2;
+let o = { 
+    x: x,
+    y: y
+};
+```
+* In ES6, you can use shorthand property names to simplify this process
+```javascript
+let x = 1, y = 2;
+let o = { x, y };
+````
+#### Computed Property Names
+* Sometimes you need to create an object with a specific property, but the name of that property is not a compile-time constant that you can type literally in your source code
+* Instead, the property name you need is stored in a variable or is the return value of a function that you invoke
+* You can't use a basic object literal for this kind of property
+* Instead, you have to create an object and then add the desired properties as an extra step:
+```javascript
+const PROPERTY_NAME = "p1";
+function computePropertyName() { return "p" + 2 }
+
+let o = {};
+o[PROPERTY_NAME] = 1;
+o[computePropertyName()] = 2;
+```
+* In ES6, you can use computed property names to simplify this process
+```javascript
+const PROPERTY_NAME = "p1";
+function computePropertyName() { return "p" + 2 }
+
+let p = {
+    [PROPERTY_NAME]: 1,
+    [computePropertyName()]: 2
+};
+```
+
+#### Symbols as Property Names
+* The Computed Property syntax also enables you to use Symbol values as property names
+```javascript
+const extension = Symbol("my extension symbol");
+let o = {
+    [extension]: { /* extension data here */ }
+};
+```
+* Symbols are opaque values. You can't do anything with them other than use them as property names
+* Every symbol is different from every other symbol, which means that they are good for creating unique property names
+* Symbols are primitives, not objects, so `Symbol()` is not a constructor function that you invoke with `new`
+* Creating a `Symbol`s with identical strings will still yield different symbols
+* The string returned by `Symbol.toString()` is not the same as the string you passed to `Symbol()`
+* The point of symbols is not security, but to define a safe extension mechanism for JS objects
+  * If you received a 3rd-party object and wanted to add a property to it, you could use a symbol as the property name to avoid any chance of a name collision
+
+#### Spread Operator:
+* The spread operator will copy properties of an existing object into a new object using the "spread" operator `...` inside an object literal
+```javascript
+let position = {x: 1, y: 3};
+let dimensions = {width: 100, height: 75};
+let rect = { ...position, ...dimensions };
+rect.x + rect.y + rect.width + rect.height // => 179
+dimensions.height = 50;
+rect.height // => 75: the rect object has its own copy of the height property
+```
+* If the object that is spread and the object it is being spread into both have a property with the same name, then the value of that property will be the one that comes last:
+```javascript
+let o = { x: 1 };
+let p = { x: 0, ...o };
+p.x // => 1: the value from object o overrides the initial value
+let q = { ...o, x: 2 };
+q.x // => 2: the value 2 overrides the previous value from o.
+```
+
 ## June 5, 2024
   ### JS: 
   * In addition to the basic `toString()` method, objects all have a `toLocaleString()`
