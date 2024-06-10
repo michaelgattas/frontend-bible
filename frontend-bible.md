@@ -1,5 +1,51 @@
 # Front-End Bible:
 
+## June 10, 2024
+### JS:
+#### Shorthand Methods 
+* When a function is defined as a property of an object, we call it a method
+* In ES6, the object literal syntax (and also class definition syntax we'll see in Chapter 9) has been extended to allow a shortcut where the function keyword and the colon are omitted
+```javascript
+let square = {
+    area() { return this.side * this.side; },
+    side: 10
+};
+square.area() // => 100
+```
+#### Property Getters and Setters
+* All of the object properties discussed up til now are __data properties__
+* JS also supports __accessor properties__ (getters and setters), which do not have a single value but instead have one or two accessor methods: a _getter_ and/or a _setter_
+* If a property has both a getter and a setter method, it is a read/write property
+* If it has only a setter method, it is a write-only property (something that is not possible with data properties)
+  * Attempts to read it always evaluate to undefined
+
+### HTML:
+#### The `<iframe>` element 
+* This represents a nested browsing context, embedding another HTML page into the current one
+* Each embedded browsing context has its own document and allows URL navigations
+* The navigations of each embedded browsing context are linearized into the session history of the topmost browsing context
+* The topmost browsing context, the one with no parent, is usually the browser window, represented by the `Window` object
+* Relevant attributes:
+  * `allow`: specifies a permissions policy for the `<iframe>`
+  * `allowfullscreen`
+  * `browsingtopics`: specifies that the selected topics for the current user should be sent with the request for the `<iframe>`'s sources. See more under the `Topics API`
+  * `credentialless`: set to `true` means that content will be loaded in a new, ephemeral context. It doesn't have access to the network, cookies, and storage data associated with its origin
+  * `csp`: a Content security policy enforced for the embedded resource 
+  * `referrerpolicy`: indicates which referrer to send when fetching the frame's resource
+  * `sandbox`: controls the restriction applied to the content embedded in the `<iframe>`
+
+### CSS:
+#### Pseudo-Classes:
+* A pseudo-class is a selector that selects elements that are in a specific state, e.g., they are the first element of their type, or they are being hovered over by the mouse pointer
+* E.g. `:hover` is a pseudo-class
+* Other pseudo-classes are `:hover`, `:focus`, `:first-child`, `:last-child`, `:nth-child()`, `:nth-last-child()`, `:nth-of-type()`, `:nth-last-of-type()`, `:first-of-type`, `:last-of-type`, `:only-child`, `:only-of-type`, `:empty`, `:not()`, `:target`, `:enabled`, `:disabled`, `:checked`, `:default`, `:valid`, `:invalid`, `:in-range`, `:out-of-range`, `:required`, `:optional`, `:read-only`, `:read-write`, `:placeholder-shown`, `:root`, `:scope`, `:user-invalid`, `:blank`, `:nth-match()`, `:nth-last-match()`, `:current`, `:past`, `:future`, `:active`,
+#### Pseudo-Elements
+* Pseudo-elements behave in a similar way, but as if you added a whole new HTML element into the markup, rather than applying a class to existing elements
+* Pseudo-elements start with a double colon `::` 
+* An example is `::first-line`, which will automatically select and style the first line of a text element and style it as though it had a special span with a class name assigned to it
+* There are a couple of special pseudo-elements, which are used along with the `content` property to insert content into your document using CSS
+* The use of `::before` and `::after` pseudo-elements along with the `content` property is referred to as "Generated Content" in CSS
+
 ## June 6, 2024
 ### JS:
 #### Shorthand Properties
@@ -1429,15 +1475,13 @@ q.x // => 2: the value 2 overrides the previous value from o.
 ## April 11, 2024
   ### JS:
   * While `null` is a reserved keyword representing the null value, 
-  * `undefined` is a property of the global object representing the absence of a value 
-
+  * `undefined` is a property of the global object representing the absence of a value
  ### HTML:
   * The `draggable` element is useful for creating drag-and-drop functionality in web applications
   * In addition to setting draggable to true or false, you have to set the `ondragstart` handler for the source element
   * Finally, you have to handle `ondragover` and `ondrop` events for the target element(s), since their default behavior is normally not to accept drag events
   * Pertinent YT vid here: https://www.youtube.com/watch?v=hCsuyZHlUtY
   * More about the Drag and Drop API: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
-
   ### CSS:
   * The flexbox model is one-dimensional, meaning it deals with one dimension at a time
     * You're either formatting rows or columns, not both at the same time
@@ -1596,7 +1640,6 @@ q.x // => 2: the value 2 overrides the previous value from o.
       parseFloat('.14') // return 0.14, because the first character is NaN
       parseInt('.14') // returns NaN, because integers can't start with '.'
       parseFloat('$14') // returns NaN, because numbers can't start with '$'
-
     ### HTML:
     * `tabIndex` is a global attribute attributable to almost all HTML elements (besides `<dialog>`)
     * It defines whether an element is focusable by sequential tab navigation
