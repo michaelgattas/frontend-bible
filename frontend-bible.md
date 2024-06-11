@@ -1,5 +1,118 @@
 # Front-End Bible:
 
+## June 11, 2024
+### JS:
+#### Accessor Properties: Getters and Setters
+```javascript
+let p = {
+// x and y are regular read-write data properties. x: 1.0,
+y: 1.0,
+    // r is a read-write accessor property with getter and setter.
+    // Don't forget to put a comma after accessor methods.
+get r() { return Math.hypot(this.x, this.y); }, set r(newvalue) {
+let oldvalue = Math.hypot(this.x, this.y); let ratio = newvalue/oldvalue;
+this.x *= ratio;
+this.y *= ratio;
+},
+    // theta is a read-only accessor property with getter only.
+get theta() { return Math.atan2(this.y, this.x); } };
+p.r // => Math.SQRT2 p.theta // => Math.PI / 4
+```
+* This object has data properties to represent the x and y coordinates of the point, and it has accessor properties that give the equivalent polar coordinates of the point
+* The code uses accessor properties to define an API that provides two representations (Cartesian coordinates and polar coordinates) of a single set of data
+* Other reasons to use accessor properties include sanity checking of property writes and returning different values on each property read:
+```javascript
+// This object generates strictly increasing serial numbers
+const serialnum = {
+    // This data property holds the next serial number. // The _ in the property name hints that it is for internal use only.
+    _n: 0,
+    // Return the current value and increment it
+    get next() { return this._n++; },
+    // Set a new value of n, but only if it is larger than current
+    set next(n) {
+        if (n > this._n) this._n = n;
+        else throw new Error("serial number can only be set to a larger value");}
+};
+
+serialnum.next = 10; 
+serialnum.next 
+serialnum.next
+
+// Set the starting serial number
+// => 10
+// => 11: different value each time we get next
+```
+#### Arrays
+* Arrays use 32-bit indexs, so the first element is index 0, and the maximum available index is 2^32 - 2, for a maximum array size of 4,294,967,295 elements
+* JS arrays are dynamic, they grow or shrink as needed, and there is no need to declare a fixed size for the array when you create it or reallocate it when the size changes
+* JS arrays may be sparse (the elements need not have contiguous indexes, and there may be gaps
+* Every array has a `length` property
+* For sparse arrays, `length` is larger than the highest index of any element (it will be the length of the array if all elements were contiguous)
+* JS arrays are specialized forms of JS objects, and array indexes are object property names
+  * Implementations of arrays are typically optimized so that accessing numerically indexed array elements is generally significantly faster than access to regular object properties
+* Arrays inherit properties from `Array.prototype`, which defines a rich set of array manipulation methods
+* JS strings behave like arrays of characters
+* ES6 introduces a set of new array classes known as `typed arrays`
+  * Unlike regular JS arrays, typed arrays have a fixed length and a fixed numeric element type
+  * They offer high performance and byte-level access to binary data
+* There are several ways to create arrays:
+  * Array literals
+    * Very simple, just a comma-separated list of elements within square brackets
+  * The `...` spread operator on an iterable object
+    ```javascript
+    let a = [1, 2, 3];
+    let b = [0, ...a, 4];
+    ```
+    * The dots "spread" the elements of the array `a` so that a is replaced by its elements
+    * The operator is a convenient way to create a shallow copy of an array
+    ```javascript
+    let original = [1,2,3]; 
+    let copy = [...original];
+    copy[0] = 0; // Modifying the copy does not change the original
+    original[0] // => 1
+    ```
+  * The `Array()` constructor
+    * This is almost always superceded by the ease/functionality of the Array Literal Syntax
+    * But, you can create an array like this: `let a = new Array(10); // this would create an array with 10 undefined elements`
+      * Note that no values are stored in the array, and the array index properties "0" and "1" and so on are not even defined for the array
+    * Explicitly specify two or more array elements or a single non-numeric element for the array:
+      * `let a = new Array(5, 4, 3, 2, 1, 'testing', 'testing'); // => [5, 4, 3, 2, 1, 'testing', 'testing']`
+  * The `Array.of()` and `Array.from()` factory methods
+    * Since the `Array()` constructor will interpret a single numeric element as a length, and multiple elements are array elements, this means you cannot simply create an Array with one numeric element using the constructor
+### HTML: 
+* The `<img>` element embeds an image into the document
+  * The `src` attribute is required, and contains the path to the image you want to embed
+  * The `alt` attribute is also required, and **incredibly useful for accessibility**
+  * Supported image formats:
+    * APNG, BMP, GIF, JPEG, PNG, SVG, WebP
+### CSS:
+#### Combinators
+* The descendant combinator, typically represented by a single space character, combines two selectors such that elements matched by the second selector are selected if they have an ancestor (parent, parent's parent, etc.) element matching the first selector
+```CSS
+body article p {
+    color: red;
+}
+```
+* The child combinator, represented by the `>` character, matches only elements that are direct children of a parent element
+```CSS
+article > p {
+    color: red;
+}
+```
+* The next sibling combinator, represented by the `+` character, selects only the element that is immediately preceded by the former element
+* For example, to select all `<img>` elements that are immediately preceded by a `<p>` element
+```CSS
+p + img {
+    margin-top: 20px;
+}
+```
+* The subsequent-sibling combinator, which selects all elements that follow (at any distance) the former sibling element
+```CSS
+p ~ img {
+    margin-top: 20px;
+}
+```
+
 ## June 10, 2024
 ### JS:
 #### Shorthand Methods 
