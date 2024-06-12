@@ -1,5 +1,37 @@
 # Front-End Bible:
 
+## June 12, 2024
+### JS:
+#### Arrays
+* `Array.of()` enables you to input arguments and allow them to be the elements of the newly created array (even if there is just one
+  * Using the `Array` constructor with a single numeric argument will create an array with that length, not with that element
+* `Array.from()` is another ES6 factory function
+  * It takes an Array-like or iterable object and returns an array that contains the same elements
+  * It is also a simple way to create a shallow copy of an array
+  * This function is important because it allows for the copying of Array-like objects
+  * This function also allows for a second argument, which is a function to be applied to each element being passed into the array
+    * In other words, you can perform mapping as you're building your new array
+* _Array-like Objects_ are objects who have a numeric length property defined, along with properties whose names happen to integers
+  * These are somewhat common as return-types for built-in browser methods
+### HTML:
+#### The `<input>` element
+* The `<input>` element is used to create interactive controls for web-based forms in order to accept data from the user
+* Within it, a multitude of data and control widgets are available, depending on the client's device and user agent
+  * Types include:
+    * `button`: A push button with no default behavior, displaying the value of the `value` attribute, and nothing by default
+    * `checkbox`: A check box allowing single values to be selected/deselected
+    * `color`: A control for specifying a color, which opens a color picker in supporting browsers
+    * `date`: a control for entering a date (year, month, and day, with no time). opens a date picker or numeric wheels for years, months and day when active in supporting browsers
+    * `datetime-local`: A control for entering a date and time, with no time zone. Opens a date picker or numeric wheels for date- and time-components when active in supporting browsers
+    * `email`: A field for editing an e-mail address. It looks like a `text` input, but has validation parameters and a keyboard optimized for email addresses
+    * `file`: A control that lets the user select a file. Use the `accept` attribute to define the types of files that the control can select
+    * `hidden`: A control that is not displayed but whose value is submitted to the server. Useful for form honey-pots!
+    * `image`: A graphical submit button. You must use the `src` attribute to define the source of the image and the `alt` attribute to define alternative text
+    * `month`: A control for entering a month and year, with no time zone. Opens a date picker or numeric wheels for month and year when active in supporting browsers
+### CSS:
+* Before completing the combinator/selector assessment tomorrow, here's a bite-sized tidbit:
+  * The `::selection` pseudo-element applies styles to the portion of a document that has been highlighted by the user
+
 ## June 11, 2024
 ### JS:
 #### Accessor Properties: Getters and Setters
