@@ -1,5 +1,91 @@
 # Front-End Bible:
 
+## June 13, 2024
+### JS:
+#### Arrays
+* Arrays are a specialized kind of object
+* The square brackets used to access array elements work just like the square brackets used to access object properties
+* JS converts the numeric array index you specify to a string–the index 1 becomes the string "1", then uses that string as a property name
+```javascript
+let o = {};
+o[1] = "one";
+o["1"] // => "one"; numeric and string property names are the same
+```
+* All indexes are property names, but only property names that are integers between 0 and 2^32 - 2 are indexes
+* All arrays are objects, and you can create properties of any name on them
+* If you use properties that are array indexes, however, arrays have the special behavior of updating their length property as needed
+* Note that you can index an array using numbers that are negative or that are not integers
+  * In this case, they are simply stores as properties of the array object, and do not affect the `length` property
+* If you index an array with a string that happens to be a non-negative integer, it behaves as an array index, not an object property
+```javascript
+a[-1.23] = true; // this creates a property names "-1.23"
+a["1000"] = 0; // this sets the 1000th element of the array
+a[1.000] // Array index 1. same as a[1] = 1
+```
+#### Sparse Arrays 
+* Sparse arrays have a length value greater than the number of elements
+#### Array Length
+* If you assign a value to an array whose index i is greater than or equal to the array's current `length`, the value of the `length` property is set to `i + 1`
+* In order to maintain the length invariant is that, if you set the length property to a non-negative integer `n` smaller than its current value, any array elements whose index is greater than or equal to `n` are deleted from the array:
+```javascript
+a = [1, 2, 3, 4, 5];
+a.length = 3;  
+a.length = 0; // deletes all elements
+a.length = 5; // length is 5, but no elements, like new Array(5)
+```
+* Pushing a value onto an array is the same as assigning the value to `a[a.length]`
+* You can use the `unshift()` method to insert a value at the beginning of an array
+* The `pop()` method is the opposite of `push()`, removing the last element of the array and returning it 
+* Similarly the `shift()` method removes and returns the first element of the array, reducing the length by 1 and shifting all elements down to an index one lower than their current index
+* You can delete array elements with the `delete` operator, just as you can delete object properties 
+```javascript
+let a = [1, 2, 3]
+delete a[2] // a now has no element at index 2
+2 in a // => false: no array index 2 is defined
+a.length // => 3: delete does not affect array length
+```
+* If you delete an element from an array, it becomes sparse
+* `splice()` is the general purpose method for inserting, deleting, or replacing array elements
+  * It alters the length property and shifts array elements to higher or lower indexes as needed
+
+#### Iterating Arrays
+* The`for/of` loop returns the elements of an array in ascending order
+  * It has no special behavior for sparse arrays and simply returns `undefined` for any array elements that do not exist
+  * If you want to use a `for/of` loop for an array and need to know the index os each array element, use the `entries()` method of the array, along with destructuring assignment, like this:
+```javascript
+let everyother = "";
+for (let [index, letter] of letters.entries()) {
+    if (index % 2 === 0) everyother += letter;
+}
+```
+* Another good way to iterate arrays is with `forEach()`
+  * This is not a new form of the `for` loop, but an array method that offers a functional approach to array iteration
+  * It iterates the array in order, and actually passes the array index to your function as a second argument
+  * Unlike the `for/of` loop, the `forEach()` function is aware of sparse arrays and does not invoke your function for elements that are not there
+* Sometimes, good ole-fashioned iteration is useful, using a standard `for` loop
+#### Multidimensional Arrays
+* JS does not have true multidimensional arrays, but you can simulate them with arrays of arrays
+
+### HTML:
+#### The `<input>` element
+* The `<input>` element is used to create interactive controls for web-based forms in order to accept data from the user
+  * More Types include:
+    * `number`: a control for entering a number. Displays a spinner and adds default validation, displays a numeric keypad in some devices with dynamic keypads
+    * `password`: a single-line text field whose value is obscured. Will alert user if site is not secure
+    * `radio`: a radio button, allowing a single value to be selected out of multiple choices with the same `name` value
+    * `range`: a control for entering a number whose exact value is not important. Displays as a range widget default to the middle value. Used in conjunction with `min` and `max` to define the range of acceptable values
+    * `reset`: a button that resets the contents of the form to default values
+    * `search`: a single line text field for entering search strings. Line-breaks are automatically removed from the input value. May include a delete icon in supporting browsers that can be used to clear the field. Displays a search icon instead of enter key on some devices with dynamic keypads
+    * `submit`: a button that submits the form
+    * `tel`: a control for entering a telephone number. Displays a telephone keypad in some devices with dynamic keypads
+    * `text`: a single-line text field. Line-breaks are automatically removed from the input value
+    * `time`: a control for entering a time value with no time zone. Displays a time picker or numeric wheels for hours and minutes when active in supporting browsers
+    * `url`: a field for editing a URL. It looks like a `text` input, but has validation parameters and a keyboard optimized for URL entry
+    * `week`: a control for entering a date consisting of a week-year number and a week number within that year. Displays a week picker or numeric wheels for week and year when active in supporting browsers
+
+### CSS:
+* For CSS today, I am completing the Selectors Assessment tasks
+
 ## June 12, 2024
 ### JS:
 #### Arrays
