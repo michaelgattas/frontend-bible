@@ -1,5 +1,65 @@
 # Front-End Bible:
 
+## June 20, 2024
+
+### JS:
+#### Subarrays
+* `slice()`: the `slice()` method returns a slice, or subarray of the specified array. 
+  * Its two arguments specify the start and end of the slice to be returned
+  * In includes the first argument index up to, **but not including** the second argument index
+  * If only one argument is specified, the returned array contains all elements from the argument index to the end of the array
+  * If either argument is negative, it specifies an array element relative to the length of the array
+  * An argument of -1, for example, specifies the last element of the array, and the element -2 specifies the element before that one
+  * `slice()` does not modify the array on which it is invoked
+  ```javascript
+  let a = [1, 2, 3, 4, 5];
+  a.slice(0, 3); // returns [1, 2, 3]
+  a.slice(3); // returns [4, 5]
+  a.slice(1, -1); // returns [2, 3, 4]
+    a.slice(-3, -2); // returns [3]
+  ```
+* `splice()` is a general-purpose method for inserting or removing elements from an array
+  * Unlike `slice()` and `concat()`, `splice()` modifies the array on which it is invoked
+  * The first argument to `splice()` specifies the array position at which the insertion and/or deletion is to begin
+  * The second argument specifies the number of elements that should be deleted from (spliced out of) the array
+    * This is another key difference
+      * The second argument to `slice()` is an end index
+      * The second argument to `splice()` is a length
+  ```javascript
+  let a = [1, 2, 3, 4, 5, 6, 7, 8];
+  a.splice(4) // => [5, 6, 7, 8]; a is now [1, 2, 3, 4]
+  a.splice(1, 2) // => [2, 3]; a is now [1, 4]
+  a.splice(1, 1) // [4]; a is now [1]
+  ```
+  * The first two arguments to `splice()` specify the position and number of elements to delete
+  * The arguments can be followed by any number of arguments that specify elements to be inserted at the point of the first argument in the array
+  ```javascript
+  let a = [1, 2, 3, 4, 5];
+  a.splice(2, 0, "a", "b") // []; a is now [1, 2, "a", "b", 3, 4, 5]
+  a.splice(2, 2, [1, 2], 3) // ["a", "b"] a is now [1, 2, [1, 2], 3, 3, 4, 5]
+  ```
+
+### HTML: 
+#### The `<label>` element represents a caption for an item in a user interface
+* Associating a `<label>` with a form control, such as `<input>` or `<textarea>` offers some major advantages
+  * The label is not just visually, but programmatically associated with its control, allowing screen readers to dictate the content more accurately
+  * Tapping/touching the label propagates the focus to the associated input, allowing for a larger hit area on a control or textarea
+* To associate a label with a text input, you first add an `id` to the associated input
+* Next, you add the `for` attribute to the label with the matching `id`
+* Don't add interactive anchor tags or buttons inside a label, instead use the `for` attribute to associate the label with the input
+* Don't add headers or similar elements for the sake of styling, instead use CSS to achieve such effects
+
+### CSS:
+#### Inheritance
+* Properties like `width`, `margin`, `padding`, and `border` are not inherited properties
+* You can often guess whether a property will be inherited if you know what aspect the property value will style
+* CSS provides five universal property values for controlling inheritance. Every CSS property accepts these values
+  * `inherit`: sets the property value applied for a selected element to the same as that of its parent element. This "turns on" inheritance
+  * `initial`: sets the property value to its default value
+  * `revert`: resets the property value to the browser's default styling rather than the defaults applied to that property. This value acts like `unset` in many cases
+  * `revert-layer`: resets the property value applied to a selected element to the value established in a previous cascade layer
+  * `unset`: resets the property value to its inherited value if it inherits, or to its default value if it does not
+
 ## June 14, 2024
 
 ### JS:
@@ -162,32 +222,42 @@
         content: " [insertion end] ";
       }
       ``` 
-* The `<kbd>` or Keyboard Input Element 
-  * This represents a span of inline text denoting textual user input from a keyboard, voice input, or any other text entry device
-  * Nesting a `<kbd>` element within another `<kbd>` element represents an actual key or other unit of input as a portion of larger input
-  * Nesting a `<kbd>` element inside a `<samp>` element represents input that has been echoed back to the user by the system
-  * Nesting a `<samp>` element inside a `<kbd>` element represents input which is based on text presented by the system, such as the names of menus and menu items, or the names of buttons displayed on the screen
+* The `<kbd>` or Keyboard Input Element
+    * This represents a span of inline text denoting textual user input from a keyboard, voice input, or any other text
+      entry device
+    * Nesting a `<kbd>` element within another `<kbd>` element represents an actual key or other unit of input as a
+      portion of larger input
+    * Nesting a `<kbd>` element inside a `<samp>` element represents input that has been echoed back to the user by the
+      system
+    * Nesting a `<samp>` element inside a `<kbd>` element represents input which is based on text presented by the
+      system, such as the names of menus and menu items, or the names of buttons displayed on the screen
 
 ### CSS
+
 #### Cascade, specificity, and inheritance
+
 * This topic controls how CSS is applied to HTML and how conflicts between style declarations are resolved
 * Stylesheets **cascade**, which means the origin, the cascade layer, and the order of CSS rules matter
-  * When two rules from the same cascade layer apply and both have equal specificity, the one that is defined last in the stylesheet is the one that will be used
-    ```CSS
-    h1 {
-      color: red;
-    }
-    h1 {
-      color: blue;
-    }
-    ```
-  * In this case the rules are from the same source, have an identical element selector, and therefore carry the same specificity, but the last one in the source order wins
-* **Specificity** is the algorithm that the browser uses to decide which property value is applied to an element 
-  * If multiple style blocks have different selectors that configure the same property with different values and target the same element, specificity decides the property value that gets applied to the element
-  * An element selector is less specific. It will select all elements of that type that appear on a page, so it has less weight
-    * Pseudo-element selectors have the same specificity as regular element selectors
-  * A class selector is more specific, so it has more weight
-    * Attribute selectors and pseudo-classes have the same weight as a class 
+    * When two rules from the same cascade layer apply and both have equal specificity, the one that is defined last in
+      the stylesheet is the one that will be used
+      ```CSS
+      h1 {
+        color: red;
+      }
+      h1 {
+        color: blue;
+      }
+      ```
+    * In this case the rules are from the same source, have an identical element selector, and therefore carry the same
+      specificity, but the last one in the source order wins
+* **Specificity** is the algorithm that the browser uses to decide which property value is applied to an element
+    * If multiple style blocks have different selectors that configure the same property with different values and
+      target the same element, specificity decides the property value that gets applied to the element
+    * An element selector is less specific. It will select all elements of that type that appear on a page, so it has
+      less weight
+        * Pseudo-element selectors have the same specificity as regular element selectors
+    * A class selector is more specific, so it has more weight
+        * Attribute selectors and pseudo-classes have the same weight as a class
   ```CSS
   .main-heading {
     color: red;
@@ -196,11 +266,14 @@
     color: blue;
   }
   ```
-    * In this case, the class selector is more specific than the element selector, so the color of the `.main-heading` class will be red
+    * In this case, the class selector is more specific than the element selector, so the color of the `.main-heading`
+      class will be red
 * **Inheritance** - some property values set on parent elements are inherited by their child elements, and some aren't
-  * E.g., if you set a `color` and `font-family` on an element, every element inside it will also be styled with that color and font, unless you've applied different values directly to them
-  * Some properties do not inherit, so if you set a `width` of 50% on an element, all of its descendants do not get a width of 50% of their parent's width
-    * If this was the case, CSS would be super frustrating and require much more styling
+    * E.g., if you set a `color` and `font-family` on an element, every element inside it will also be styled with that
+      color and font, unless you've applied different values directly to them
+    * Some properties do not inherit, so if you set a `width` of 50% on an element, all of its descendants do not get a
+      width of 50% of their parent's width
+        * If this was the case, CSS would be super frustrating and require much more styling
 
 ## June 13, 2024
 
@@ -1031,8 +1104,10 @@ q.x // => 2: the value 2 overrides the previous value from o.
 
   ```javascript
     let o = {x: 1};
+
 o.y // => undefined
 o.y.length // => TypeError: Cannot read property 'length' of undefined
+
   ```
 
 * Fortunately, conditional property access (options chaining) can be used to avoid this error
@@ -1074,6 +1149,7 @@ o.y.length // => TypeError: Cannot read property 'length' of undefined
         <input type="radio" id="mothman" name="monster" value="M"/>
         <label for="mothman">Mothman</label>
     </fieldset>
+
 </form>
 ```
 
@@ -1192,7 +1268,9 @@ o.y.length // => TypeError: Cannot read property 'length' of undefined
 
   ```javascript
         let o1 = Object.create({x: 1, y: 2}); // o1 inherits properties x and y
+
 o1.x + o1.y // => 3
+
   ```
 
 * You can pass `null` to create a new object that does not have a prototype, but if you do this, the newly created
@@ -1216,7 +1294,9 @@ o1.x + o1.y // => 3
 
   ```javascript
   let x = {x: "don't change this value"};
+
 library.function(Object.create(o));
+
   ```
 
 * Javascript objects are associative arrays (like a hash map or dictionary)
@@ -1424,23 +1504,26 @@ library.function(Object.create(o));
 
   ```javascript
   let matrix = getData(); // get a 2D array of data from somewhere
+
 // Now sum all the numbers in the matrix
 let sum = 0, success = false;
 // Start with a labeled statement that we can break out of if errors occur
 computeSum: if (matrix) {
-    for (let x = 0; x < matrix.length; x++) {
-        let row = matrix[x];
-        if (!row) break computeSum;
-        for (let y = 0; y < row.length; y++) {
-            let cell = row[y];
-            if (isNaN(cell)) break computeSum;
-            sum += cell;
-        }
-    }
-    success = true;
+for (let x = 0; x < matrix.length; x++) {
+let row = matrix[x];
+if (!row) break computeSum;
+for (let y = 0; y < row.length; y++) {
+let cell = row[y];
+if (isNaN(cell)) break computeSum;
+sum += cell;
 }
-// The break statements jump here. If we arrive here with success == false then there was somthing wrong with the matrix we were given.
+}
+success = true;
+}
+// The break statements jump here. If we arrive here with success == false then there was somthing wrong with the matrix
+we were given.
 // Otherwise, sum contains the sum of all cells of the matrix
+
   ```
 
 * The `continue` statement is used to skip the rest of the body of a loop and jump back to the top of the loop to begin
@@ -1454,6 +1537,7 @@ computeSum: if (matrix) {
       total += data[i];
   }
   ```
+
 * The `return` statement is used to make the interpreter jump from a function invocation back to the code that invoked
   it
 * The `yield` statement is much like the return statement but is used only in ES6 generator functions to produce the
@@ -1554,6 +1638,7 @@ computeSum: if (matrix) {
 
   ```HTML
     <p>New Products:</p>
+
 <ul>
     <li>
         <data value="398">Mini Ketchup</data>
@@ -1690,23 +1775,25 @@ computeSum: if (matrix) {
         "footer footer";
     grid-template-columns: 1fr 3fr;
     gap: 20px;
+
 }
 
 header {
-    grid-area: header;
+grid-area: header;
 }
 
 article {
-    grid-area: content;
+grid-area: content;
 }
 
 aside {
-    grid-area: sidebar;
+grid-area: sidebar;
 }
 
 footer {
-    grid-area: footer;
+grid-area: footer;
 }
+
   ```
 
 ## May 3, 2024
@@ -1725,10 +1812,12 @@ footer {
 
   ```javascript
     initialize;
+
 while (test) {
-    statement;
-    increment;
+statement;
+increment;
 }
+
   ```
 
 * Most `for` loops are numeric, but they can be used to iterate over many different types of data structures:
@@ -1787,7 +1876,9 @@ while (test) {
         break;
     default: // final starting point
     // code block
+
 }
+
   ```
 
 * It's also worth noting that the `===` operator is used to check equality in this context
@@ -1838,7 +1929,9 @@ while (test) {
     display: grid;
     grid-template-columns: 100px 100px 100px;
     grid-auto-rows: minmax(100px, auto);
+
 }
+
   ```
 
 * In this case, the row will be at least 100px tall, but will expand to fit the content if it is larger than 100px
@@ -1865,8 +1958,11 @@ while (test) {
 
   ```javascript 
   i = 0, j = 0, k = 2;
-// you could also write something like 
-i = 0, j = 0, k = someVal === 2 // in this case, the comma operator discards the left operand values and returns 'someVal' assigned to k for comparison to the number 2
+
+// you could also write something like
+i = 0, j = 0, k = someVal === 2 // in this case, the comma operator discards the left operand values and returns '
+someVal' assigned to k for comparison to the number 2
+
   ```
 
 * The most common example of the comma operator is in a `for` loop, where multiple variables are used, and operands with
@@ -1922,7 +2018,9 @@ i = 0, j = 0, k = someVal === 2 // in this case, the comma operator discards the
     display: grid;
     grid-template-columns: repeat(3, 100px);
     gap: 20px;
+
 }
+
   ```
 
 * Explicit grids are created using `grid-template-columns` and `grid-template-rows
@@ -1960,8 +2058,10 @@ i = 0, j = 0, k = someVal === 2 // in this case, the comma operator discards the
   console.log(f(), x); // Local variable changed: prints "localchanged global"
   console.log(g(), y); // Global variable changed: prints "local globalchanged"
   ```
+
     * The notable difference is the context in which the eval function is called, and the scope in which it is executed
       in each case
+
 * The `delete` operator is used to remove a property from an index or object
     * The `delete` operator returns `true` if the property is successfully deleted, and `false` otherwise
     * If the property is non-existent, `delete` will return `true`
@@ -2078,13 +2178,15 @@ i = 0, j = 0, k = someVal === 2 // in this case, the comma operator discards the
 
   ```javascript
     let d = new Date(); // Create a new object with the Date() constructor
+
 d instanceof Date // => true: d was created with Date()
 d instanceof Object // => true: all objects are instances of Object
-d instanceof Number // => false: d is not a Number object 
+d instanceof Number // => false: d is not a Number object
 let a = [1, 2, 3]; // Create an array with array literal syntax
 a instanceof Array // => true: a is an array
 a instanceof Object // => true: all arrays are objects
 a instanceof RegExp // => false: arrays are not regular expressions
+
   ```
 
 ### HTML:
@@ -2152,7 +2254,9 @@ a instanceof RegExp // => false: arrays are not regular expressions
   ```CSS
     p {
     font-family: "Trebuchet MS", Verdana, sans-serif;
+
 }
+
   ```
 
 * In this case, the browser will first try to load "Trebuchet MS", then "Verdana", and finally any sans-serif font
@@ -2202,6 +2306,7 @@ a instanceof RegExp // => false: arrays are not regular expressions
   let y = x++ // y == 5, x == 6
   let z = ++x // z == 7, x == 7
   ```
+
 * Basically the pre- or post- defines if the change to the original will happen pre- or post- the assignment to
   the `lval` in question
 * Remember, all increment/decrement operators must use `lval`, so must be a
