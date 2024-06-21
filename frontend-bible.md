@@ -1,16 +1,84 @@
 # Front-End Bible:
 
+## June 21, 2024
+
+### JS: 
+* The `fill()` method sets the elements of an array, or a slice of an array, to a specified value
+* It mutates the array it's called on, and also returns the modified array
+```javascript
+let a = new Array(5); // start the array with no elements and length 5
+a.fill(0); // => [0, 0, 0, 0, 0]
+a.fill(9, 1); // => [0, 9, 9, 9, 9]; fill with 9 starting at index 1
+a.fill(8, 2, -1) // => [0, 9, 8, 8, 9]; fill with 8 starting at index 2 and ending at the second-to-last index
+```
+* First argument is the value to fill
+* Second argument is the start index
+  * If omitted, the entire array will be filled
+* Third argument is the end index
+  * If omitted, the array will be filled to the end index
+
+* The `copyWithin()` method copies a slice of an array to a new position within the array
+* It modifies the array in place and returns the modified array, but will not change the length of the array
+* First argument specifies the destination index to which the first element will be copied
+* The second argument is the index of the first element to be copied
+  * If this is omitted, 0 is used
+* The third argument specifies the end of the slice of elements to be copied
+  * If omitted, the length of the array is used
+* Elements from the start index up to, but not including, the end index will be copied
+```javascript
+let a = [1, 2, 3, 4, 5];
+a.copyWithin(1) // => [1, 1, 2, 3, 4]: copy the entire array to index 1
+a.copyWithin(2, 3, 5) // => [1, 1, 3, 4, 4]: copy last 2 elements to index 2
+a.copyWithin(0, -2) // => [4, 4, 3, 4, 4]: negative offsets work, too
+```
+
+### HTML:
+#### The `<legend>` element
+* This represents a caption for the content of its parent `<fieldset>`
+```HTML
+<fieldset>
+    <legend>Choose your favorite monster</legend>
+    <input type="radio" id="kraken" name="monster" value="K" />
+    <label for="kraken">Kraken</label><br/>
+    
+    <input type="radio" id="sasquatch" name="monster" value="S" />
+    <label for="sasquatch">Sasquatch</label><br />
+
+    <input type="radio" id="mothman" name="monster" value="M" />
+    <label for="mothman">Mothman</label>
+</fieldset>
+```
+* Check this example out in `index.html`
+
+#### The `<li>` element
+* Used to represent an item in a list
+* Must be contained in a parent element: an unordered list or ordered list, or a menu
+* Notable Attributes:
+  * `value`: this integer attribute indicates the current ordinal value of the list item as defined by the `<ol>` element
+    * The only allowed value for this attribute is a number, even if the list is displayed with Roman numerals or letters
+
+### CSS:
+#### Universal values and Inheritance
+* The CSS shorthand property `all` can be used to apply one of these inheritance values to (almost) all properties at once
+* Its value can be any one of the inheritance values (`inherit`, `initial`, `revert`, `revert-layer`, or `unset`)
+  * It's a convenient way to undo changes made to styles so that you can get back to a known starting point before beginning new changes
+  * Example to follow on Monday
+
 ## June 20, 2024
 
 ### JS:
+
 #### Subarrays
-* `slice()`: the `slice()` method returns a slice, or subarray of the specified array. 
-  * Its two arguments specify the start and end of the slice to be returned
-  * In includes the first argument index up to, **but not including** the second argument index
-  * If only one argument is specified, the returned array contains all elements from the argument index to the end of the array
-  * If either argument is negative, it specifies an array element relative to the length of the array
-  * An argument of -1, for example, specifies the last element of the array, and the element -2 specifies the element before that one
-  * `slice()` does not modify the array on which it is invoked
+
+* `slice()`: the `slice()` method returns a slice, or subarray of the specified array.
+    * Its two arguments specify the start and end of the slice to be returned
+    * In includes the first argument index up to, **but not including** the second argument index
+    * If only one argument is specified, the returned array contains all elements from the argument index to the end of
+      the array
+    * If either argument is negative, it specifies an array element relative to the length of the array
+    * An argument of -1, for example, specifies the last element of the array, and the element -2 specifies the element
+      before that one
+    * `slice()` does not modify the array on which it is invoked
   ```javascript
   let a = [1, 2, 3, 4, 5];
   a.slice(0, 3); // returns [1, 2, 3]
@@ -19,46 +87,57 @@
     a.slice(-3, -2); // returns [3]
   ```
 * `splice()` is a general-purpose method for inserting or removing elements from an array
-  * Unlike `slice()` and `concat()`, `splice()` modifies the array on which it is invoked
-  * The first argument to `splice()` specifies the array position at which the insertion and/or deletion is to begin
-  * The second argument specifies the number of elements that should be deleted from (spliced out of) the array
-    * This is another key difference
-      * The second argument to `slice()` is an end index
-      * The second argument to `splice()` is a length
+    * Unlike `slice()` and `concat()`, `splice()` modifies the array on which it is invoked
+    * The first argument to `splice()` specifies the array position at which the insertion and/or deletion is to begin
+    * The second argument specifies the number of elements that should be deleted from (spliced out of) the array
+        * This is another key difference
+            * The second argument to `slice()` is an end index
+            * The second argument to `splice()` is a length
   ```javascript
   let a = [1, 2, 3, 4, 5, 6, 7, 8];
   a.splice(4) // => [5, 6, 7, 8]; a is now [1, 2, 3, 4]
   a.splice(1, 2) // => [2, 3]; a is now [1, 4]
   a.splice(1, 1) // [4]; a is now [1]
   ```
-  * The first two arguments to `splice()` specify the position and number of elements to delete
-  * The arguments can be followed by any number of arguments that specify elements to be inserted at the point of the first argument in the array
+    * The first two arguments to `splice()` specify the position and number of elements to delete
+    * The arguments can be followed by any number of arguments that specify elements to be inserted at the point of the
+      first argument in the array
   ```javascript
   let a = [1, 2, 3, 4, 5];
   a.splice(2, 0, "a", "b") // []; a is now [1, 2, "a", "b", 3, 4, 5]
   a.splice(2, 2, [1, 2], 3) // ["a", "b"] a is now [1, 2, [1, 2], 3, 3, 4, 5]
   ```
 
-### HTML: 
+### HTML:
+
 #### The `<label>` element represents a caption for an item in a user interface
+
 * Associating a `<label>` with a form control, such as `<input>` or `<textarea>` offers some major advantages
-  * The label is not just visually, but programmatically associated with its control, allowing screen readers to dictate the content more accurately
-  * Tapping/touching the label propagates the focus to the associated input, allowing for a larger hit area on a control or textarea
+    * The label is not just visually, but programmatically associated with its control, allowing screen readers to
+      dictate the content more accurately
+    * Tapping/touching the label propagates the focus to the associated input, allowing for a larger hit area on a
+      control or textarea
 * To associate a label with a text input, you first add an `id` to the associated input
 * Next, you add the `for` attribute to the label with the matching `id`
-* Don't add interactive anchor tags or buttons inside a label, instead use the `for` attribute to associate the label with the input
+* Don't add interactive anchor tags or buttons inside a label, instead use the `for` attribute to associate the label
+  with the input
 * Don't add headers or similar elements for the sake of styling, instead use CSS to achieve such effects
 
 ### CSS:
+
 #### Inheritance
+
 * Properties like `width`, `margin`, `padding`, and `border` are not inherited properties
 * You can often guess whether a property will be inherited if you know what aspect the property value will style
 * CSS provides five universal property values for controlling inheritance. Every CSS property accepts these values
-  * `inherit`: sets the property value applied for a selected element to the same as that of its parent element. This "turns on" inheritance
-  * `initial`: sets the property value to its default value
-  * `revert`: resets the property value to the browser's default styling rather than the defaults applied to that property. This value acts like `unset` in many cases
-  * `revert-layer`: resets the property value applied to a selected element to the value established in a previous cascade layer
-  * `unset`: resets the property value to its inherited value if it inherits, or to its default value if it does not
+    * `inherit`: sets the property value applied for a selected element to the same as that of its parent element.
+      This "turns on" inheritance
+    * `initial`: sets the property value to its default value
+    * `revert`: resets the property value to the browser's default styling rather than the defaults applied to that
+      property. This value acts like `unset` in many cases
+    * `revert-layer`: resets the property value applied to a selected element to the value established in a previous
+      cascade layer
+    * `unset`: resets the property value to its inherited value if it inherits, or to its default value if it does not
 
 ## June 14, 2024
 
