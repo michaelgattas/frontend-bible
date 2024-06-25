@@ -1,5 +1,68 @@
 # Front-End Bible:
 
+## June 22, 2024
+
+### JS:
+#### `indexOf()` and `lastIndexOf()` Methods
+* Each of these search an array for an element with a specified value and return the index of the first such element found, or -1 if none is found
+* `indexOf()` searches the array from the beginning, and `lastIndexOf()` searches from the end
+* Each uses the `===` operator, so objects are compared by equivalent reference, not value
+* If you want to actually look at object contents, use `find()` with a custom predicate function
+* Each of these methods take an optional second argument, which is the index at which to begin the search
+
+#### `includes()`
+* This method takes a single argument and returns `true` if the array contains that value or `false` otherwise
+* This method uses a slightly different version of equality that does consider `NaN` to be equal to itself
+* This means that `includes()` is a good way to check for the presence of `NaN` in an array, but `indexOf()` is not
+
+#### `sort()`
+* This method sorts the elements of an array in place and returns the sorted array
+* When called with no arguments, it sorts the array elements in alphabetical order (temporarily converting them to strings to perform the comparison, if necessary)
+* Undefined elements are sorted to the end of the array
+* If you want to sort an array of numbers, you must pass a comparison function as an argument
+  * If the first argument should appear after the second in the sorted array, the function should return a positive number
+  * If the first argument should appear before the second, the function should return a negative number
+  * If the two arguments are equal, the function should return 0
+* An interesting example would be to sort an array of strings, with case ignored in the alphabetical comparison
+```javascript
+let a = ["Banana", "apple", "Cherry", "decks"]
+a.sort() // => ["Banana", "Cherry", "apple", "decks"]
+a.sort((a, b) => {
+    let s = a.toLowerCase(), t = b.toLowerCase();
+    if (a > b) return 1
+    if (a < b) return -1
+    return 0
+}) // => ["apple", "Banana", "Cherry", "decks"]
+```
+
+#### `reverse()`
+* This method reverse the order of the elements of an array and returns the reversed array
+* It does this in place, or without creating a new array
+
+### HTML:
+#### The `<link>` element
+* This specifies relationships between the current document and an external resourrce
+  * It's most commonly used to link to stylesheets, but also used to establish site icons
+* It's placed inside the `<head>` element, like this
+```HTML
+<link href="main.css" rel="stylesheet" />
+<link href="favicon.ico" rel="icon" />
+```
+* Often times you can use the `rel` attribute to indicate special icon types for use on various mobile platforms
+* `sizes` attribute can be used to specify the size of the icon
+* `type` attribute can be used to specify the MIME type of the linked resource
+* You can also provide a media type or query inside a `media` attribute
+  * This resource will then only be loaded if the media condition is true
+
+### CSS:
+* In ascending, the factors that apply the final styling to an element are:
+  * Source Order
+  * Specificity
+  * Important
+* Source Order:
+  * If you have more than one rule, all of which have exactly the same weight, then the one that comes last in the CSS will win
+  * Source order only matters when the specificity weight of the rule is the same
+
 ## June 21, 2024
 
 ### JS: 
