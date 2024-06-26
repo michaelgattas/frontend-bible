@@ -1,29 +1,84 @@
 # Front-End Bible:
 
-## June 22, 2024
+## June 26, 2024
 
 ### JS:
+
+####  Array to String Conversions
+* The `join()` method converts all elements of an array to strings at concatenates them, returning the resulting string
+  * You can specify an optional string that separates the elements in the returned string
+  * If no separator string is specified, a comma is used
+  * This is effectively the inverse of `String.split()`
+  * Arrays' inbuilt `toString()` method is effectively `join()` with no arguments
+* In addition to the static methods `Array.of()` and `Array.from()`, there is an inbuilt `Array.isArray()` which returns true/false depending on the value of the passed in argument
+
+#### Strings as Arrays
+* Strings behave like read-only arrays of UTF-16 Unicode characters
+* Instead of accessing individual characters with the `charAt()` method, you can use square brackets
+```javascript
+let s = "test";
+s.charAt(0) // => "t"
+s[1] // => "e"
+```
+* Strings behaving like arrays also means that we can apply generic array methods to them
+```javascript
+Array.prototype.join.call("Javascript", " ") // => "J a v a s c r i p t"
+```
+* Because strings are immutable values, so they are treated like read-only arrays
+* Array methods like `push()`, `sort()`, `reverse()`, and `splice()` do not work on strings
+
+#### Functions
+* Functions defined using the `function` keyword are **hoisted** in a program, meaning they can be invoked before their definition in a block of code
+
+### HTML:
+#### The `<main>` element
+* This is used to represent the dominant content of the `<body>` of a document
+* It consists of content that is directly related to or expands upon the central topic of a document, or the central functionality of an application
+* A document must not have more than one `<main>` element that doesn't have the `hidden` attribute specified
+
+#### The `<map>` element
+* This element is used with the `<area>` element to define an image map (a clickable link area)
+* It must contain the `name` attribute with no space characters
+
+### CSS:
+#### Specificity
+* To further understand specificity as it pertains to CSS rule application, consider the following about selector specificity:
+  * **Identifiers**: Score one in this column for each ID selector contained inside the overall selector.
+  * **Classes**: Score one in this column for each class selector, attribute selector, or pseudo-class contained inside the overall selector.
+  * **Elements**: Score one in this column for each element selector or pseudo-element contained inside the overall selector.
+
+## June 25, 2024
+
+### JS:
+
 #### `indexOf()` and `lastIndexOf()` Methods
-* Each of these search an array for an element with a specified value and return the index of the first such element found, or -1 if none is found
+
+* Each of these search an array for an element with a specified value and return the index of the first such element
+  found, or -1 if none is found
 * `indexOf()` searches the array from the beginning, and `lastIndexOf()` searches from the end
 * Each uses the `===` operator, so objects are compared by equivalent reference, not value
 * If you want to actually look at object contents, use `find()` with a custom predicate function
 * Each of these methods take an optional second argument, which is the index at which to begin the search
 
 #### `includes()`
+
 * This method takes a single argument and returns `true` if the array contains that value or `false` otherwise
 * This method uses a slightly different version of equality that does consider `NaN` to be equal to itself
 * This means that `includes()` is a good way to check for the presence of `NaN` in an array, but `indexOf()` is not
 
 #### `sort()`
+
 * This method sorts the elements of an array in place and returns the sorted array
-* When called with no arguments, it sorts the array elements in alphabetical order (temporarily converting them to strings to perform the comparison, if necessary)
+* When called with no arguments, it sorts the array elements in alphabetical order (temporarily converting them to
+  strings to perform the comparison, if necessary)
 * Undefined elements are sorted to the end of the array
 * If you want to sort an array of numbers, you must pass a comparison function as an argument
-  * If the first argument should appear after the second in the sorted array, the function should return a positive number
-  * If the first argument should appear before the second, the function should return a negative number
-  * If the two arguments are equal, the function should return 0
+    * If the first argument should appear after the second in the sorted array, the function should return a positive
+      number
+    * If the first argument should appear before the second, the function should return a negative number
+    * If the two arguments are equal, the function should return 0
 * An interesting example would be to sort an array of strings, with case ignored in the alphabetical comparison
+
 ```javascript
 let a = ["Banana", "apple", "Cherry", "decks"]
 a.sort() // => ["Banana", "Cherry", "apple", "decks"]
@@ -36,58 +91,70 @@ a.sort((a, b) => {
 ```
 
 #### `reverse()`
+
 * This method reverse the order of the elements of an array and returns the reversed array
 * It does this in place, or without creating a new array
 
 ### HTML:
+
 #### The `<link>` element
+
 * This specifies relationships between the current document and an external resourrce
-  * It's most commonly used to link to stylesheets, but also used to establish site icons
+    * It's most commonly used to link to stylesheets, but also used to establish site icons
 * It's placed inside the `<head>` element, like this
+
 ```HTML
-<link href="main.css" rel="stylesheet" />
-<link href="favicon.ico" rel="icon" />
+
+<link href="main.css" rel="stylesheet"/>
+<link href="favicon.ico" rel="icon"/>
 ```
+
 * Often times you can use the `rel` attribute to indicate special icon types for use on various mobile platforms
 * `sizes` attribute can be used to specify the size of the icon
 * `type` attribute can be used to specify the MIME type of the linked resource
 * You can also provide a media type or query inside a `media` attribute
-  * This resource will then only be loaded if the media condition is true
+    * This resource will then only be loaded if the media condition is true
 
 ### CSS:
+
 * In ascending, the factors that apply the final styling to an element are:
-  * Source Order
-  * Specificity
-  * Important
+    * Source Order
+    * Specificity
+    * Important
 * Source Order:
-  * If you have more than one rule, all of which have exactly the same weight, then the one that comes last in the CSS will win
-  * Source order only matters when the specificity weight of the rule is the same
+    * If you have more than one rule, all of which have exactly the same weight, then the one that comes last in the CSS
+      will win
+    * Source order only matters when the specificity weight of the rule is the same
 
 ## June 21, 2024
 
-### JS: 
+### JS:
+
 * The `fill()` method sets the elements of an array, or a slice of an array, to a specified value
 * It mutates the array it's called on, and also returns the modified array
+
 ```javascript
 let a = new Array(5); // start the array with no elements and length 5
 a.fill(0); // => [0, 0, 0, 0, 0]
 a.fill(9, 1); // => [0, 9, 9, 9, 9]; fill with 9 starting at index 1
 a.fill(8, 2, -1) // => [0, 9, 8, 8, 9]; fill with 8 starting at index 2 and ending at the second-to-last index
 ```
+
 * First argument is the value to fill
 * Second argument is the start index
-  * If omitted, the entire array will be filled
+    * If omitted, the entire array will be filled
 * Third argument is the end index
-  * If omitted, the array will be filled to the end index
+    * If omitted, the array will be filled to the end index
 
 * The `copyWithin()` method copies a slice of an array to a new position within the array
 * It modifies the array in place and returns the modified array, but will not change the length of the array
 * First argument specifies the destination index to which the first element will be copied
 * The second argument is the index of the first element to be copied
-  * If this is omitted, 0 is used
+    * If this is omitted, 0 is used
 * The third argument specifies the end of the slice of elements to be copied
-  * If omitted, the length of the array is used
+    * If omitted, the length of the array is used
 * Elements from the start index up to, but not including, the end index will be copied
+
 ```javascript
 let a = [1, 2, 3, 4, 5];
 a.copyWithin(1) // => [1, 1, 2, 3, 4]: copy the entire array to index 1
@@ -96,36 +163,48 @@ a.copyWithin(0, -2) // => [4, 4, 3, 4, 4]: negative offsets work, too
 ```
 
 ### HTML:
+
 #### The `<legend>` element
+
 * This represents a caption for the content of its parent `<fieldset>`
+
 ```HTML
+
 <fieldset>
     <legend>Choose your favorite monster</legend>
-    <input type="radio" id="kraken" name="monster" value="K" />
+    <input type="radio" id="kraken" name="monster" value="K"/>
     <label for="kraken">Kraken</label><br/>
-    
-    <input type="radio" id="sasquatch" name="monster" value="S" />
-    <label for="sasquatch">Sasquatch</label><br />
 
-    <input type="radio" id="mothman" name="monster" value="M" />
+    <input type="radio" id="sasquatch" name="monster" value="S"/>
+    <label for="sasquatch">Sasquatch</label><br/>
+
+    <input type="radio" id="mothman" name="monster" value="M"/>
     <label for="mothman">Mothman</label>
 </fieldset>
 ```
+
 * Check this example out in `index.html`
 
 #### The `<li>` element
+
 * Used to represent an item in a list
 * Must be contained in a parent element: an unordered list or ordered list, or a menu
 * Notable Attributes:
-  * `value`: this integer attribute indicates the current ordinal value of the list item as defined by the `<ol>` element
-    * The only allowed value for this attribute is a number, even if the list is displayed with Roman numerals or letters
+    * `value`: this integer attribute indicates the current ordinal value of the list item as defined by the `<ol>`
+      element
+        * The only allowed value for this attribute is a number, even if the list is displayed with Roman numerals or
+          letters
 
 ### CSS:
+
 #### Universal values and Inheritance
-* The CSS shorthand property `all` can be used to apply one of these inheritance values to (almost) all properties at once
+
+* The CSS shorthand property `all` can be used to apply one of these inheritance values to (almost) all properties at
+  once
 * Its value can be any one of the inheritance values (`inherit`, `initial`, `revert`, `revert-layer`, or `unset`)
-  * It's a convenient way to undo changes made to styles so that you can get back to a known starting point before beginning new changes
-  * Example to follow on Monday
+    * It's a convenient way to undo changes made to styles so that you can get back to a known starting point before
+      beginning new changes
+    * Example to follow on Monday
 
 ## June 20, 2024
 
