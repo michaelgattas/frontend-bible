@@ -1,51 +1,240 @@
 # Front-End Bible:
 
+## July 2, 2024
+
+### JS:
+
+* Javascript's binding of `this` is particularly finicky
+    * Arrow functions automatically inherit the `this` value from the environment in which they are defined
+    * Nested functions, however, do not
+
+```javascript
+let o = {
+    m: function () {
+        let self = this; // Save the this value in a variable
+        this === o // => true: this is the object o
+        f(); // Call f() as a regular function
+
+        function f() {
+            this === o // => false: this is the global object (in non-strict mode) or undefined (in strict mode)
+            self === o // => true: self is the outer this value
+        }
+    }
+}
+```
+
+* In the method `m`, we can assign the `this` value to a variable `self`, and within the nested function `f`, we can
+  use `self` instead of this to refer to the containing object
+* Inside the nested function `f()`, the `this` keyword is not equal to the object `o`, but rather the global object
+  or `undefined` in strict mode
+* This is widely considered to be a flaw in the Javascript language, and it is important to be aware of
+* Another workaround is to use the `bind()` method to bind the `this` value to a function
+
+```javascript
+const f = (function () {
+    this === 0 // true, since we bound this function to the outer this  
+}).bind(this);
+```
+
+* Constructor functions do not normally use the `return` keyword
+    * They instead initialize the new object and then return implicitly when they reach the end of their body
+
+* Indirect Invocation:
+    * All JS functions have two methods called `call()` and `apply()`
+    * These both invoke a function indirectly
+    * Both methods allow you to explicitly specify the `this` value for the invocation, which you can invoke any
+      function as a method of any object, even if it is not actually a method of that object
+    * Both allow you to specify the arguments to be passed to the function
+    * `call()` uses its own argument list as arguments to the function
+    * `apply()` expects an array of values to be passed as arguments to the function
+
+### HTML:
+
+* The `<meter>` represents a scalar value within a known range or a fractional value
+    * `value` attribute: the value of the scalar measurement
+    * `min` attribute: the lower bound of the range
+    * `max` attribute: the upper bound of the range
+    * `low` attribute: the upper bound of the low range
+    * `high` attribute: the lower bound of the high range
+    * `optimum` attribute: the optimal value of the gauge
+
+### CSS:
+* When you declare CSS in cascade layers, the order of precedence is determined by the order in which the layers are declared
+* CSS styles declared outside any layer are combined, in the order in which those layers are declared, into an unnamed layer, as if it were the last layer declared
+* With competing normal (not important) styles, late layers take precedence over earlier defined layers
+* For styles flagged with `!important`, however, the order is reversed, with important styles in earlier layers taking precedence over important styles in later layers
+* Inline styles take precedence over all author styles, no matter the layer
+
+* When you have multiple style blocks in different layers providing competing values for a property on a single element, the order in which the layers are declared determines the precedence
+* Specificity between layers doesn't matter, but specificity within a single layer does
+
+## July 1, 2024
+
+### JS:
+
+* Arrow functions inherit the value of `this` from the environment in which they are defined, rather than defining their
+  own invocation context
+* Arrow functions also differ from other functions in that they do not have a `prototype` property, which means they
+  cannot be used as constructor functions for new classes
+
+* Functions can be invoked in 5 ways:
+    * As functions
+    * As methods
+    * As constructors
+    * Indirectly through their `call()` and `apply()` methods
+    * Implicitly, via JS language features that do not appear like normal function invocations
+
+* Conditional invocation is possible, where you write
+
+```javascript
+f?.(x)
+    // this is equivalent to
+    (f !== null && f !== undefined) ? f(x) : undefined
+```
+
+* Method function invocation binds `this` keyword to the invocation context of the object on which the method is called
+
+### HTML:
+
+* The `<meta>` element represents metadata that can't be represented by other HTML meta-related elements (
+  like `<base>`, `<link>`, `<script>`, `<style>`, or `title`)
+* The type of metadata provided by the `<meta>` element can be one of the following:
+    * If the `name` attribute is set, the `<meta` element provides document-level metadata, applying to the whole page
+    * If the `http-equiv` attribute is set, the `<meta>` element is a pragma directive, providing information equivalent
+      to what can be given by a similarly-named HTTP header
+    * If the `charset` attribute is set, the `<meta>` element is a charset declaration, giving the character encoding in
+      which the document is encoded
+    * If the `itemprop` attribute is set, the `<meta>` element provides user-defined metadata
+
+### CSS:
+
+* It's possible for users to set custom stylesheets to override the developer's styles
+    * E.g., a visually impaired user might want to set the font size on all web pages they visit to be double the normal
+      size to allow for easier reading
+* Order of overriding declarations:
+    * Conflicting declarations will be applied in the following order, with later ones overriding earlier ones:
+        * Declarations in user agent style sheets (e.g., the browser's default styles)
+        * Normal declarations in user style sheets (custom styles set by a user)
+        * Normal declarations in author style sheets (styles set by the developer)
+        * Important declarations in author style sheets
+        * Important declarations in user style sheets
+        * Important declarations in user agent style sheets
+
+## June 27, 2024
+
+### JS:
+
+#### Functions
+
+* In addition to function declarations, you can use a function expression
+* Function expressions appear within the context of a larger expression or statement, and the name is optional
+
+```javascript
+// This function expression defines a function that squares its argument
+// Not that we assign it to a variable
+const square = function (x) {
+    return x * x;
+};
+
+// Function expressions can include names, which is useful for recursion.
+const f = function fact(x) {
+    if (x <= 1) return 1; else return x * fact(x - 1);
+};
+```
+
+### HTML:
+
+#### The `<mark>` element
+
+* The `<mark>` element represents text which is highlighted for reference or notation purposes due to the marked
+  passage's relevance in the enclosing context
+* Do not use it purely for formatting purposes
+* Also, most screen reading technologies do not announce the presence of the `<mark>` element by default, so you can add
+  a `::before` or `::after` pseudo-element to make it known
+* Sometimes, screen readers will deliberately disabled announcing content that creates extra verbosity, so do not abuse
+  this technique
+
+#### The `<menu>` element
+
+* The `<menu>` element is described in the HTML as a semantic alternative to `<ul>`, but treated by browsers (and
+  exposed through the accessibility tree) as no different from a `<ul>`
+* It represents an unordered list of items (which are represented by `<li>` elements)
+* Primarily, `<ul>` is used for display, while `<menu>` is used for interactive items
+
+### CSS:
+
+#### Inline styles
+
+* Inline styles take precedence over all normal styles, no matter the specificity
+
+#### !important
+
+* There is a special piece of CSS that you can use to overrule all of the above calculations, even inline styles
+
 ## June 26, 2024
 
 ### JS:
 
-####  Array to String Conversions
+#### Array to String Conversions
+
 * The `join()` method converts all elements of an array to strings at concatenates them, returning the resulting string
-  * You can specify an optional string that separates the elements in the returned string
-  * If no separator string is specified, a comma is used
-  * This is effectively the inverse of `String.split()`
-  * Arrays' inbuilt `toString()` method is effectively `join()` with no arguments
-* In addition to the static methods `Array.of()` and `Array.from()`, there is an inbuilt `Array.isArray()` which returns true/false depending on the value of the passed in argument
+    * You can specify an optional string that separates the elements in the returned string
+    * If no separator string is specified, a comma is used
+    * This is effectively the inverse of `String.split()`
+    * Arrays' inbuilt `toString()` method is effectively `join()` with no arguments
+* In addition to the static methods `Array.of()` and `Array.from()`, there is an inbuilt `Array.isArray()` which returns
+  true/false depending on the value of the passed in argument
 
 #### Strings as Arrays
+
 * Strings behave like read-only arrays of UTF-16 Unicode characters
 * Instead of accessing individual characters with the `charAt()` method, you can use square brackets
+
 ```javascript
 let s = "test";
 s.charAt(0) // => "t"
 s[1] // => "e"
 ```
+
 * Strings behaving like arrays also means that we can apply generic array methods to them
+
 ```javascript
 Array.prototype.join.call("Javascript", " ") // => "J a v a s c r i p t"
 ```
+
 * Because strings are immutable values, so they are treated like read-only arrays
 * Array methods like `push()`, `sort()`, `reverse()`, and `splice()` do not work on strings
 
 #### Functions
-* Functions defined using the `function` keyword are **hoisted** in a program, meaning they can be invoked before their definition in a block of code
+
+* Functions defined using the `function` keyword are **hoisted** in a program, meaning they can be invoked before their
+  definition in a block of code
 
 ### HTML:
+
 #### The `<main>` element
+
 * This is used to represent the dominant content of the `<body>` of a document
-* It consists of content that is directly related to or expands upon the central topic of a document, or the central functionality of an application
+* It consists of content that is directly related to or expands upon the central topic of a document, or the central
+  functionality of an application
 * A document must not have more than one `<main>` element that doesn't have the `hidden` attribute specified
 
 #### The `<map>` element
+
 * This element is used with the `<area>` element to define an image map (a clickable link area)
 * It must contain the `name` attribute with no space characters
 
 ### CSS:
+
 #### Specificity
-* To further understand specificity as it pertains to CSS rule application, consider the following about selector specificity:
-  * **Identifiers**: Score one in this column for each ID selector contained inside the overall selector.
-  * **Classes**: Score one in this column for each class selector, attribute selector, or pseudo-class contained inside the overall selector.
-  * **Elements**: Score one in this column for each element selector or pseudo-element contained inside the overall selector.
+
+* To further understand specificity as it pertains to CSS rule application, consider the following about selector
+  specificity:
+    * **Identifiers**: Score one in this column for each ID selector contained inside the overall selector.
+    * **Classes**: Score one in this column for each class selector, attribute selector, or pseudo-class contained
+      inside the overall selector.
+    * **Elements**: Score one in this column for each element selector or pseudo-element contained inside the overall
+      selector.
 
 ## June 25, 2024
 
@@ -1323,19 +1512,19 @@ q.x // => 2: the value 2 overrides the previous value from o.
 * Property Access expressions do not throw an error if a property does not exist
 * It does throw an error, however, ifyou try to access a project of an object that does not exist
 
-  ```javascript
+```javascript
     let o = {x: 1};
 
 o.y // => undefined
 o.y.length // => TypeError: Cannot read property 'length' of undefined
 
-  ```
+```
 
 * Fortunately, conditional property access (options chaining) can be used to avoid this error
 
-  ```javascript
+```javascript
     let len = o.y?.length; // len is undefined if o.y does not exist
-  ```
+```
 
 * An attempt to set a property on `null` or `undefined` will cause a TypeError
 * Attempts to set properties on other values do not always success either
@@ -1355,7 +1544,7 @@ o.y.length // => TypeError: Cannot read property 'length' of undefined
 
 * The `<fieldset>` element is used to group several controls as well as labels `<label>` within a web form
 
-  ```HTML
+```HTML
 
 <form>
     <fieldset>
@@ -1487,38 +1676,37 @@ o.y.length // => TypeError: Cannot read property 'length' of undefined
 
 * `Object.create()` creates a new object, using the first argument as the prototype of that object:
 
-  ```javascript
+```javascript
         let o1 = Object.create({x: 1, y: 2}); // o1 inherits properties x and y
 
 o1.x + o1.y // => 3
 
-  ```
+```
 
 * You can pass `null` to create a new object that does not have a prototype, but if you do this, the newly created
   object will not inherit anything, not even basic methods like `toString()` (which means it won't work with the +
   operator either)
 
-  ```javascript 
+```javascript 
   let o2 = Object.create(null); // o2 inherits no props or methods.
-  ```  
+```  
 
 * If you want to create an ordinary empty object (like the object returned by `{}` or `new Object()`),
   pass `Object.prototype` to `Object.create()`
 
-  ```javascript
+```javascript
   let o3 = Object.create(Object.prototype); // o3 is like {} or new Object().
-  ````
+````
 
 * One use case for creating a prototype chain is that a library method might unintentionally augment the values in the
   original object. Instead, you can pass in your object as a prototype of the new object, which will guard against
   accidental modifications
 
-  ```javascript
+```javascript
   let x = {x: "don't change this value"};
 
 library.function(Object.create(o));
-
-  ```
+```
 
 * Javascript objects are associative arrays (like a hash map or dictionary)
     * In C, C++, Java, and similarly strongly type languages, an object can only have a fixed number of properties, and
@@ -1723,41 +1911,44 @@ library.function(Object.create(o));
 
 * Labeled break statements can allow you to break out of a deeply nested loop. Here's an example
 
-  ```javascript
+```javascript
   let matrix = getData(); // get a 2D array of data from somewhere
 
 // Now sum all the numbers in the matrix
 let sum = 0, success = false;
 // Start with a labeled statement that we can break out of if errors occur
 computeSum: if (matrix) {
-for (let x = 0; x < matrix.length; x++) {
-let row = matrix[x];
-if (!row) break computeSum;
-for (let y = 0; y < row.length; y++) {
-let cell = row[y];
-if (isNaN(cell)) break computeSum;
-sum += cell;
-}
-}
-success = true;
+    for (let x = 0; x < matrix.length; x++) {
+        let row = matrix[x];
+        if (!row) break computeSum;
+        for (let y = 0; y < row.length; y++) {
+            let cell = row[y];
+            if (isNaN(cell)) break computeSum;
+            sum += cell;
+        }
+    }
+    success = true;
 }
 // The break statements jump here. If we arrive here with success == false then there was somthing wrong with the matrix
-we were given.
+we
+were
+given.
 // Otherwise, sum contains the sum of all cells of the matrix
 
-  ```
+```
 
 * The `continue` statement is used to skip the rest of the body of a loop and jump back to the top of the loop to begin
   a new iteration
     * In the case of a `for` loop, the increment expression is evaluated before the loop condition is tested
     * In the case of a `while` loop, the loop condition is tested before the loop body is executed
     * Here's an example:
-  ```javascript
+
+```javascript
   for (let i = 0; i < data.length; i++) {
-      if (!data[i]) continue; // Skip null and undefined values
-      total += data[i];
-  }
-  ```
+    if (!data[i]) continue; // Skip null and undefined values
+    total += data[i];
+}
+```
 
 * The `return` statement is used to make the interpreter jump from a function invocation back to the code that invoked
   it
@@ -1987,7 +2178,7 @@ we were given.
   the layout of different sections
 * Check the `index.html`/`styles.scss` files for a full example, but here's an example:
 
-  ```CSS 
+```CSS 
     .container {
     display: grid;
     grid-template-areas:
@@ -2000,22 +2191,22 @@ we were given.
 }
 
 header {
-grid-area: header;
+    grid-area: header;
 }
 
 article {
-grid-area: content;
+    grid-area: content;
 }
 
 aside {
-grid-area: sidebar;
+    grid-area: sidebar;
 }
 
 footer {
-grid-area: footer;
+    grid-area: footer;
 }
 
-  ```
+```
 
 ## May 3, 2024
 
@@ -2023,32 +2214,32 @@ grid-area: footer;
 
 * Explicitly, the `for` loop syntax is
 
-  ```javascript 
+```javascript 
     for (initialize; test; increment) {
     statement
 }
-  ```
+```
 
 * An interesting way to compare it to a `while` loop:
 
-  ```javascript
+```javascript
     initialize;
 
 while (test) {
-statement;
-increment;
+    statement;
+    increment;
 }
 
-  ```
+```
 
 * Most `for` loops are numeric, but they can be used to iterate over many different types of data structures:
 
-  ```javascript
+```javascript
   function tail(o) {
     for (; o.next; o = o.next) /* empty */ ;
     return o;
 }
-  ```
+```
 
 ### HTML:
 
@@ -2087,7 +2278,7 @@ increment;
   conditionals more legible
 * A `switch` statement in JS looks like this:
 
-  ```javascript
+```javascript
     switch (expression) {
     case value1: // starting point 1
         // code block
@@ -2100,7 +2291,7 @@ increment;
 
 }
 
-  ```
+```
 
 * It's also worth noting that the `===` operator is used to check equality in this context
   The purpose of these `case` statements is to provide a starting point for the code block to execute, and the `break`
@@ -2145,7 +2336,7 @@ increment;
 * In this case, simply use the `minmax()` function to set a minimum and maximum height for the row
 * For example:
 
-  ```CSS
+```CSS
     .container {
     display: grid;
     grid-template-columns: 100px 100px 100px;
@@ -2153,21 +2344,21 @@ increment;
 
 }
 
-  ```
+```
 
 * In this case, the row will be at least 100px tall, but will expand to fit the content if it is larger than 100px
 * You can also configure a value that allows as many columns as will fit, using a combination of `auto-fit`
   and `minmax()`
 * For example:
 
-  ```CSS
+```CSS
     .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-auto-rows: minmax(100px, auto);
     gap: 20px;
 }
-  ```
+```
 
 ## April 30, 2024
 
@@ -2177,23 +2368,24 @@ increment;
   operand
 * An example would be
 
-  ```javascript 
+```javascript 
   i = 0, j = 0, k = 2;
 
 // you could also write something like
 i = 0, j = 0, k = someVal === 2 // in this case, the comma operator discards the left operand values and returns '
-someVal' assigned to k for comparison to the number 2
+someVal
+' assigned to k for comparison to the number 2
 
-  ```
+```
 
 * The most common example of the comma operator is in a `for` loop, where multiple variables are used, and operands with
   side effects exist on both sides of the comma
 
-  ```javascript
+```javascript
   for (let i = 0, j = 1; i < 10, j < 5; i++, j++) {
     console.log(i, j)
 }
-  ```
+```
 
 * **Expressions** are evaluated to produce a value, but **Statements** are executed to make something happen
 
@@ -2234,7 +2426,7 @@ someVal' assigned to k for comparison to the number 2
 * You can repeat all or part of a track listing using the CSS `repeat()` function
 * E.g.
 
-  ```CSS
+```CSS
   .container {
     display: grid;
     grid-template-columns: repeat(3, 100px);
@@ -2242,7 +2434,7 @@ someVal' assigned to k for comparison to the number 2
 
 }
 
-  ```
+```
 
 * Explicit grids are created using `grid-template-columns` and `grid-template-rows
 * Implicit grids extends the defined explicit grid when content is placed outside of that grid, such as into the rows by
@@ -2262,44 +2454,47 @@ someVal' assigned to k for comparison to the number 2
     * `let` and `const` variables are block-scoped, so they will not be accessible outside the `eval` function
     * If the `eval` is aliased and called by any other name, its scope will be treated as global scope, and any local
       variables or functions from the calling scope will not be accessible within the `eval` code
-  ```javascript 
-  const geval = eval
-  let x = "global", y = "global"
-  function f() {
-      let x = "local"
-      eval("x += 'changed';")
-      return x;
-  }
-  function g() {
-      let y = "local"
-      geval("y += 'changed';")
-      return y;
-  }
-  
-  console.log(f(), x); // Local variable changed: prints "localchanged global"
-  console.log(g(), y); // Global variable changed: prints "local globalchanged"
-  ```
 
-    * The notable difference is the context in which the eval function is called, and the scope in which it is executed
+```javascript 
+  const geval = eval
+let x = "global", y = "global"
+
+function f() {
+    let x = "local"
+    eval("x += 'changed';")
+    return x;
+}
+
+function g() {
+    let y = "local"
+    geval("y += 'changed';")
+    return y;
+}
+
+console.log(f(), x); // Local variable changed: prints "localchanged global"
+console.log(g(), y); // Global variable changed: prints "local globalchanged"
+```
+
+* The notable difference is the context in which the eval function is called, and the scope in which it is executed
       in each case
 
 * The `delete` operator is used to remove a property from an index or object
     * The `delete` operator returns `true` if the property is successfully deleted, and `false` otherwise
     * If the property is non-existent, `delete` will return `true`
     * If the property is non-configurable, `delete` will return `false`
-  ```javascript 
-   let obj = {a: 1, b: 2, c: 3}
-   delete obj.a // true
-   delete obj.d // true
-   delete obj // false
-   
-   let arr = [1, 2, 3]
-   delete arr[0] // true
-   delete arr[3] // true
-   delete arr // false
-   console.log(arr) // [empty, 2, 3]
-   console.log(arr.length) // 3, because the array still has 3 elements, this is called a "sparse array"
-  ```
+```javascript 
+let obj = {a: 1, b: 2, c: 3}
+delete obj.a // true
+delete obj.d // true
+delete obj // false
+
+let arr = [1, 2, 3]
+delete arr[0] // true
+delete arr[3] // true
+delete arr // false
+console.log(arr) // [empty, 2, 3]
+console.log(arr.length) // 3, because the array still has 3 elements, this is called a "sparse array"
+```
 
 ### HTML:
 
@@ -2397,8 +2592,8 @@ someVal' assigned to k for comparison to the number 2
   and properties that can be accessed
 * Here's a code block from JS The Definitive Guide (p. 173) to further explain how the `instanceof` operator works:
 
-  ```javascript
-    let d = new Date(); // Create a new object with the Date() constructor
+```javascript
+let d = new Date(); // Create a new object with the Date() constructor
 
 d instanceof Date // => true: d was created with Date()
 d instanceof Object // => true: all objects are instances of Object
@@ -2408,7 +2603,7 @@ a instanceof Array // => true: a is an array
 a instanceof Object // => true: all arrays are objects
 a instanceof RegExp // => false: arrays are not regular expressions
 
-  ```
+```
 
 ### HTML:
 
@@ -2425,12 +2620,12 @@ a instanceof RegExp // => false: arrays are not regular expressions
 * In a `display: grid` context, you can use `fr`, or fractional units to take up a given proportion of the available
   space
 * For example:
-  ```CSS
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-  }
-  ```
+```CSS
+.container {
+display: grid;
+grid-template-columns: 1fr 2fr 1fr;
+}
+```
 
 ## April 24, 2024
 
@@ -2472,13 +2667,13 @@ a instanceof RegExp // => false: arrays are not regular expressions
 * **Font stacks** enable you to create fall-backs if a web-font fails to load
 * The `font-family` property can take a comma-separated list of font names, with the browser trying each font in order
 
-  ```CSS
-    p {
-    font-family: "Trebuchet MS", Verdana, sans-serif;
+```CSS
+p {
+font-family: "Trebuchet MS", Verdana, sans-serif;
 
 }
 
-  ```
+```
 
 * In this case, the browser will first try to load "Trebuchet MS", then "Verdana", and finally any sans-serif font
 
@@ -2522,11 +2717,11 @@ a instanceof RegExp // => false: arrays are not regular expressions
 * The increment and decrement operators have a pre- and post- versions, which return the value before or after
   increment/decrement
 * For example:
-  ```javascript
+```javascript
   let x = 5 
   let y = x++ // y == 5, x == 6
   let z = ++x // z == 7, x == 7
-  ```
+```
 
 * Basically the pre- or post- defines if the change to the original will happen pre- or post- the assignment to
   the `lval` in question
@@ -2968,56 +3163,64 @@ px solid red
 ## April 5, 2024
 
 * ### JS:
-    * The global functions `parseInt()` and `parseFloat()` can be used to converted strings with leading numbers into
-      either integers or floating point numbers
-      ```javascript
-      parseInt('34 tribes') // returns 34
-      parseFloat('3.14 pies') // returns 3.14
-      parseInt('3.14 pies') // returns 3
-      parseFloat('.14') // return 0.14, because the first character is NaN
-      parseInt('.14') // returns NaN, because integers can't start with '.'
-      parseFloat('$14') // returns NaN, because numbers can't start with '$'
+* The global functions `parseInt()` and `parseFloat()` can be used to converted strings with leading numbers into
+  either integers or floating point numbers
+
+```javascript
+parseInt('34 tribes') // returns 34
+parseFloat('3.14 pies') // returns 3.14
+parseInt('3.14 pies') // returns 3
+parseFloat('.14') // return 0.14, because the first character is NaN
+parseInt('.14') // returns NaN, because integers can't start with '.'
+parseFloat('$14') // returns NaN, because numbers can't start with '$'
+```
   ### HTML:
-    * `tabIndex` is a global attribute attributable to almost all HTML elements (besides `<dialog>`)
-    * It defines whether an element is focusable by sequential tab navigation
-        * May still be focusable using clicks or the `focus()` method
-    * The nearest positive value to zero is focused first, followed by sequentially higher positive values, then zero
-    * Any negative tabindex value will never be focused
-      ```html
-      <input tabIndex="0">Last</input>
-      <input tabIndex="-1">Not tabbable </input>
-      <input tabIndex="2">Second</input>
-      <input tabIndex="1">First</input>
-      <input tabIndex="-3">Not tabbable</input>
+  * `tabIndex` is a global attribute attributable to almost all HTML elements (besides `<dialog>`)
+  * It defines whether an element is focusable by sequential tab navigation
+      * May still be focusable using clicks or the `focus()` method
+  * The nearest positive value to zero is focused first, followed by sequentially higher positive values, then zero
+* Any negative tabindex value will never be focused
+```html
+<input tabIndex="0">Last</input>
+<input tabIndex="-1">Not tabbable </input>
+<input tabIndex="2">Second</input>
+<input tabIndex="1">First</input>
+<input tabIndex="-3">Not tabbable</input>
+```
 
   ### CSS:
-    * The difference between `em` and `rem` units are that `em` refers to an element's parent's font size, while a `rem`
-      refers to the root element's (the HTML document's) font size
+  * The difference between `em` and `rem` units are that `em` refers to an element's parent's font size, while a `rem`
+    refers to the root element's (the HTML document's) font size
 
 ## April 4, 2024
 
 * ### JS:
     * The unary + operator `(+x)` will convert a value to a number (equivalent of `Number(x)`)
     * JS Symbols
-    * Numbers have a toString method that accepts a radix (or base) as an argument and returns a number in Base Radix
-      ```javascript
-        let n = 17;    
-        let binary = "0b" + n.toString(2); // binary == "0b10001"  
-        let octal = "0o" + n.toString(8); // octal == "0o21"  
-        let hex = "0x" + n.toString(16); // hex == "0 ```
-  ### HTML:
-  ```html
+* Numbers have a toString method that accepts a radix (or base) as an argument and returns a number in Base Radix
+
+```javascript
+    let n = 17;
+let binary = "0b" + n.toString(2); // binary == "0b10001"  
+let octal = "0o" + n.toString(8); // octal == "0o21"  
+let hex = "0x" + n.toString(16); // hex == "0 
+```
+
+### HTML:
+
+```html
       <!DOCTYPE html>
-          <html>
-              <head>
-                  <title>Page Title</title>
-              </head>
-              <body>
-                  <h1>This is a Heading</h1>
-                  <p>This is a paragraph.</p>
-                  <p>This is another paragraph.</p>
-              </body>
-          </html>
+<html>
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+</body>
+</html>
+```
 
 
 
