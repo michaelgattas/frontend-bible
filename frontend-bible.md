@@ -3,8 +3,40 @@
 ## July 3, 2024
 
 ### JS: 
+* In ES6, you can define a default value for each function parameter directly in the parameter list of your function
+```javascript
+function getPropertyNames(o, a = []) {
+    for (let property in o) a.push(property);
+    return a;
+}
+```
+* You can also the value of a previous parameter to define the default value of the parameters that follow it:
+```javascript
+const rectangle = (width, height = width * 2) => ({width, height});
+rectangle(1) // => {width: 1, height: 2}
+```
 
-### HTML:
+### HTML: 
+#### The `<noscript>` element
+* This element defines a section of HTML to be inserted if a script type on the page is unsupported or if scripting is currently turned off in the browser
+```HTML
+<noscript>
+    <!--    anchor linking to external file -->
+    <a href="https://www.mozilla.org"/>External Link</a>
+</noscript>
+<p>Rocks!</p>
+```
+
+#### The `<object>` element
+* This element represents an external resource, which can be treated as an image, nested browsing context, or a resource to be handled by a plugin
+```HTML
+<object type="application/pdf" data="/media/examples/In-CCO.pdf" width="250" height="200"></object>
+```
+* Relevant attributes:
+  * `data`: the URL of the resource to be embedded
+  * `form`: the form element that the object element is associated with (must be an ID of a `<form>` element in the same document)
+  * `height`: the height of the object
+  * `type`: a content type specified by data
 
 ### CSS:
 #### Scoping Proximity
@@ -23,6 +55,9 @@
 * It states that when two scopes have conflicting styles, the style with the smallest number of hops up the DOM tree to the scope root wins
 
 * Skills assessment: check the index.html and styles.css files for the rundown
+
+#### Cascade Layers
+* Cascade Layers are explicit specificity containers providing simpler and greater control over CSS declarations that ultimately get applied
 
 ## July 2, 2024
 
