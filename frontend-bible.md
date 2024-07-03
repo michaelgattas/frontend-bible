@@ -1,5 +1,29 @@
 # Front-End Bible:
 
+## July 3, 2024
+
+### JS: 
+
+### HTML:
+
+### CSS:
+#### Scoping Proximity
+* Another advanced topic that you might not use right away but may need to understand in the future is `@scope`
+* This is an at-rule that enables you to create a block of rules that only apply to a specific subsection of the HTML on your page
+* For example, you can specify styles that will only apply to `<img>` elements when they're nested inside elements that have a `feature` class
+```CSS
+@scope (.feature) {
+    img {
+        border: 1px solid black;
+        display: block;
+    }
+}
+```
+* Scoping proximity is the mechanism that resolves conflicts between scoped elements
+* It states that when two scopes have conflicting styles, the style with the smallest number of hops up the DOM tree to the scope root wins
+
+* Skills assessment: check the index.html and styles.css files for the rundown
+
 ## July 2, 2024
 
 ### JS:
