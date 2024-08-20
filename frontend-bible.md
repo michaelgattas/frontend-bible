@@ -1,5 +1,75 @@
 # Front-End Bible:
 
+## August 20, 2024
+
+### JS:
+#### Rest Parameters and Variable Length Argument Lists
+* Parameter defaults enable functions to be invoked with fewer arguments than parameters
+* Rest parameters enable functions to be invoked with more arguments than parameters
+```Javascript
+function max(first=-Infinity, ...rest) {
+    let maxValue = first; // Start by assuming the first arg is biggest
+    // Then loop through the rest of the arguments, looking for bigger ones
+    for (let n of rest) {
+        if (n > maxValue) {
+            maxValue = n;
+        }
+    }
+    // Finally return the biggest
+    return maxValue;
+}
+
+max(1, 10, 100, 2, 3, 1000, 4, 5); // => 1000
+```
+* A rest parameter is preceded by three periods, and it must be the last parameter in a function declaration
+* The value of the rest parameter will always be an array within the body of the function
+
+### HTML:
+* The `<ol>` element represents an ordered list of items, typically rendered as a numbered list
+  * It accepts these common attributes:
+    * `reversed`: a Boolean attribute that indicates that the list should be displayed in reverse order
+    * `start`: a number that specifies the starting value of the first list item in an ordered list
+    * `type`: a string that specifies the kind of marker to use in the list
+      * The default value is `1`, which uses decimal numbers
+      * Other possible values include `a` (lowercase letters), `A` (uppercase letters), `i` (lowercase Roman numerals),
+        and `I` (uppercase Roman numerals)
+      * The specified type is used for the entire list unless a different `type` attribute is used on an enclosed `<li>` element
+
+* The `<optgroup>` HTML element creates a grouping of options within a `<select>` element
+  * It can contain one or more `<option>` elements or `<optgroup>` elements
+  * It also accepts these attributes (in addition to the global attributes)
+    * `disabled`: a Boolean attribute that indicates that the option group is disabled
+    * `label`: a string that provides a label for the option group
+    
+* The `<option>` element is used to define an item contained in a `<select>`, an `<optgroup>` or a `<datalist>` element
+  * Pertinent attribute include:
+    * `disabled`: a Boolean attribute that indicates that the option is disabled
+    * `label`: a string that provides a label for the option
+    * `selected`: a Boolean attribute that indicates that the option is pre-selected
+    * `value`: a string that provides the value of the option
+
+### CSS:
+#### The Box Model
+* Everything in CSS has a box around it
+* The general categories of them fall into **Block** and **Inline**
+* For Outer Display Types:
+  * `display: block` elements:
+    * Break onto a new line
+    * `width` and `height` properties are respected
+    * Padding, margin and border will cause other elements to be pushed away from the box
+      * If the `width` is not specified, the box will extend in the inline direction to fill the space available in its container
+    * Some elements, like `<h1>` and `<p>` are block elements by default
+
+  * `display: inline` elements:
+    * The box will not break onto a new line
+    * The `width` and `height` properties will not apply
+    * Top and bottom padding, margins, and borders will apply but will not cause other inline boxes to move away from the box
+    * Left and right padding, margins, and borders will apply and will cause other inline boxes to move away from the box
+    * Elements like `<span>`, `<em>`, `<strong>` and `<a>` are inline by default
+
+
+
+
 ## July 3, 2024
 
 ### JS: 
