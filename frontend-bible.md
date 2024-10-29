@@ -1,5 +1,54 @@
 # Front-End Bible:
 
+## October 29, 2024
+
+### JS: 
+* You can destructure an object in a function argument list
+```javascript
+function vectorAdd({x: x1, y: y1}, {x: x2, y: y2}) {
+    return {x: x1 + x2, y: y1 + y2};
+}
+```
+
+* Because you can treat functions as objects, you can effectively add properties to them as you would an array or any other object.
+* If you wanted to use the function as a type of "cache" you could do so like this:
+```javascript
+function factorial(n) {
+    if (Number.isInteger(n) && n > 0) {
+        if (!(n in factorial)) {
+            factorial[n] = n * factorial(n - 1);
+        }
+        return factorial[n];
+    } else {
+        return NaN;
+    }
+}
+```
+* Here, we basically treat the function as a cache that will persist across all calls to the function, like so
+```javascript
+factorial[1] = 1;
+factorial(6) // => 720
+factorial[5] // => 120; the call above caches this value
+```
+
+### HTML:
+* The `<output>` is a container element into which a site or app can inject the results of a calculation or the outcome of a user action
+  * It's particularly helpful for forms, where you can use it to display the results of a calculation or the outcome of a user action
+
+* The `<p>` element represents a paragraph 
+  * They are block-level elements, and notably will automatically close if another block-level element is parse before the closing `</p>` tag
+
+* The `<picture>` element is a container for zero or more `<source>` elements and one `<img>` element to offer alternative versions of an image for different display/device scenarios
+  * The browser will consider each child `<source>` element and choose the best match among them
+  * If no matches are found, the URL of the `<img>` element's `src` attribute is selected
+  * The selected image is then presented in the space occupied by the `<img>` element
+  * (Continued tomorrow)
+
+### CSS:
+#### The Box Model
+* Boxes also have an inner display type, which dictates how elements inside that box are laid out
+  * There is normal flow, flex, and grid
+
 ## August 20, 2024
 
 ### JS:
@@ -66,8 +115,6 @@ max(1, 10, 100, 2, 3, 1000, 4, 5); // => 1000
     * Top and bottom padding, margins, and borders will apply but will not cause other inline boxes to move away from the box
     * Left and right padding, margins, and borders will apply and will cause other inline boxes to move away from the box
     * Elements like `<span>`, `<em>`, `<strong>` and `<a>` are inline by default
-
-
 
 
 ## July 3, 2024
